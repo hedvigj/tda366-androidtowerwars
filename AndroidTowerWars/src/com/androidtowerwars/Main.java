@@ -1,8 +1,5 @@
 package com.androidtowerwars;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.ZoomCamera;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
@@ -21,8 +18,8 @@ import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
-import org.anddev.andengine.util.MathUtils;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -47,7 +44,6 @@ public class Main extends BaseGameActivity {
     private TextureRegion mBackgroundTextureRegion;
     private TextureRegion mSkeletonTextureRegion;
     private TimerHandler spriteTimerHandler;
-    
     // ===========================================================
     // Getter & Setter
     // ===========================================================
