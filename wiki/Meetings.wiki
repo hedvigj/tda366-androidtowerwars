@@ -3,8 +3,12 @@
 
 = Meetings =
 
-*Meeting 1:* http://dl.dropbox.com/u/19803932/Meeting%201.pdf
+*Meeting 1:* http://dl.dropbox.com/u/19803932/Meeting%201.pdf 
+
 *Meeting 2:* http://dl.dropbox.com/u/19803932/Meeting2.pdf
+
 *Meeting 3:* http://dl.dropbox.com/u/19803932/Meeting%20Agenda%203.pdf
+
 *Meeting 4:* http://dl.dropbox.com/u/19803932/Meeting%20Agenda%204.pdf
+
 *Meeting 5:* http://dl.dropbox.com/u/19803932/Meeting%20Agenda%205.pdf
