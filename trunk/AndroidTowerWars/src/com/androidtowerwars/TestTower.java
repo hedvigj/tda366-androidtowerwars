@@ -20,7 +20,13 @@ public class TestTower extends Sprite {
 			if (Main.instance.controller.soldierList.get(n).collidesWith(range)) {
 				Main.instance.controller.soldierList.get(n).kill();
 			}
+			
 		}
+		/*for(int n=0;n<Main.instance.controller.rightSoldierList.size();n++){
+			if (Main.instance.controller.rightSoldierList.get(n).collidesWith(range)) {
+			Main.instance.controller.rightSoldierList.get(n).kill();
+		}
+		}*/
 
 	}
 
