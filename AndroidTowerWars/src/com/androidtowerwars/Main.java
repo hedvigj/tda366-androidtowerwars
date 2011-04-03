@@ -117,9 +117,12 @@ public class Main extends BaseGameActivity {
 		// scene.setBackground(new SpriteBackground(background));
 		scene.getLastChild().attachChild(background);
 
-		final TestTower tower = new TestTower(Constants.MAP_WIDTH - 200, Constants.MAP_HEIGHT * 0.5f, this.mTowerTextureRegion, 200);
+		final TestTower tower = new TestTower(Constants.MAP_WIDTH-300, Constants.MAP_HEIGHT * 0.5f, this.mTowerTextureRegion, 200);
+		final BadTower bTower = new BadTower(300, Constants.MAP_HEIGHT*0.5f, this.mTowerTextureRegion, 200);
 		scene.getLastChild().attachChild(tower);
+		scene.getLastChild().attachChild(bTower);
 		controller.createSpriteSpawnTimeHandler();
+		controller.createRightSpawnTimeHandler();
 		return scene;
 	}
 
