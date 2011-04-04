@@ -3,6 +3,8 @@ package com.androidtowerwars;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.microedition.khronos.opengles.GL10;
+
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.ZoomCamera;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
@@ -11,6 +13,12 @@ import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.entity.scene.background.ColorBackground;
+import org.anddev.andengine.entity.scene.menu.MenuScene;
+import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
+import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
+import org.anddev.andengine.entity.scene.menu.item.SpriteMenuItem;
+
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
@@ -29,7 +37,9 @@ import android.widget.Toast;
 
 import com.androidtowerwars.constants.*;
 
-public class Main extends BaseGameActivity {
+import android.view.KeyEvent;
+
+public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 
 	// ===========================================================
 	// Constants
@@ -48,6 +58,16 @@ public class Main extends BaseGameActivity {
 	public TextureRegion mSkeletonTextureRegion;	
 	private TextureRegion mTowerTextureRegion;
 	public Controller controller;
+	private Texture mTexture;
+	private TextureRegion mMenuResetTextureRegion; 
+	private Texture mMenuTexture;
+	private TextureRegion mMenuQuitTextureRegion; 
+	protected MenuScene mMenuScene;
+	protected static final int MENU_RESET = 0;
+    protected static final int MENU_QUIT = MENU_RESET + 1;
+
+	
+	
 	// ===========================================================
 	// Getter & Setter
 	// ===========================================================
@@ -96,11 +116,19 @@ public class Main extends BaseGameActivity {
 		this.mEngine.getTextureManager().loadTexture(this.mBackgroundTexture);
 		this.mEngine.getTextureManager().loadTexture(this.mSkeletonTexture);
 		this.mEngine.getTextureManager().loadTexture(this.mTowerTexture);
+		this.mEngine.getTextureManager().loadTexture(this.mTexture);
+
+        this.mMenuTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        this.mMenuResetTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuTexture, this, "gfx/menu_reset.png", 0, 0);
+        this.mMenuQuitTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuTexture, this, "gfx/menu_quit.png", 0, 50);
+        this.mEngine.getTextureManager().loadTexture(this.mMenuTexture);
+
 	}
 
 	public Scene onLoadScene() {
 		final Scene scene = new Scene(1);
 		this.mEngine.registerUpdateHandler(new FPSLogger());
+		this.createMenuScene();
 		/* Limit scene size */
 		this.mCamera.setBounds(0, Constants.MAP_WIDTH, 0, Constants.MAP_HEIGHT);
 		this.mCamera.setBoundsEnabled(true);
@@ -129,6 +157,63 @@ public class Main extends BaseGameActivity {
 	public void onLoadComplete() {
 		//Toast.makeText(getApplicationContext(), "The Skeleton wants to be touched!", Toast.LENGTH_LONG).show();
 	}
+	 @Override
+     public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
+             if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
+                     if(this.mMenuScene.hasChildScene()) {
+                             /* Remove the menu and reset it. */
+                             this.mMenuScene.back();
+                     } else {
+                             /* Attach the menu. */
+                             this.mMenuScene.setChildScene(this.mMenuScene, false, true, true);
+                     }
+                     return true;
+             } else {
+                     return super.onKeyDown(pKeyCode, pEvent);
+             }
+     }
+
+     
+     public boolean onMenuItemClicked(final MenuScene pMenuScene, final IMenuItem pMenuItem, final float pMenuItemLocalX, final float pMenuItemLocalY) {
+             switch(pMenuItem.getID()) {
+                     case MENU_RESET:
+                             /* Restart the animation. */
+                             this.mMenuScene.reset();
+
+                             /* Remove the menu and reset it. */
+                             this.mMenuScene.clearChildScene();
+                             this.mMenuScene.reset();
+                             return true;
+                     case MENU_QUIT:
+                             /* End Activity. */
+                             this.finish();
+                             return true;
+                     default:
+                             return false;
+             }
+     }
+
+     // ===========================================================
+     // Methods
+     // ===========================================================
+
+     protected void createMenuScene() {
+             this.mMenuScene = new MenuScene(this.mCamera);
+
+             final SpriteMenuItem resetMenuItem = new SpriteMenuItem(MENU_RESET, this.mMenuResetTextureRegion);
+             resetMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+             this.mMenuScene.addMenuItem(resetMenuItem);
+
+             final SpriteMenuItem quitMenuItem = new SpriteMenuItem(MENU_QUIT, this.mMenuQuitTextureRegion);
+             quitMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+             this.mMenuScene.addMenuItem(quitMenuItem);
+
+             this.mMenuScene.buildAnimations();
+
+             this.mMenuScene.setBackgroundEnabled(false);
+
+             this.mMenuScene.setOnMenuItemClickListener(this);
+     }
 
 	// ===========================================================
 	// Methods
