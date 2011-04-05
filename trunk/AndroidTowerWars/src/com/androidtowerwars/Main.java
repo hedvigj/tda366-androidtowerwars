@@ -58,9 +58,9 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 	public TextureRegion mSkeletonTextureRegion;	
 	private TextureRegion mTowerTextureRegion;
 	public Controller controller;
-	private Texture mTexture;
 	private TextureRegion mMenuResetTextureRegion; 
-	private Texture mMenuTexture;
+	private Texture mMenuResetTexture;
+	private Texture mMenuQuitTexture;
 	private TextureRegion mMenuQuitTextureRegion; 
 	protected MenuScene mMenuScene;
 	protected static final int MENU_RESET = 0;
@@ -113,22 +113,25 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 				this.mTowerTexture, this, "gfx/arrow_tower_2.png",
 				0, 0);
 		
+		this.mMenuResetTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        this.mMenuQuitTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        this.mMenuResetTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuResetTexture, this, "gfx/menu_reset.png", 0, 0);
+        this.mMenuQuitTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuQuitTexture, this, "gfx/menu_quit.png", 0, 0);
+		
 		this.mEngine.getTextureManager().loadTexture(this.mBackgroundTexture);
 		this.mEngine.getTextureManager().loadTexture(this.mSkeletonTexture);
 		this.mEngine.getTextureManager().loadTexture(this.mTowerTexture);
-		this.mEngine.getTextureManager().loadTexture(this.mTexture);
-
-        this.mMenuTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-        this.mMenuResetTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuTexture, this, "gfx/menu_reset.png", 0, 0);
-        this.mMenuQuitTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuTexture, this, "gfx/menu_quit.png", 0, 50);
-        this.mEngine.getTextureManager().loadTexture(this.mMenuTexture);
+        this.mEngine.getTextureManager().loadTexture(this.mMenuResetTexture);
+        this.mEngine.getTextureManager().loadTexture(this.mMenuQuitTexture);
 
 	}
 
 	public Scene onLoadScene() {
 		final Scene scene = new Scene(1);
 		this.mEngine.registerUpdateHandler(new FPSLogger());
+		
 		this.createMenuScene();
+		
 		/* Limit scene size */
 		this.mCamera.setBounds(0, Constants.MAP_WIDTH, 0, Constants.MAP_HEIGHT);
 		this.mCamera.setBoundsEnabled(true);
@@ -160,12 +163,12 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 	 @Override
      public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
              if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
-                     if(this.mMenuScene.hasChildScene()) {
+                     if(getEngine().getScene().hasChildScene()) {
                              /* Remove the menu and reset it. */
                              this.mMenuScene.back();
                      } else {
                              /* Attach the menu. */
-                             this.mMenuScene.setChildScene(this.mMenuScene, false, true, true);
+                             getEngine().getScene().setChildScene(this.mMenuScene, false, true, true);
                      }
                      return true;
              } else {
@@ -178,11 +181,11 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
              switch(pMenuItem.getID()) {
                      case MENU_RESET:
                              /* Restart the animation. */
-                             this.mMenuScene.reset();
+                    	 	getEngine().getScene().reset();
 
                              /* Remove the menu and reset it. */
-                             this.mMenuScene.clearChildScene();
-                             this.mMenuScene.reset();
+                    	 	getEngine().getScene().clearChildScene();
+                    	 	getEngine().getScene().reset();
                              return true;
                      case MENU_QUIT:
                              /* End Activity. */
