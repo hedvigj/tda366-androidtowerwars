@@ -13,6 +13,8 @@ import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
 import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
+import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.scene.background.ColorBackground;
 import org.anddev.andengine.entity.scene.menu.MenuScene;
 import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
@@ -29,6 +31,7 @@ import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
+import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 import org.anddev.andengine.util.MathUtils;
 
@@ -39,7 +42,7 @@ import com.androidtowerwars.constants.*;
 
 import android.view.KeyEvent;
 
-public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
+public class Main extends BaseGameActivity implements IOnMenuItemClickListener, IOnAreaTouchListener{
 
 	// ===========================================================
 	// Constants
@@ -54,6 +57,7 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 	private Texture mBackgroundTexture;
 	private Texture mSkeletonTexture;
 	private Texture mTowerTexture;
+	private Texture mButtonTexture;
 	private TextureRegion mBackgroundTextureRegion;
 	public TextureRegion mSkeletonTextureRegion;	
 	private TextureRegion mTowerTextureRegion;
@@ -61,7 +65,8 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 	private TextureRegion mMenuResetTextureRegion; 
 	private Texture mMenuResetTexture;
 	private Texture mMenuQuitTexture;
-	private TextureRegion mMenuQuitTextureRegion; 
+	private TextureRegion mMenuQuitTextureRegion;
+	private TiledTextureRegion mButtonTextureRegion;
 	protected MenuScene mMenuScene;
 	protected static final int MENU_RESET = 0;
     protected static final int MENU_QUIT = MENU_RESET + 1;
@@ -112,17 +117,24 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 		this.mTowerTextureRegion = TextureRegionFactory.createFromAsset(
 				this.mTowerTexture, this, "gfx/arrow_tower_2.png",
 				0, 0);
+		this.mButtonTexture = new Texture(64, 128,
+				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mButtonTextureRegion = TextureRegionFactory.createTiledFromAsset(
+				this.mButtonTexture, this, "gfx/arrow_tower_2.png", 0,0, 1, 1);
+
 		
 		this.mMenuResetTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         this.mMenuQuitTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         this.mMenuResetTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuResetTexture, this, "gfx/menu_reset.png", 0, 0);
         this.mMenuQuitTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuQuitTexture, this, "gfx/menu_quit.png", 0, 0);
 		
+        
 		this.mEngine.getTextureManager().loadTexture(this.mBackgroundTexture);
 		this.mEngine.getTextureManager().loadTexture(this.mSkeletonTexture);
 		this.mEngine.getTextureManager().loadTexture(this.mTowerTexture);
         this.mEngine.getTextureManager().loadTexture(this.mMenuResetTexture);
         this.mEngine.getTextureManager().loadTexture(this.mMenuQuitTexture);
+      
 
 	}
 
@@ -154,6 +166,14 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 		scene.getLastChild().attachChild(bTower);
 		controller.createSpriteSpawnTimeHandler();
 		controller.createRightSpawnTimeHandler();
+		
+		scene.setOnAreaTouchListener(this);
+        ClickButton pButton = new ClickButton(Constants.MAP_WIDTH - 400, Constants.MAP_HEIGHT * 0.4f , mButtonTextureRegion);
+        scene.registerTouchArea(pButton);
+		scene.getLastChild().attachChild(pButton);
+
+		
+		
 		return scene;
 	}
 
@@ -217,6 +237,16 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener{
 
              this.mMenuScene.setOnMenuItemClickListener(this);
      }
+
+	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
+			ITouchArea pTouchArea, float pTouchAreaLocalX,
+			float pTouchAreaLocalY) {
+		
+		final TestTower tower = new TestTower(Constants.MAP_WIDTH - 400, Constants.MAP_HEIGHT * 0.4f, this.mTowerTextureRegion, 200);
+		getEngine().getScene().getLastChild().attachChild(tower);
+		
+		return false;
+	}
 
 	// ===========================================================
 	// Methods

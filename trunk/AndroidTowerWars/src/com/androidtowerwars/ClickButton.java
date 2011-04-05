@@ -5,8 +5,8 @@ import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
 public class ClickButton extends TiledSprite{
 	
-	public ClickButton(int pX, int pY, TiledTextureRegion mTextureRegion){
-		super(pX, pY, mTextureRegion);
+	public ClickButton(int pX, float f, TiledTextureRegion mTextureRegion){
+		super(pX, f, mTextureRegion);
 	}
 	
 	public void touch(final int mTileIndex){
