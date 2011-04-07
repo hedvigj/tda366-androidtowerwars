@@ -7,6 +7,7 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 public class TestTower extends Sprite {
 
 	private Rectangle range;
+
 	
 	public TestTower(float pX, float pY, TextureRegion pTextureRegion, float range) {
 		super(pX, pY, pTextureRegion);
@@ -29,5 +30,4 @@ public class TestTower extends Sprite {
 		}*/
 
 	}
-
 }
