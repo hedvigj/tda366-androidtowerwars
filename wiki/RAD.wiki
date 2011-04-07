@@ -7,4 +7,7 @@ RAD
 
 = Details =
 
-http://dl.dropbox.com/u/19803932/Requirements%20and%20Analysis%20Document%20for%20Android.pdf
+*RAD 1.2: * http://dl.dropbox.com/u/19803932/Requirements%20and%20Analysis%20Document%20for%20Android%20revision%202.pdf
+
+*RAD 1.1: * http://dl.dropbox.com/u/19803932/Requirements%20and%20Analysis%20Document%20for%20Android.pdf
+
