@@ -1,12 +1,16 @@
 package com.androidtowerwars;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
-import org.anddev.andengine.entity.sprite.Sprite;
 
-import com.androidtowerwars.constants.Constants;
+import com.androidtowerwars.model.TestSoldier;
+import com.androidtowerwars.model.World;
+import com.androidtowerwars.model.World.Team;
+
 
 public class Controller {
 	
@@ -19,8 +23,7 @@ public class Controller {
 	// ===========================================================
 	private TimerHandler spriteTimerHandler;
 	private TimerHandler rSpriteTimerHandler;
-	public List<TestSoldier> soldierList = new LinkedList<TestSoldier>();
-	public List<RightTestSoldier> rightSoldierList = new LinkedList<RightTestSoldier>();
+	public HashMap<World.Team, List<TestSoldier>> soldierListMap = new HashMap<World.Team, List<TestSoldier>>();
 	
 	//===========================================================
 	// Methods
@@ -34,44 +37,39 @@ public class Controller {
 	 * @param pY
 	 *            is the Y Position of your Sprite
 	 */
-	private void createSprite(float pX, float pY) {
-		TestSoldier sprite = new TestSoldier(pX, pY, Main.instance.mSkeletonTextureRegion);
-		soldierList.add(sprite);
-		Main.instance.getEngine().getScene().getLastChild().attachChild(sprite);
-	}
-	private void createRightSprite(float pX, float pY){
-		RightTestSoldier rSprite = new RightTestSoldier(pX,pY, Main.instance.mSkeletonTextureRegion);
-		rightSoldierList.add(rSprite);
-		Main.instance.getEngine().getScene().getLastChild().attachChild(rSprite);
+	private void createSprite(float pX, float pY, World.Team team) {
+		TestSoldier sprite = new TestSoldier(pX, pY, GameActivity.instance.mSkeletonTextureRegion, team);
+		soldierListMap.get(team).add(sprite);
+		GameActivity.instance.getEngine().getScene().getLastChild().attachChild(sprite);
 	}
 	/**
 	 * Creates a Timer Handler used to Spawn Sprites
 	 */
 	public void createSpriteSpawnTimeHandler() {
-		Main.instance.getEngine().registerUpdateHandler(
+		soldierListMap.put(Team.EVIL, new LinkedList<TestSoldier>());
+		GameActivity.instance.getEngine().registerUpdateHandler(
 				spriteTimerHandler = new TimerHandler(1.0f,
 						new ITimerCallback() {
 							public void onTimePassed(
 									final TimerHandler pTimerHandler) {
 								spriteTimerHandler.reset();
-								// Random Position Generator
 								final float xPos = 200;
-								final float yPos = Constants.MAP_HEIGHT / 2;
-								createSprite(xPos, yPos);
+								final float yPos = World.MAP_HEIGHT / 2;
+								createSprite(xPos, yPos, World.Team.EVIL);
 							}
 						}));
 	}
 	public void createRightSpawnTimeHandler() {
-		Main.instance.getEngine().registerUpdateHandler(
+		soldierListMap.put(Team.GOOD, new LinkedList<TestSoldier>());
+		GameActivity.instance.getEngine().registerUpdateHandler(
 				rSpriteTimerHandler = new TimerHandler(2.0f,
 						new ITimerCallback() {
 							public void onTimePassed(
 									final TimerHandler pTimerHandler) {
 								rSpriteTimerHandler.reset();
-								// Random Position Generator
-								final float xPos = Constants.MAP_WIDTH-200;
-								final float yPos = Constants.MAP_HEIGHT / 2;
-								createRightSprite(xPos, yPos);
+								final float xPos = World.MAP_WIDTH-200;
+								final float yPos = World.MAP_HEIGHT / 2;
+								createSprite(xPos, yPos, World.Team.GOOD);
 							}
 						}));
 	}
