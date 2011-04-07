@@ -1,13 +1,38 @@
 Images regarding our project. Not sprites for the game.
 
-= Introduction =
+Simple sketchs of the overall view:
 
-Add your content here.
+http://dl.dropbox.com/u/21480735/IMAG0072.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0081.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0083.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0084.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0088.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0089.jpg
 
 
-= Details =
+Sketchs of the towers:
 
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+http://dl.dropbox.com/u/21480735/IMAG0082.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0090.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0091.jpg
+
+http://dl.dropbox.com/u/21480735/IMAG0092.jpg
+
+
+Sketchs of the Use Cases:
+
+http://dl.dropbox.com/u/21480735/UseCases-Basic.jpg
+
+http://dl.dropbox.com/u/21480735/UseCases-Future.jpg
+
+
+Sketchs of the Model and DomainLogics:
+
+These will be remade in a digital format as it is impossible to read when taken a picture of.
