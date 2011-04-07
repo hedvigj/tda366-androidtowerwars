@@ -180,8 +180,6 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener, 
         scene.getLastChild().attachChild(b1Button);
         scene.getLastChild().attachChild(b2Button);
 
-		
-		
 		return scene;
 	}
 
@@ -210,14 +208,20 @@ public class Main extends BaseGameActivity implements IOnMenuItemClickListener, 
              switch(pMenuItem.getID()) {
                      case MENU_RESET:
                              /* Restart the animation. */
-                    	 	getEngine().getScene().getLastChild().detachChild(b2Tower);
+                 		runOnUpdateThread(new Runnable() {
+               			 public void run() {
+               			 /* Now it is save to remove the entity! */
+               				getEngine().getScene().getLastChild().detachChild(b2Tower);
                     	 	getEngine().getScene().getLastChild().detachChild(b1Tower);
                     	 	getEngine().getScene().getLastChild().detachChild(tower);
                     	 	getEngine().getScene().getLastChild().detachChild(tower1);
                     	 	tower = null;
                     	 	tower1 = null;
                     	 	b1Tower = null;
-                    	 	b2Tower = null;
+                    	 	b2Tower = null; 
+               			 }
+               			 });
+                    	 	
                     	 	
                              /* Remove the menu and reset it. */
                     	 	getEngine().getScene().clearChildScene();

@@ -11,7 +11,7 @@ public class TestTower extends Sprite {
 	
 	public TestTower(float pX, float pY, TextureRegion pTextureRegion, float range) {
 		super(pX, pY, pTextureRegion);
-		this.range = new Rectangle(pX-(range*0.5f)+this.getWidth()*0.5f, pY-50, range, 100f);
+		this.range = new Rectangle(pX-(range*0.5f)+this.getWidth()*0.5f, pY-200, range, 400f);
 	}
 
 	@Override
