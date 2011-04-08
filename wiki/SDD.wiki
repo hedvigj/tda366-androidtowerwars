@@ -1,0 +1,7 @@
+Documents concerning the SDD. Including images. 
+
+Model and DomainLogics:
+
+http://dl.dropbox.com/u/4967906/Towerlogics.doc
+
+http://dl.dropbox.com/u/4967906/ModelMindmap%20copy.png
