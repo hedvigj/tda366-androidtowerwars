@@ -1,4 +1,4 @@
-#summary hello
+#summary SDD and material such as Model Mindmap etc.
 =Documents concerning the SDD. Including images.= 
 
 Model and DomainLogics:
