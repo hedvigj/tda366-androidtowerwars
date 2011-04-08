@@ -1,3 +1,5 @@
+#summary Imags regrding the project
+
 Images regarding our project. Not sprites for the game.
 
 Simple sketchs of the overall view:
