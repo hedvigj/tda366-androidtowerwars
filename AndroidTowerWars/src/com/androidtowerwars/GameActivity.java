@@ -21,7 +21,9 @@ import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
+import com.androidtowerwars.Preferences;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 
@@ -50,8 +52,10 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 	private TextureRegion mMenuResetTextureRegion; 
 	private Texture mMenuResetTexture;
 	private Texture mMenuQuitTexture;
+	private Texture mMenuSettingsTexture;
 	private TextureRegion mMenuQuitTextureRegion;
 	private TextureRegion mButtonTextureRegion;
+	private TextureRegion mMenuSettingsTextureRegion;
 	protected MenuScene mMenuScene;
 	private ClickButton s1Button;
 	private ClickButton s2Button;
@@ -62,7 +66,8 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 	private TestTower b1Tower;
 	private TestTower b2Tower;
 	protected static final int MENU_RESET = 0;
-    protected static final int MENU_QUIT = MENU_RESET + 1;
+    protected static final int MENU_QUIT = MENU_RESET + 2;
+    protected static final int MENU_SETTINGS = 1;
 
 	
 	// ===========================================================
@@ -112,8 +117,10 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 		
 		this.mMenuResetTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         this.mMenuQuitTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        this.mMenuSettingsTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         this.mMenuResetTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuResetTexture, this, "gfx/menu_reset.png", 0, 0);
         this.mMenuQuitTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuQuitTexture, this, "gfx/menu_quit.png", 0, 0);
+        this.mMenuSettingsTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuSettingsTexture, this, "gfx/menu_quit.png", 0, 0);
 		
         this.mEngine.getTextureManager().loadTexture(this.mButtonTexture);
 		getEngine().getTextureManager().loadTexture(this.mBackgroundTexture);
@@ -121,6 +128,7 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 		getEngine().getTextureManager().loadTexture(this.mTowerTexture);
         getEngine().getTextureManager().loadTexture(this.mMenuResetTexture);
         getEngine().getTextureManager().loadTexture(this.mMenuQuitTexture);
+        getEngine().getTextureManager().loadTexture(this.mMenuSettingsTexture);
       
 
 	}
@@ -217,6 +225,9 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
                              /* End Activity. */
                              this.finish();
                              return true;
+                     case MENU_SETTINGS:
+             			startActivity(new Intent(this, Preferences.class));
+            			return true;
                      default:
                              return false;
              }
@@ -232,11 +243,17 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
              final SpriteMenuItem resetMenuItem = new SpriteMenuItem(MENU_RESET, this.mMenuResetTextureRegion);
              resetMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
              this.mMenuScene.addMenuItem(resetMenuItem);
+             // settingsbutton - says quit atm
+             final SpriteMenuItem settingsMenuItem = new SpriteMenuItem(MENU_SETTINGS, this.mMenuSettingsTextureRegion);
+             settingsMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
+             this.mMenuScene.addMenuItem(settingsMenuItem);
 
              final SpriteMenuItem quitMenuItem = new SpriteMenuItem(MENU_QUIT, this.mMenuQuitTextureRegion);
              quitMenuItem.setBlendFunction(GL10.GL_SRC_ALPHA, GL10.GL_ONE_MINUS_SRC_ALPHA);
              this.mMenuScene.addMenuItem(quitMenuItem);
 
+
+             
              this.mMenuScene.buildAnimations();
 
              this.mMenuScene.setBackgroundEnabled(false);
