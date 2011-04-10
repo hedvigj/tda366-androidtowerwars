@@ -27,6 +27,8 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.KeyEvent;
 
+import com.androidtowerwars.controller.SoldierController;
+import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.model.TestTower;
 import com.androidtowerwars.model.World;
 
@@ -48,7 +50,9 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 	private TextureRegion mBackgroundTextureRegion;
 	public TextureRegion mSkeletonTextureRegion;	
 	private TextureRegion mTowerTextureRegion;
-	public Controller controller;
+	public SoldierController soldierController;
+	public TowerController towerController;
+	
 	private TextureRegion mMenuResetTextureRegion; 
 	private Texture mMenuResetTexture;
 	private Texture mMenuQuitTexture;
@@ -61,10 +65,10 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 	private ClickButton s2Button;
 	private ClickButton b1Button;
 	private ClickButton b2Button;
-	private TestTower tower;
-	private TestTower tower1;
-	private TestTower b1Tower;
-	private TestTower b2Tower;
+	private Sprite tower;
+	private Sprite tower1;
+	private Sprite b1Tower;
+	private Sprite b2Tower;
 	protected static final int MENU_RESET = 0;
     protected static final int MENU_QUIT = MENU_RESET + 2;
     protected static final int MENU_SETTINGS = 1;
@@ -80,7 +84,6 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 	
 	public Engine onLoadEngine() {
 		instance = this;
-		controller = new Controller();
 		Engine engine = new World();
 		// Attempt to set up multitouch support
 		if (MultiTouch.isSupported(this) && (MultiTouch.isSupported(this))) {
@@ -135,6 +138,10 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 
 	public Scene onLoadScene() {
 		final Scene scene = new Scene(1);
+		soldierController = new SoldierController();
+		scene.getLastChild().attachChild(soldierController);
+		towerController = TowerController.getInstance();
+		scene.getLastChild().attachChild(towerController);
 		getEngine().registerUpdateHandler(new FPSLogger());
 		
 		this.createMenuScene();
@@ -154,8 +161,8 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 				this.mBackgroundTextureRegion);
 		scene.getLastChild().attachChild(background);
 
-		controller.createSpriteSpawnTimeHandler();
-		controller.createRightSpawnTimeHandler();
+		soldierController.createSpriteSpawnTimeHandler();
+		soldierController.createRightSpawnTimeHandler();
 		
 		scene.setOnAreaTouchListener(this);
         s1Button = new ClickButton(World.MAP_WIDTH - 400, World.MAP_HEIGHT * 0.4f , mButtonTextureRegion);
@@ -268,26 +275,26 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 			if(pTouchArea == s1Button){
 				if (tower == null) {
 					Log.d("TowerWars", "s1Button");
-					tower = new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
+					tower = TowerController.createTestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD); //new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
 					getEngine().getScene().getLastChild().attachChild(tower);
 				}
 			}
 			else if(pTouchArea == s2Button ){
 				if (tower1 == null) {
 					Log.d("TowerWars", "s2Button");
-					tower1 = new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
+					tower1 = TowerController.createTestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD); //new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
 					getEngine().getScene().getLastChild().attachChild(tower1);
 				}
 			}
 			else if(pTouchArea == b1Button){
 				if (b1Tower == null) {
-					b1Tower = new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
+					b1Tower = TowerController.createTestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);//new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
 					getEngine().getScene().getLastChild().attachChild(b1Tower);
 				}
 			}
 			else{
 				if (b2Tower == null) {
-					b2Tower = new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
+					b2Tower = TowerController.createTestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL); //new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
 					getEngine().getScene().getLastChild().attachChild(b2Tower);
 				}
 			}
