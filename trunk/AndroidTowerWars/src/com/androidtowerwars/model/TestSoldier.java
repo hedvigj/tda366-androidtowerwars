@@ -13,6 +13,7 @@ public class TestSoldier extends Observable implements ISoldier {
 	private int health = 100;
 
 	private int damage = 33;
+	private int value = 5;
 
 	private float x;
 	private float y;
@@ -73,4 +74,10 @@ public class TestSoldier extends Observable implements ISoldier {
 		return team;
 	}
 	
+	public int getValue(){
+		return value;
+	}
+	public void setValue(int value){
+		this.value=value;
+	}
 }
