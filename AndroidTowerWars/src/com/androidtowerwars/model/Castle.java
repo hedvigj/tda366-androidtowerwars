@@ -1,8 +1,9 @@
 package com.androidtowerwars.model;
 
 import com.androidtowerwars.model.World.Team;
+import com.androidtowerwars.view.ObserverSprite;
 
-public class Castle {
+public class Castle implements ICastle {
 	private int maxHealth = 10000;
 	private int health = 10000;
 	private World.Team team;
@@ -36,5 +37,4 @@ public class Castle {
 	public void setTeam(World.Team team){
 		this.team=team;
 	}
-
 }
