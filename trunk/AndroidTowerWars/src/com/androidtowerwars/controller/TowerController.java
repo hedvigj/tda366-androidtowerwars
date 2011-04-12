@@ -9,11 +9,11 @@ import org.anddev.andengine.entity.Entity;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 
-import com.androidtowerwars.logic.TowerLogic;
 import com.androidtowerwars.model.ITower;
 import com.androidtowerwars.model.TestTower;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
+import com.androidtowerwars.model.logic.TowerLogic;
 
 public class TowerController extends Entity {
 	

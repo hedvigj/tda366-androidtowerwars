@@ -11,11 +11,12 @@ import org.anddev.andengine.entity.Entity;
 import org.anddev.andengine.entity.sprite.Sprite;
 
 import com.androidtowerwars.GameActivity;
-import com.androidtowerwars.logic.SoldierLogic;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.TestSoldier;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
+import com.androidtowerwars.model.logic.SoldierLogic;
+import com.androidtowerwars.view.ObserverSprite;
 
 
 public class SoldierController extends Entity {
@@ -30,7 +31,7 @@ public class SoldierController extends Entity {
 	private TimerHandler spriteTimerHandler;
 	private TimerHandler rSpriteTimerHandler;
 	public static ConcurrentHashMap<World.Team, List<ISoldier>> soldierListMap = new ConcurrentHashMap<World.Team, List<ISoldier>>();
-	public static ConcurrentHashMap<ISoldier, Sprite> soldierSpriteMap = new ConcurrentHashMap<ISoldier, Sprite>();
+	public static ConcurrentHashMap<ISoldier, ObserverSprite> soldierSpriteMap = new ConcurrentHashMap<ISoldier, ObserverSprite>();
 	
 	//===========================================================
 	// Methods
@@ -40,20 +41,28 @@ public class SoldierController extends Entity {
 		super.onManagedUpdate(pSecondsElapsed);
 		for(List<ISoldier> soldierList: soldierListMap.values()) {
 			for(ISoldier soldier: soldierList) {
-				SoldierLogic.updateSoldier(soldier, soldierSpriteMap.get(soldier), pSecondsElapsed);
+				SoldierLogic.updateSoldier(soldier, pSecondsElapsed);
 			}
 		}
 	}
 	
-	public static synchronized void removeSoldier(ISoldier soldier, List<ISoldier> list) {
+	public static synchronized void removeSoldier(final ISoldier soldier, List<ISoldier> list) {
 		list.remove(soldier);
+		GameActivity.instance.runOnUpdateThread(new Runnable() {
+			public void run() {
+				/* Now it is save to remove the entity! */
+				GameActivity.instance.getEngine().getScene().getLastChild()
+						.detachChild(GameActivity.instance.soldierController.soldierSpriteMap.get(soldier));
+			}
+		});
 	}
 	
 	private void createSprite(float pX, float pY, World.Team team) {
 		TestSoldier soldier = new TestSoldier(pX, pY, team);
-		Sprite soldierSprite = new Sprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
+		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
 		soldierListMap.get(team).add(soldier);
 		soldierSpriteMap.put(soldier, soldierSprite);
+		soldier.addObserver(soldierSprite);
 		GameActivity.instance.getEngine().getScene().getLastChild().attachChild(soldierSprite);
 	}
 	/**
