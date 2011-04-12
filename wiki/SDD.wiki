@@ -1,6 +1,10 @@
 #summary SDD and material such as Model Mindmap etc.
 =Documents concerning the SDD. Including images.= 
 
+SDD Version 1:
+
+http://dl.dropbox.com/u/19803932/SDD.pdf
+
 Model and DomainLogics:
 
 http://dl.dropbox.com/u/4967906/Towerlogics.doc
