@@ -25,12 +25,17 @@ import com.androidtowerwars.Preferences;
 
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
 
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
+import com.androidtowerwars.model.Castle;
 import com.androidtowerwars.model.TestTower;
 import com.androidtowerwars.model.World;
+import com.androidtowerwars.model.World.Team;
 
 public class GameActivity extends BaseGameActivity implements IOnMenuItemClickListener, IOnAreaTouchListener{
 
@@ -47,9 +52,11 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 	private Texture mSkeletonTexture;
 	private Texture mTowerTexture;
 	private Texture mButtonTexture;
+	private Texture mCastleTexture;
 	private TextureRegion mBackgroundTextureRegion;
 	public TextureRegion mSkeletonTextureRegion;	
 	private TextureRegion mTowerTextureRegion;
+	private TextureRegion mCastleTextureRegion;
 	public SoldierController soldierController;
 	public TowerController towerController;
 	
@@ -72,6 +79,7 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 	protected static final int MENU_RESET = 0;
     protected static final int MENU_QUIT = MENU_RESET + 2;
     protected static final int MENU_SETTINGS = 1;
+
 
 	
 	// ===========================================================
@@ -116,7 +124,7 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				this.mButtonTexture, this, "gfx/GroundTile.png", 0,0);
-
+		
 		
 		this.mMenuResetTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         this.mMenuQuitTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -144,6 +152,7 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 		scene.getLastChild().attachChild(towerController);
 		getEngine().registerUpdateHandler(new FPSLogger());
 		
+		
 		this.createMenuScene();
 		
 		/* Limit scene size */
@@ -169,7 +178,7 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
         s2Button = new ClickButton(World.MAP_WIDTH - 400, World.MAP_HEIGHT * 0.6f , mButtonTextureRegion);
         b1Button = new ClickButton(300, World.MAP_HEIGHT*0.4f, mButtonTextureRegion);
         b2Button = new ClickButton(300, World.MAP_HEIGHT*0.6f, mButtonTextureRegion);
-        
+
         
         scene.registerTouchArea(b1Button);
         scene.registerTouchArea(b2Button);
