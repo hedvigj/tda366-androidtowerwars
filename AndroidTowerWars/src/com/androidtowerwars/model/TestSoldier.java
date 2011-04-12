@@ -1,13 +1,10 @@
 package com.androidtowerwars.model;
 
-import org.anddev.andengine.entity.sprite.Sprite;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
-import org.anddev.andengine.ui.activity.BaseGameActivity;
+import java.util.Observable;
 
-import com.androidtowerwars.GameActivity;
+import android.util.Log;
 
-public class TestSoldier implements ISoldier {
+public class TestSoldier extends Observable implements ISoldier {
 
 	private World.Team team;
 	private float speed = 60; // pixels per second
@@ -60,6 +57,8 @@ public class TestSoldier implements ISoldier {
 	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;
+		setChanged();
+		notifyObservers();
 	}
 	
 	public float getSpeed() {

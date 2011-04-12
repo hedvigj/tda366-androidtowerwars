@@ -1,4 +1,4 @@
-package com.androidtowerwars.logic;
+package com.androidtowerwars.model.logic;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
