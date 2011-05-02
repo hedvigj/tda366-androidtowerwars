@@ -3,17 +3,14 @@ package com.androidtowerwars.model;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.view.ObserverSprite;
 
-public class Castle implements ICastle {
+public class Wall implements IWall {
 	private int maxHealth = 10000;
 	private int health = 10000;
 	private World.Team team;
-	private float x;
-	private float y;
 
-	public Castle(float pX, float pY, World.Team team) {
+
+	public Wall(World.Team team) {
 		this.team = team;
-		x = pX;
-		y = pY;
 	}
 
 	public int getMaxHealth() {
@@ -30,10 +27,7 @@ public class Castle implements ICastle {
 	public void setHealth(int health) {
 		this.health = health;
 	}
-	public void setPosition(float x, float y){
-		this.x=x;
-		this.y=y;
-	}
+	
 	public void setTeam(World.Team team){
 		this.team=team;
 	}
