@@ -32,8 +32,8 @@ import android.view.View.OnClickListener;
 
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
-import com.androidtowerwars.model.Castle;
 import com.androidtowerwars.model.TestTower;
+import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 
@@ -132,7 +132,7 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
         this.mMenuResetTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuResetTexture, this, "gfx/menu_reset.png", 0, 0);
         this.mMenuQuitTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuQuitTexture, this, "gfx/menu_quit.png", 0, 0);
         this.mMenuSettingsTextureRegion = TextureRegionFactory.createFromAsset(this.mMenuSettingsTexture, this, "gfx/menu_quit.png", 0, 0);
-		
+        
         this.mEngine.getTextureManager().loadTexture(this.mButtonTexture);
 		getEngine().getTextureManager().loadTexture(this.mBackgroundTexture);
 		getEngine().getTextureManager().loadTexture(this.mSkeletonTexture);
@@ -140,6 +140,7 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
         getEngine().getTextureManager().loadTexture(this.mMenuResetTexture);
         getEngine().getTextureManager().loadTexture(this.mMenuQuitTexture);
         getEngine().getTextureManager().loadTexture(this.mMenuSettingsTexture);
+    
       
 
 	}
