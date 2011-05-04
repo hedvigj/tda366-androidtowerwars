@@ -21,6 +21,8 @@ import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
+
+
 import com.androidtowerwars.Preferences;
 
 import android.content.Intent;
@@ -283,11 +285,17 @@ public class GameActivity extends BaseGameActivity implements IOnMenuItemClickLi
 			float pTouchAreaLocalY) {
 			
 			if(pTouchArea == s1Button){
+			    
+		         Intent i = new Intent(this, Pop.class);
+		            startActivity(i);
+		        /*
 				if (tower == null) {
 					Log.d("TowerWars", "s1Button");
 					tower = TowerController.createTestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD); //new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
 					getEngine().getScene().getLastChild().attachChild(tower);
 				}
+				*/
+				
 			}
 			else if(pTouchArea == s2Button ){
 				if (tower1 == null) {
