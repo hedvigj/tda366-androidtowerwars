@@ -32,6 +32,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 
+import com.androidtowerwars.controller.DragAndZoomController;
 import com.androidtowerwars.controller.MenuController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
@@ -192,8 +193,6 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
      // ===========================================================
 		@Override
 	   public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
-	    	Log.d("TowerWars", "Åt helvete");
-	    	
 	        if(menuController.onKeyDown(pKeyCode, pEvent)) {    
 	                return true;
 	        } else {
