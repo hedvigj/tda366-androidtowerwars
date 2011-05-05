@@ -17,6 +17,7 @@ import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.SoldierLogic;
 import com.androidtowerwars.view.ObserverSprite;
+import com.androidtowerwars.view.WorldView;
 
 
 public class SoldierController extends Entity {
@@ -77,7 +78,7 @@ public class SoldierController extends Entity {
 									final TimerHandler pTimerHandler) {
 								spriteTimerHandler.reset();
 								final float xPos = 200;
-								final float yPos = World.MAP_HEIGHT / 2;
+								final float yPos = WorldView.MAP_HEIGHT / 2;
 								createSprite(xPos, yPos, World.Team.EVIL);
 							}
 						}));
@@ -90,8 +91,8 @@ public class SoldierController extends Entity {
 							public void onTimePassed(
 									final TimerHandler pTimerHandler) {
 								rSpriteTimerHandler.reset();
-								final float xPos = World.MAP_WIDTH-200;
-								final float yPos = World.MAP_HEIGHT / 2;
+								final float xPos = WorldView.MAP_WIDTH-200;
+								final float yPos = WorldView.MAP_HEIGHT / 2;
 								createSprite(xPos, yPos, World.Team.GOOD);
 							}
 						}));
