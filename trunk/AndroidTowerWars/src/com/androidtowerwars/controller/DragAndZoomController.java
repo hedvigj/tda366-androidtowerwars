@@ -1,4 +1,4 @@
-package com.androidtowerwars;
+package com.androidtowerwars.controller;
 
 import org.anddev.andengine.engine.camera.ZoomCamera;
 import org.anddev.andengine.entity.scene.Scene;

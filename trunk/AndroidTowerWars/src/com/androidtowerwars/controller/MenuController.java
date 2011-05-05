@@ -66,7 +66,6 @@ public class MenuController implements IOnMenuItemClickListener {
         
 }
     public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
-    	Log.d("TowerWars", "Åt helvete");
         if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {    
         	if(WorldView.getInstance().getScene().hasChildScene()) {
                         /* Remove the menu and reset it. */
