@@ -10,7 +10,7 @@ public class Wall implements IWall {
 	private int maxHealth = 10000;
 	private int health = 20;
 	private World.Team team;
-	private static Rectangle range;
+	private Rectangle range;
 	
 	public Wall(float pX, float pY, float range, World.Team team) {
 		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-200, range, 400f); // TODO: Ändra range
@@ -41,7 +41,7 @@ public class Wall implements IWall {
 		this.team=team;
 	}
 	
-	public static Rectangle getRange(){
+	public Rectangle getRange(){
 		return range;
 	}
 }

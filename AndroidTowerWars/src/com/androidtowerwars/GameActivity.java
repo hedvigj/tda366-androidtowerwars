@@ -36,6 +36,7 @@ import com.androidtowerwars.controller.DragAndZoomController;
 import com.androidtowerwars.controller.MenuController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
+import com.androidtowerwars.controller.WallController;
 import com.androidtowerwars.model.TestTower;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
@@ -58,12 +59,15 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	private Texture mSkeletonTexture;
 	private Texture mTowerTexture;
 	private Texture mButtonTexture;
+	private Texture mWallTexture;
 	private TextureRegion mButtonTextureRegion;
 	private TextureRegion mBackgroundTextureRegion;
 	public TextureRegion mSkeletonTextureRegion;	
 	private TextureRegion mTowerTextureRegion;
+	private TextureRegion mWallTextureRegion;
 	public SoldierController soldierController;
 	public TowerController towerController;
+	public WallController wallController;
 	
 	private ClickButton s1Button;
 	private ClickButton s2Button;
@@ -73,6 +77,8 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	private Sprite tower1;
 	private Sprite b1Tower;
 	private Sprite b2Tower;
+	private Wall goodWall;
+	private Wall badWall;
 
 	
 	MenuView menuView = new MenuView(this);
@@ -117,6 +123,9 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		this.mTowerTextureRegion = TextureRegionFactory.createFromAsset(
 				this.mTowerTexture, this, "gfx/tower1.png",
 				0, 0);
+		this.mWallTexture = new Texture(256,256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mWallTextureRegion = TextureRegionFactory.createFromAsset(
+				this.mWallTexture, this, "gfx/wall.png", 0,0);
 		this.mButtonTexture = new Texture(256, 128,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         
@@ -127,6 +136,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		getEngine().getTextureManager().loadTexture(this.mBackgroundTexture);
 		getEngine().getTextureManager().loadTexture(this.mSkeletonTexture);
 		getEngine().getTextureManager().loadTexture(this.mTowerTexture);
+		getEngine().getTextureManager().loadTexture(this.mWallTexture);
 
     
       
@@ -139,6 +149,8 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		scene.getLastChild().attachChild(soldierController);
 		towerController = TowerController.getInstance();
 		scene.getLastChild().attachChild(towerController);
+		wallController =  new WallController();
+		scene.getLastChild().attachChild(wallController);
 		getEngine().registerUpdateHandler(new FPSLogger());
 		
 		
@@ -158,6 +170,14 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		final Sprite background = new Sprite(0, 0,
 				this.mBackgroundTextureRegion);
 		scene.getLastChild().attachChild(background);
+		
+		//TODO:Inte riktigt klart
+		final Sprite bWall = new Sprite(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.3f, mWallTextureRegion);
+		scene.getLastChild().attachChild(bWall);
+		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH-1525, WorldView.MAP_HEIGHT*0.3f, mWallTextureRegion);
+		scene.getLastChild().attachChild(gWall);
+		badWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.3f, 300, Team.EVIL);
+		goodWall = new Wall(WorldView.MAP_WIDTH-1525, WorldView.MAP_HEIGHT*0.3f, 300, Team.GOOD);
 
 		soldierController.createSpriteSpawnTimeHandler();
 		soldierController.createRightSpawnTimeHandler();
