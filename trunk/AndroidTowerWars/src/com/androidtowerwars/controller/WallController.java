@@ -11,9 +11,16 @@ import com.androidtowerwars.model.logic.WallLogic;
 public class WallController extends Entity {
 	
 	private static WallController instance = null;
+	private Wall goodWall;
+	private Wall badWall;
 	
-	protected synchronized void onManagedUpdate(Wall wall, final float pSecondsElapsed) {
+	public WallController(Wall goodWall, Wall badWall) {
+		this.goodWall = goodWall;
+		this.badWall = badWall;
+	}
+	protected synchronized void onManagedUpdate(final float pSecondsElapsed) {
 		super.onManagedUpdate(pSecondsElapsed);
-		WallLogic.updateWall(wall, pSecondsElapsed);
+		WallLogic.updateWall(goodWall, pSecondsElapsed);
+		WallLogic.updateWall(badWall, pSecondsElapsed);
 		}
 }

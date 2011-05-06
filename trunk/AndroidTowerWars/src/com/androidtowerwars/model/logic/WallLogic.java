@@ -15,9 +15,10 @@ public class WallLogic {
 	public synchronized static void updateWall(Wall wall, float pSecondsElapsed){
 		World.Team team = wall.getTeam();
 		Rectangle range = wall.getRange();
-		// TODO: Fixa detta, så det fungerar riktigt.
+		// TODO: Fixa detta, sï¿½ det fungerar riktigt.
 		for(int n=0;n<GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).size();n++) {
-		if (range.collidesWith(GameActivity.instance.soldierController.soldierSpriteMap.get(GameActivity.instance.soldierController.soldierListMap.get(team)))){
+		if (range.collidesWith(GameActivity.instance.soldierController.soldierSpriteMap.get(GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n)))){
+			
 			SoldierLogic.killSoldier(GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n));
 			damageCastle(wall, team);
 			}
@@ -25,11 +26,12 @@ public class WallLogic {
 	}
 	
 	public static synchronized void damageCastle(Wall wall, World.Team team){
-		int health = wall.getHealth();
+		final int health = wall.getHealth();
 		if(health <= 0){
-			System.out.println("Muren är förstörd");
+			System.out.println("Muren ï¿½r fï¿½rstï¿½rd");
 		}
 		else
 			wall.setHealth(health-10);
+			System.out.println("Wall health:" + wall.getHealth());
 	}
 }

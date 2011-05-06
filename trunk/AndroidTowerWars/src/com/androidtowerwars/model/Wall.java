@@ -7,13 +7,14 @@ import com.androidtowerwars.view.ObserverSprite;
 import com.androidtowerwars.view.WorldView;
 
 public class Wall implements IWall {
-	private int maxHealth = 10000;
-	private int health = 20;
+	private int maxHealth = 200;
+	private int health = maxHealth;
 	private World.Team team;
 	private Rectangle range;
 	
 	public Wall(float pX, float pY, float range, World.Team team) {
-		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-200, range, 400f); // TODO: Ändra range
+		//this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-200, range, 400f); // TODO: ï¿½ndra range
+		this.range = new Rectangle(pX-range, pY, range*2, 800f);
 		this.team = team;
 	}
 
