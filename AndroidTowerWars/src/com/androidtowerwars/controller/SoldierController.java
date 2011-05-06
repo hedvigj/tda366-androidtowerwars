@@ -77,7 +77,7 @@ public class SoldierController extends Entity {
 							public void onTimePassed(
 									final TimerHandler pTimerHandler) {
 								spriteTimerHandler.reset();
-								final float xPos = 200;
+								final float xPos = 300;
 								final float yPos = WorldView.MAP_HEIGHT / 2;
 								createSprite(xPos, yPos, World.Team.EVIL);
 							}
@@ -91,7 +91,7 @@ public class SoldierController extends Entity {
 							public void onTimePassed(
 									final TimerHandler pTimerHandler) {
 								rSpriteTimerHandler.reset();
-								final float xPos = WorldView.MAP_WIDTH-200;
+								final float xPos = WorldView.MAP_WIDTH-300;
 								final float yPos = WorldView.MAP_HEIGHT / 2;
 								createSprite(xPos, yPos, World.Team.GOOD);
 							}

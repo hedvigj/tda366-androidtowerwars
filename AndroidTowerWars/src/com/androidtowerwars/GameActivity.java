@@ -145,14 +145,25 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 
 	public Scene onLoadScene() {
 		final Scene scene = new Scene(1);
+		getEngine().registerUpdateHandler(new FPSLogger());
+		final Sprite background = new Sprite(0, 0,
+				this.mBackgroundTextureRegion);
+		scene.getLastChild().attachChild(background);
+		
+		//TODO:Inte riktigt klart
+		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH - mWallTextureRegion.getWidth(), WorldView.MAP_HEIGHT * 0.3f, mWallTextureRegion);
+		scene.getLastChild().attachChild(gWall);
+		final Sprite bWall = new Sprite(0, WorldView.MAP_HEIGHT*0.3f, mWallTextureRegion);
+		scene.getLastChild().attachChild(bWall);
+		goodWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.5f, mWallTextureRegion.getWidth(), Team.GOOD);
+		badWall = new Wall(0, WorldView.MAP_HEIGHT*0.5f, mWallTextureRegion.getWidth(), Team.EVIL);
+		
 		soldierController = new SoldierController();
 		scene.getLastChild().attachChild(soldierController);
 		towerController = TowerController.getInstance();
 		scene.getLastChild().attachChild(towerController);
-		wallController =  new WallController();
+		wallController =  new WallController(goodWall, badWall);
 		scene.getLastChild().attachChild(wallController);
-		getEngine().registerUpdateHandler(new FPSLogger());
-		
 		
 		menuView.createMenuScene();
 		
@@ -167,20 +178,11 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 				WorldView.getInstance().getCamera());
 
 		scene.setOnSceneTouchListener(touchListener);
-		final Sprite background = new Sprite(0, 0,
-				this.mBackgroundTextureRegion);
-		scene.getLastChild().attachChild(background);
-		
-		//TODO:Inte riktigt klart
-		final Sprite bWall = new Sprite(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.3f, mWallTextureRegion);
-		scene.getLastChild().attachChild(bWall);
-		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH-1525, WorldView.MAP_HEIGHT*0.3f, mWallTextureRegion);
-		scene.getLastChild().attachChild(gWall);
-		badWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.3f, 300, Team.EVIL);
-		goodWall = new Wall(WorldView.MAP_WIDTH-1525, WorldView.MAP_HEIGHT*0.3f, 300, Team.GOOD);
 
 		soldierController.createSpriteSpawnTimeHandler();
 		soldierController.createRightSpawnTimeHandler();
+		
+		
 		
 		scene.setOnAreaTouchListener(this);
         s1Button = new ClickButton(WorldView.MAP_WIDTH - 400, WorldView.MAP_HEIGHT * 0.4f , mButtonTextureRegion);
