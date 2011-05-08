@@ -43,7 +43,7 @@ public class MenuView {
         mSettingsTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         mResetTextureRegion = TextureRegionFactory.createFromAsset(mResetTexture, gameActivity, "gfx/menu_reset.png", 0, 0);
         mQuitTextureRegion = TextureRegionFactory.createFromAsset(mQuitTexture, gameActivity, "gfx/menu_quit.png", 0, 0);
-        mSettingsTextureRegion = TextureRegionFactory.createFromAsset(mSettingsTexture, gameActivity, "gfx/menu_quit.png", 0, 0);
+        mSettingsTextureRegion = TextureRegionFactory.createFromAsset(mSettingsTexture, gameActivity, "gfx/menu_settings.png", 0, 0);
         
         final TextureManager textureManager = WorldView.getInstance().getTextureManager();
         textureManager.loadTexture(mResetTexture);
