@@ -9,7 +9,7 @@ import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 
 import android.util.Log;
 
-import com.androidtowerwars.model.TestSoldier;
+import com.androidtowerwars.model.Soldier;
 
 public class ObserverSprite extends Sprite implements Observer {
 
@@ -38,7 +38,7 @@ public class ObserverSprite extends Sprite implements Observer {
 	}
 
 	public void update(Observable arg0, Object arg1) {
-		TestSoldier model = (TestSoldier) arg0;
+		Soldier model = (Soldier) arg0;
 		setPosition(model.getX(), model.getY());
 	}
 

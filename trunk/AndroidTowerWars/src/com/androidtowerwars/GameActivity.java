@@ -37,7 +37,7 @@ import com.androidtowerwars.controller.MenuController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.WallController;
-import com.androidtowerwars.model.TestTower;
+import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
@@ -161,7 +161,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		soldierController = new SoldierController();
 		scene.getLastChild().attachChild(soldierController);
 		towerController = TowerController.getInstance();
-		scene.getLastChild().attachChild(towerController);
+		//scene.getLastChild().attachChild(towerController);
 		wallController =  new WallController(goodWall, badWall);
 		scene.getLastChild().attachChild(wallController);
 		

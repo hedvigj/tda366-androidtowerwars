@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import android.util.Log;
 
-public class TestSoldier extends Observable implements ISoldier {
+public class Soldier extends Observable implements ISoldier {
 
 	private World.Team team;
 	private float speed = 60; // pixels per second
@@ -18,7 +18,7 @@ public class TestSoldier extends Observable implements ISoldier {
 	private float x;
 	private float y;
 
-	public TestSoldier(float pX, float pY, World.Team team) {
+	public Soldier(float pX, float pY, World.Team team) {
 		x = pX;
 		y = pY;
 		this.team = team;

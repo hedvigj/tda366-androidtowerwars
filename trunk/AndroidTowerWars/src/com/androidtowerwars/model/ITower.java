@@ -5,9 +5,9 @@ import org.anddev.andengine.entity.primitive.Rectangle;
 public interface ITower {
 	public World.Team getTeam();
 
-	public void setAttack();
+	public void setDamage();
 
-	public int getAttack();
+	public int getDamage();
 	
 	public Rectangle getRange();
 	
