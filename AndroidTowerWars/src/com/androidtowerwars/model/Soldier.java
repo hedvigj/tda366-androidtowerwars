@@ -4,7 +4,7 @@ import java.util.Observable;
 
 import android.util.Log;
 
-public class Soldier extends Observable implements ISoldier {
+public class Soldier extends Observable implements ISoldier, IObservableSprite {
 
 	private World.Team team;
 	private float speed = 60; // pixels per second

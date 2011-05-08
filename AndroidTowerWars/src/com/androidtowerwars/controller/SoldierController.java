@@ -52,7 +52,7 @@ public class SoldierController extends Entity {
 		GameActivity.instance.runOnUpdateThread(new Runnable() {
 			public void run() {
 				/* Now it is save to remove the entity! */
-				GameActivity.instance.getEngine().getScene().getLastChild()
+				WorldView.getInstance().getScene().getLastChild()
 						.detachChild(GameActivity.instance.soldierController.soldierSpriteMap.get(soldier));
 			}
 		});
@@ -64,7 +64,7 @@ public class SoldierController extends Entity {
 		soldierListMap.get(team).add(soldier);
 		soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
-		GameActivity.instance.getEngine().getScene().getLastChild().attachChild(soldierSprite);
+		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
 	}
 	/**
 	 * Creates a Timer Handler used to Spawn Sprites

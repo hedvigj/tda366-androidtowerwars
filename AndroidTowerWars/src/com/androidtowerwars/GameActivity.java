@@ -1,15 +1,9 @@
 package com.androidtowerwars;
 
-import javax.microedition.khronos.opengles.GL10;
-
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
-import org.anddev.andengine.entity.scene.menu.MenuScene;
-import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
-import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
-import org.anddev.andengine.entity.scene.menu.item.SpriteMenuItem;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
@@ -22,23 +16,17 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
-
-import com.androidtowerwars.Preferences;
-
 import android.content.Intent;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.KeyEvent;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.androidtowerwars.controller.DragAndZoomController;
 import com.androidtowerwars.controller.MenuController;
+import com.androidtowerwars.controller.ProjectileController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.WallController;
-import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
@@ -58,15 +46,18 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	public static GameActivity instance = null;
 	private Texture mBackgroundTexture;
 	private Texture mSkeletonTexture;
+	private Texture mArrowTexture;
 	private Texture mTowerTexture;
 	private Texture mButtonTexture;
 	private Texture mWallTexture;
 	private TextureRegion mButtonTextureRegion;
 	private TextureRegion mBackgroundTextureRegion;
-	public TextureRegion mSkeletonTextureRegion;	
+	public TextureRegion mSkeletonTextureRegion;
+	public TextureRegion mArrowTextureRegion;
 	private TextureRegion mTowerTextureRegion;
 	private TextureRegion mWallTextureRegion;
 	public SoldierController soldierController;
+	public ProjectileController projectileController;
 	public TowerController towerController;
 	public WallController wallController;
 	private Texture mGoodBarrackTexture;
@@ -145,6 +136,10 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		this.mSkeletonTextureRegion = TextureRegionFactory.createFromAsset(
 				this.mSkeletonTexture, this, "gfx/skeleton_master_wizard.png",
 				0, 0);
+		this.mArrowTexture = new Texture(64, 64, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mArrowTextureRegion = TextureRegionFactory.createFromAsset(
+				this.mArrowTexture, this, "gfx/Arrow2.png",
+				0, 0);
 		this.mTowerTexture = new Texture(256, 256,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mTowerTextureRegion = TextureRegionFactory.createFromAsset(
@@ -167,6 +162,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
         this.mEngine.getTextureManager().loadTexture(this.mButtonTexture);
 		getEngine().getTextureManager().loadTexture(this.mBackgroundTexture);
 		getEngine().getTextureManager().loadTexture(this.mSkeletonTexture);
+		getEngine().getTextureManager().loadTexture(this.mArrowTexture);
 		getEngine().getTextureManager().loadTexture(this.mTowerTexture);
 		getEngine().getTextureManager().loadTexture(this.mWallTexture);
 		getEngine().getTextureManager().loadTexture(this.mGoodBarrackTexture);
@@ -193,6 +189,8 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		
 		soldierController = new SoldierController();
 		scene.getLastChild().attachChild(soldierController);
+		projectileController = new ProjectileController();
+		scene.getLastChild().attachChild(projectileController);
 		towerController = TowerController.getInstance();
 		//scene.getLastChild().attachChild(towerController);
 		wallController =  new WallController(goodWall, badWall);

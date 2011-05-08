@@ -16,7 +16,9 @@ public class Tower implements ITower {
 
 	private Rectangle range;
 	private World.Team team;
-	private int damage = 40;
+	private float x;
+	private float y;
+	private int damage = 55;
 	private float attack_speed = 0.7f; //seconds delay
 	private int kills = 0;
 	
@@ -25,10 +27,10 @@ public class Tower implements ITower {
 	
 	
 	public Tower(float pX, float pY, float range, World.Team team) {
-		//this.range = new Rectangle(pX-(range*0.5f)+this.getWidth()*0.5f, pY-200, range, 400f);
 		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-200, range, 400f); //not centered by width!
 		this.team = team;
-		
+		this.x = pX;
+		this.y = pY;
 		WorldView.getInstance().registerUpdateHandler(
 		timerHandler = new TimerHandler(attack_speed,
 				new ITimerCallback() {
@@ -55,9 +57,8 @@ public class Tower implements ITower {
 		return 0;
 	}
 
-	public void setDamage() {
-		// TODO Auto-generated method stub
-		
+	public void setDamage(int damage) {
+		this.damage = damage;		
 	}
 
 	public void upgradeTower() {
@@ -68,4 +69,21 @@ public class Tower implements ITower {
 	public Rectangle getRange() {
 		return range;
 	}
+	
+	public void increaseKills() {
+		kills =+ 1;
+	}
+	
+	public int getKills() {
+		return kills;
+	}
+	
+	public float getX() {
+		return x;
+	}
+	
+	public float getY() {
+		return y;
+	}
+	
 }
