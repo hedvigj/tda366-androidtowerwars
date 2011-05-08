@@ -7,9 +7,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 
-import android.util.Log;
-
-import com.androidtowerwars.model.Soldier;
+import com.androidtowerwars.model.IObservableSprite;
 
 public class ObserverSprite extends Sprite implements Observer {
 
@@ -38,7 +36,7 @@ public class ObserverSprite extends Sprite implements Observer {
 	}
 
 	public void update(Observable arg0, Object arg1) {
-		Soldier model = (Soldier) arg0;
+		IObservableSprite model = (IObservableSprite) arg0;
 		setPosition(model.getX(), model.getY());
 	}
 
