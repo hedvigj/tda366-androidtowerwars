@@ -12,7 +12,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ISoldier;
-import com.androidtowerwars.model.TestSoldier;
+import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.SoldierLogic;
@@ -59,7 +59,7 @@ public class SoldierController extends Entity {
 	}
 	
 	private void createSprite(float pX, float pY, World.Team team) {
-		TestSoldier soldier = new TestSoldier(pX, pY, team);
+		Soldier soldier = new Soldier(pX, pY, team);
 		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
 		soldierListMap.get(team).add(soldier);
 		soldierSpriteMap.put(soldier, soldierSprite);

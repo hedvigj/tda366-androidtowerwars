@@ -5,7 +5,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.ISoldier;
-import com.androidtowerwars.model.TestSoldier;
+import com.androidtowerwars.model.Soldier;
 
 public class SoldierLogic {
 	
