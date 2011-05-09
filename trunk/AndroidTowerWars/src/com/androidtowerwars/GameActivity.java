@@ -16,8 +16,8 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
-import android.content.Intent;
 import android.util.Log;
+import android.app.Dialog;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -31,6 +31,7 @@ import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.view.MenuView;
+import com.androidtowerwars.view.BuildTowerView;
 import com.androidtowerwars.view.WorldView;
 
 public class GameActivity extends BaseGameActivity implements IOnAreaTouchListener{
@@ -108,7 +109,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	// ===========================================================
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
-	
+
 	public Engine onLoadEngine() {
 		instance = this;
 		Engine engine = new WorldView();
@@ -333,8 +334,10 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 			
 			if(pTouchArea == goodButton1){
 			    
-		         Intent i = new Intent(this, Pop.class);
-		            startActivity(i);
+		         //Intent i = new Intent(this, PopupPad.class);
+		           // startActivity(i);
+		         Dialog v = new BuildTowerView(this);
+		         v.show();
 		        /*
 				if (tower == null) {
 					Log.d("TowerWars", "s1Button");
@@ -367,6 +370,12 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		return false;
 		
 	}
+
+    public void buildTower() {
+        
+        tower = TowerController.createTestTower(WorldView.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD); //new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
+        getEngine().getScene().getLastChild().attachChild(tower);
+    }
 
 	// ===========================================================
 	// Methods

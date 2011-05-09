@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/keypad"
+	android:orientation="vertical"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:stretchColumns="*">
+	<TableRow>
+		<Button android:id="@+id/keypad_1"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/android_button">
+		</Button>
+		<Button android:id="@+id/keypad_2"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/android_button">
+		</Button>		
+		<Button android:id="@+id/keypad_3"
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/android_button">
+		</Button>
+	</TableRow>
+
+</TableLayout>
