@@ -2,12 +2,15 @@ package com.androidtowerwars.model;
 
 import java.util.Observable;
 
+import org.anddev.andengine.entity.primitive.Rectangle;
+
 import android.util.Log;
 
 public class Soldier extends Observable implements ISoldier, IObservableSprite {
 
 	private World.Team team;
 	private float speed = 60; // pixels per second
+	private Rectangle range;
 
 	private int maxHealth = 100;
 	private int health = 100;
@@ -18,10 +21,11 @@ public class Soldier extends Observable implements ISoldier, IObservableSprite {
 	private float x;
 	private float y;
 
-	public Soldier(float pX, float pY, World.Team team) {
+	public Soldier(float pX, float pY, float range, World.Team team) {
 		x = pX;
 		y = pY;
 		this.team = team;
+		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-200, range, 400f);
 		if (team == World.Team.GOOD) {
 			speed = -speed;
 		}
@@ -79,5 +83,9 @@ public class Soldier extends Observable implements ISoldier, IObservableSprite {
 	}
 	public void setValue(int value){
 		this.value=value;
+	}
+	
+	public Rectangle getRange(){
+		return range;
 	}
 }

@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.Entity;
+import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.sprite.Sprite;
 
 import com.androidtowerwars.GameActivity;
@@ -59,7 +60,7 @@ public class SoldierController extends Entity {
 	}
 	
 	private void createSprite(float pX, float pY, World.Team team) {
-		Soldier soldier = new Soldier(pX, pY, team);
+		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte säker på att 5 är rätt.
 		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
 		soldierListMap.get(team).add(soldier);
 		soldierSpriteMap.put(soldier, soldierSprite);

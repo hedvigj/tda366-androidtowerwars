@@ -11,6 +11,6 @@ public class BarrackLogic {
 	}
 	
 	public Soldier createSoldier(){
-		return new Soldier(0,0, null);
+		return new Soldier(0,0,0, null);
 	}
 }

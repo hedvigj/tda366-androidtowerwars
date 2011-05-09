@@ -1,5 +1,7 @@
 package com.androidtowerwars.model;
 
+import org.anddev.andengine.entity.primitive.Rectangle;
+
 public interface ISoldier {
 	
 	public World.Team getTeam();
@@ -23,4 +25,6 @@ public interface ISoldier {
 	public float getSpeed();
 	
 	public void setSpeed(float speed);
+
+	public Rectangle getRange();
 }
