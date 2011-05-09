@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
     
     <application android:icon="@drawable/icon" android:label="@string/app_name">
-        <activity android:label="@string/app_name" android:name=".GameActivity">
+        <activity android:label="@string/app_name" android:name="StartGame">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -16,8 +16,13 @@
 		<activity android:name=".Preferences"
 			android:label="@string/settings_title">
 		</activity>
-		<activity android:name=".Pop"
-			
+		<activity android:name="view.PopupPad"
+			android:theme="@android:style/Theme.Dialog">
+		</activity>
+		<activity android:name=".GameActivity">
+		</activity>
+		<activity android:name="com.androidtowerwars.view.AboutView"
+			android:label="@string/about_title"
 			android:theme="@android:style/Theme.Dialog">
 		</activity>
     </application>
