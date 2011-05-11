@@ -1,18 +1,15 @@
 package com.androidtowerwars.controller;
 
-import org.anddev.andengine.entity.scene.Scene;
+//import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.menu.MenuScene;
 import org.anddev.andengine.entity.scene.menu.MenuScene.IOnMenuItemClickListener;
 import org.anddev.andengine.entity.scene.menu.item.IMenuItem;
-import org.anddev.andengine.entity.sprite.Sprite;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.KeyEvent;
 
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.Preferences;
-import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.MenuView;
 import com.androidtowerwars.view.WorldView;
 
@@ -20,7 +17,7 @@ public class MenuController implements IOnMenuItemClickListener {
 	
 
     
-    private final Scene scene = WorldView.getInstance().getScene();
+    //private final Scene scene = WorldView.getInstance().getScene();
     private GameActivity gameActivity;
     private MenuView menuView;
 	

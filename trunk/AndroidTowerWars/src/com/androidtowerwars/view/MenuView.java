@@ -15,8 +15,8 @@ import com.androidtowerwars.controller.MenuController;
 
 public class MenuView {
 	
-	private TextureRegion mResetTextureRegion; 
-	private Texture mResetTexture;
+	//private TextureRegion mResetTextureRegion; 
+	//private Texture mResetTexture;
 	private Texture mQuitTexture;
 	private Texture mSettingsTexture;
 	private TextureRegion mQuitTextureRegion;
@@ -38,15 +38,15 @@ public class MenuView {
 	}
 	
 	public void loadResources() {		
-		mResetTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		//mResetTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         mQuitTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         mSettingsTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-        mResetTextureRegion = TextureRegionFactory.createFromAsset(mResetTexture, gameActivity, "gfx/menu_reset.png", 0, 0);
+        //mResetTextureRegion = TextureRegionFactory.createFromAsset(mResetTexture, gameActivity, "gfx/menu_reset.png", 0, 0);
         mQuitTextureRegion = TextureRegionFactory.createFromAsset(mQuitTexture, gameActivity, "gfx/menu_quit.png", 0, 0);
         mSettingsTextureRegion = TextureRegionFactory.createFromAsset(mSettingsTexture, gameActivity, "gfx/menu_settings.png", 0, 0);
         
         final TextureManager textureManager = WorldView.getInstance().getTextureManager();
-        textureManager.loadTexture(mResetTexture);
+        //textureManager.loadTexture(mResetTexture);
         textureManager.loadTexture(mQuitTexture);
         textureManager.loadTexture(mSettingsTexture);
 	}

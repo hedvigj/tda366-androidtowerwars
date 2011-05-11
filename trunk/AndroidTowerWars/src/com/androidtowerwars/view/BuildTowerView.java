@@ -1,35 +1,43 @@
 package com.androidtowerwars.view;
 
+import org.anddev.andengine.opengl.texture.region.TextureRegion;
+
 import com.androidtowerwars.R;
-import com.androidtowerwars.R.id;
-import com.androidtowerwars.R.layout;
-import com.androidtowerwars.R.string;
 import com.androidtowerwars.controller.TowerController;
-import com.androidtowerwars.model.World;
+import com.androidtowerwars.model.World.Team;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Button;
+
 
 
 public class BuildTowerView extends Dialog {
 
     
     private final View keys[] = new View[3];
+    
+    private float pX; 
+    private float pY; 
+    private TextureRegion pTextureRegion;
+    private float range;
+    private Team team;
       
-    public BuildTowerView(Context context) {
+    public BuildTowerView(Context context,float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
         super(context);
-
+        this.pX             = pX;
+        this.pY             = pY;
+        this.pTextureRegion = pTextureRegion;
+        this.range          = range;
+        this.team           = team;
     }
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+        Log.d("Wie","körs nu");
         setTitle(R.string.buildpop_title);
         setContentView(R.layout.popuppad);
         findViews();
@@ -49,17 +57,30 @@ public class BuildTowerView extends Dialog {
             final int t = i + 1;
             keys[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    // Perform action on clicks
-                    sendBuild(t);
-                    Log.d("Wie","wiiiieeeee");
-                    
+                    sendBuild(t, pX, pY, pTextureRegion, range, team );
                 }
             });
         }
     }
     
-    private void sendBuild (int tower) {
-        //link to towerbuilder?
+    private void sendBuild (int tower, float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
+        
+        switch (tower) {
+        case 1:
+            //build tower 1
+            Log.d("Wie","wiiiieeeee");
+            TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+            break;
+        case 2:
+            //build tower 1
+            TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+            break;
+        case 3:
+            //build tower 1
+            TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+            break;
+        }
+        
         dismiss();
     }
 }

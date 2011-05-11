@@ -22,7 +22,7 @@ public class WorldView extends Engine {
 						WorldView.CAMERA_WIDTH, WorldView.CAMERA_HEIGHT),
 						new ZoomCamera(0, 0, WorldView.CAMERA_WIDTH,
 								WorldView.CAMERA_HEIGHT)));
-		this.instance = this;
+		setInstance(this);
 	}
 	
 	
@@ -36,6 +36,11 @@ public class WorldView extends Engine {
 	public ZoomCamera getCamera() {
 		return (ZoomCamera) super.getCamera();
 	}
+
+
+    public static void setInstance(WorldView instance) {
+        WorldView.instance = instance;
+    }
 	
 
 }

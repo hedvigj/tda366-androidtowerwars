@@ -6,8 +6,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.anddev.andengine.entity.Entity;
 
-import android.util.Log;
-
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.IProjectile;
 import com.androidtowerwars.model.ISoldier;
