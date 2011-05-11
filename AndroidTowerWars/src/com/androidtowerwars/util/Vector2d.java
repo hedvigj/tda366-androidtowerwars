@@ -1,7 +1,5 @@
 package com.androidtowerwars.util;
 
-import android.util.Log;
-
 public class Vector2d {
 	private float x;
 	private float y;

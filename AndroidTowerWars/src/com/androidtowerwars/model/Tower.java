@@ -6,9 +6,6 @@ import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.primitive.Rectangle;
 
-import android.util.Log;
-
-import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.logic.TowerLogic;
 import com.androidtowerwars.view.WorldView;
 
