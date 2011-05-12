@@ -1,20 +1,19 @@
 package com.androidtowerwars.model;
 
+import org.anddev.andengine.entity.primitive.Rectangle;
+
 import com.androidtowerwars.model.World.Team;
 
 public class Ranger extends Soldier {
-	
-	private float speed = 70;
-	private float range = 15;
-
-	private int maxHealth = 200;
-	private int health = 200;
-
-	private int damage = 50;
-	private int value = 10;
 
 	public Ranger(float pX, float pY, float range, Team team) {
 		super(pX, pY, range, team);
+		super.range = new Rectangle(pX-(15*0.5f)*0.5f, pY-200, 15, 400f);
+		super.speed = 70;
+		super.health = 200;
+		super.maxHealth = 200;
+		super.damage = 50;
+		super.value = 10;
 	}
 
 }
