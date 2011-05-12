@@ -37,7 +37,10 @@ public class ProjectileController extends Entity {
 			super.onManagedUpdate(pSecondsElapsed);
 			for(List<IProjectile> projectileList: projectileListMap.values()) {
 				for(IProjectile projectile: projectileList) {
-					ProjectileLogic.updateProjectile(projectile, pSecondsElapsed);
+					ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
+					if (projectileSpriteMap.get(projectile).collidesWith(GameActivity.instance.soldierController.soldierSpriteMap.get(projectile.getTarget()))) {
+						ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
+				}
 				}
 			}
 		}
