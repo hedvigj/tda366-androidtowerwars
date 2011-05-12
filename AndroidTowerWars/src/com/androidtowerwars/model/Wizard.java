@@ -1,20 +1,18 @@
 package com.androidtowerwars.model;
 
+import org.anddev.andengine.entity.primitive.Rectangle;
+
 import com.androidtowerwars.model.World.Team;
 
 public class Wizard extends Soldier{
-	
-	private float speed = 50;
-	private float range = 10;
-
-	private int maxHealth = 300;
-	private int health = 300;
-
-	private int damage = 80;
-	private int value = 20;
 
 	public Wizard(float pX, float pY,float range, Team team) {
 		super(pX, pY, range, team);
+		super.range = new Rectangle(pX-(10*0.5f)*0.5f, pY-200, 10, 400f);
+		super.speed = 50;
+		super.health = 300;
+		super.maxHealth = 300;
+		super.damage = 80;
+		super.value = 20;
 	}
-
 }

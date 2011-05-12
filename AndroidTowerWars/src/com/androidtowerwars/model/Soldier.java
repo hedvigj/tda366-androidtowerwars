@@ -9,14 +9,14 @@ import android.util.Log;
 public class Soldier extends Observable implements ISoldier, IObservableSprite {
 
 	private World.Team team;
-	private float speed = 60; // pixels per second
-	private Rectangle range;
+	protected float speed = 60; // pixels per second
+	protected Rectangle range;
 
-	private int maxHealth = 100;
-	private int health = 100;
+	protected int maxHealth = 100;
+	protected int health = 100;
 
-	private int damage = 33;
-	private int value = 5;
+	protected int damage = 33;
+	protected int value = 5;
 
 	private float x;
 	private float y;
