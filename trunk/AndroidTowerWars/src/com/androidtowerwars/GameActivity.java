@@ -1,5 +1,8 @@
 package com.androidtowerwars;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
@@ -16,8 +19,8 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
-import android.util.Log;
 import android.app.Dialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -26,12 +29,14 @@ import com.androidtowerwars.controller.MenuController;
 import com.androidtowerwars.controller.ProjectileController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
+import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.controller.WallController;
+import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
-import com.androidtowerwars.view.MenuView;
 import com.androidtowerwars.view.BuildTowerView;
+import com.androidtowerwars.view.MenuView;
 import com.androidtowerwars.view.WorldView;
 
 public class GameActivity extends BaseGameActivity implements IOnAreaTouchListener{
@@ -51,44 +56,20 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	private Texture mTowerTexture;
 	private Texture mButtonTexture;
 	private Texture mWallTexture;
-	private TextureRegion mButtonTextureRegion;
+	public TextureRegion mButtonTextureRegion;
 	private TextureRegion mBackgroundTextureRegion;
 	public TextureRegion mSkeletonTextureRegion;
 	public TextureRegion mArrowTextureRegion;
-	private TextureRegion mTowerTextureRegion;
+	public TextureRegion mTowerTextureRegion;
 	private TextureRegion mWallTextureRegion;
 	public SoldierController soldierController;
 	public ProjectileController projectileController;
 	public TowerController towerController;
 	public WallController wallController;
+	public TowerTileController towerTileController;
+	
 	private Texture mGoodBarrackTexture;
 	private TextureRegion mGoodBarrackTextureRegion;
-	
-	private ClickButton goodButton1;
-	private ClickButton goodButton2;
-	private ClickButton goodButton3;
-	private ClickButton goodButton4;
-	private ClickButton goodButton5;
-	private ClickButton goodButton6;
-	private ClickButton goodButton7;
-	private ClickButton goodButton8;
-	private ClickButton goodButton9;
-	private ClickButton goodButton10;
-	private ClickButton goodButton11;
-	private ClickButton goodButton12;
-	
-	private ClickButton badButton1;
-	private ClickButton badButton2;
-	private ClickButton badButton3;
-	private ClickButton badButton4;
-	private ClickButton badButton5;
-	private ClickButton badButton6;
-	private ClickButton badButton7;
-	private ClickButton badButton8;
-	private ClickButton badButton9;
-	private ClickButton badButton10;
-	private ClickButton badButton11;
-	private ClickButton badButton12;
 	
 	//private Sprite tower;
 	//private Sprite tower1;
@@ -195,10 +176,11 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		scene.getLastChild().attachChild(soldierController);
 		projectileController = new ProjectileController();
 		scene.getLastChild().attachChild(projectileController);
-		towerController = TowerController.getInstance();
-		//scene.getLastChild().attachChild(towerController);
 		wallController =  new WallController(goodWall, badWall);
 		scene.getLastChild().attachChild(wallController);
+		towerController = TowerController.getInstance();
+		towerTileController = new TowerTileController();
+		
 		
 		menuView.createMenuScene();
 		
@@ -216,96 +198,49 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 
 		soldierController.createSpriteSpawnTimeHandler();
 		soldierController.createRightSpawnTimeHandler();
-		
-		
-		
+				
 		scene.setOnAreaTouchListener(this);
-		// TODO: Below here everything looks horribly bad, can make some sort of GroundTile class/method?
-        goodButton1 = new ClickButton(WorldView.MAP_WIDTH - 700, WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
-        goodButton2 = new ClickButton(WorldView.MAP_WIDTH - 700, WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
-        goodButton3 = new ClickButton(WorldView.MAP_WIDTH - 900, WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
-        goodButton4 = new ClickButton(WorldView.MAP_WIDTH - 900, WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
-        goodButton5 = new ClickButton(WorldView.MAP_WIDTH - 1100, WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
-        goodButton6 = new ClickButton(WorldView.MAP_WIDTH - 1100, WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
-        goodButton7 = new ClickButton(WorldView.MAP_WIDTH - 1300, WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
-        goodButton8 = new ClickButton(WorldView.MAP_WIDTH - 1300, WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
-        goodButton9 = new ClickButton(WorldView.MAP_WIDTH - 1500, WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
-        goodButton10 = new ClickButton(WorldView.MAP_WIDTH - 1500, WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
-        goodButton11 = new ClickButton(WorldView.MAP_WIDTH - 1700, WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
-        goodButton12 = new ClickButton(WorldView.MAP_WIDTH - 1700, WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
-        
-        
-        badButton1 = new ClickButton(500, WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
-        badButton2 = new ClickButton(500, WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
-        badButton3 = new ClickButton(700, WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
-        badButton4 = new ClickButton(700, WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
-        badButton5 = new ClickButton(900, WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
-        badButton6 = new ClickButton(900, WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
-        badButton7 = new ClickButton(1100, WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
-        badButton8 = new ClickButton(1100, WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
-        badButton9 = new ClickButton(1300, WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
-        badButton10 = new ClickButton(1300, WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
-        badButton11 = new ClickButton(1500, WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
-        badButton12 = new ClickButton(1500, WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
+		
+		int tileSpacing = 200;
+		for(int n = 0;n<6;n++) {
+			//good towers
+			Sprite tempSprite = new Sprite(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
+			TowerTile tempTowerTile = new TowerTile(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.44f, mButtonTextureRegion.getWidth(),mButtonTextureRegion.getHeight(), World.Team.GOOD);
+			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
+			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
+			scene.registerTouchArea(tempSprite);
+			scene.getLastChild().attachChild(tempSprite);
+			
+			tempSprite = new Sprite(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
+			tempTowerTile = new TowerTile(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion.getWidth(), mButtonTextureRegion.getHeight(), World.Team.GOOD);
+			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
+			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
+			scene.registerTouchArea(tempSprite);
+			scene.getLastChild().attachChild(tempSprite);
+			
+			//evil towers
+			tempSprite = new Sprite(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
+			tempTowerTile = new TowerTile(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion.getWidth(), mButtonTextureRegion.getHeight(), World.Team.EVIL);
+			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
+			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
+			scene.registerTouchArea(tempSprite);
+			scene.getLastChild().attachChild(tempSprite);
+			
+			tempSprite = new Sprite(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
+			tempTowerTile = new TowerTile(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion.getWidth(), mButtonTextureRegion.getHeight(), World.Team.EVIL);
+			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
+			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
+			scene.registerTouchArea(tempSprite);
+			scene.getLastChild().attachChild(tempSprite);
+		}
+		
         
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         
-        scene.registerTouchArea(goodButton1);
-        scene.registerTouchArea(goodButton2);
-        scene.registerTouchArea(goodButton3);
-        scene.registerTouchArea(goodButton4);
-        scene.registerTouchArea(goodButton5);
-        scene.registerTouchArea(goodButton6);
-        scene.registerTouchArea(goodButton7);
-        scene.registerTouchArea(goodButton8);
-        scene.registerTouchArea(goodButton9);
-        scene.registerTouchArea(goodButton10);
-        scene.registerTouchArea(goodButton11);
-        scene.registerTouchArea(goodButton12);
-        
-        scene.registerTouchArea(badButton1);
-        scene.registerTouchArea(badButton2);
-        scene.registerTouchArea(badButton3);
-        scene.registerTouchArea(badButton4);
-        scene.registerTouchArea(badButton5);
-        scene.registerTouchArea(badButton6);
-        scene.registerTouchArea(badButton7);
-        scene.registerTouchArea(badButton8);
-        scene.registerTouchArea(badButton9);
-        scene.registerTouchArea(badButton10);
-        scene.registerTouchArea(badButton11);
-        scene.registerTouchArea(badButton12);
         
         scene.registerTouchArea(goodBarrack);
         scene.registerTouchArea(badBarrack);
-        
-        
-        scene.getLastChild().attachChild(goodButton1);
-		scene.getLastChild().attachChild(goodButton2);
-		scene.getLastChild().attachChild(goodButton3);
-		scene.getLastChild().attachChild(goodButton4);
-		scene.getLastChild().attachChild(goodButton5);
-		scene.getLastChild().attachChild(goodButton6);
-		scene.getLastChild().attachChild(goodButton7);
-		scene.getLastChild().attachChild(goodButton8);
-		scene.getLastChild().attachChild(goodButton9);
-		scene.getLastChild().attachChild(goodButton10);
-		scene.getLastChild().attachChild(goodButton11);
-		scene.getLastChild().attachChild(goodButton12);
-        
-        scene.getLastChild().attachChild(badButton2);
-        scene.getLastChild().attachChild(badButton1);
-        scene.getLastChild().attachChild(badButton3);
-        scene.getLastChild().attachChild(badButton4);
-        scene.getLastChild().attachChild(badButton5);
-        scene.getLastChild().attachChild(badButton6);
-        scene.getLastChild().attachChild(badButton7);
-        scene.getLastChild().attachChild(badButton8);
-        scene.getLastChild().attachChild(badButton9);
-        scene.getLastChild().attachChild(badButton10);
-        scene.getLastChild().attachChild(badButton11);
-        scene.getLastChild().attachChild(badButton12);
         
         scene.getLastChild().attachChild(goodBarrack);
         scene.getLastChild().attachChild(badBarrack);
@@ -334,16 +269,23 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			ITouchArea pTouchArea, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-			
-			if(pTouchArea == goodButton1){
-			    Log.d("TowerWars", timestamp + "");
-			    if (timestamp != Math.round(System.currentTimeMillis() / 1000)) {
-			        timestamp = Math.round(System.currentTimeMillis() / 1000);
-			        Log.d("TowerWars", "insidan");
-			        Dialog v = new BuildTowerView(this, WorldView.MAP_WIDTH - 500 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
-			        v.show();
-			        
-			    }
+		TowerTile towerTile = (TowerTile) TowerTileController.towerTileSpriteMap.get(pTouchArea);
+		if (towerTile != null && towerTile.isOccupied() != true) {
+		    if (timestamp != Math.round(System.currentTimeMillis() / 1000)) {
+		        timestamp = Math.round(System.currentTimeMillis() / 1000);
+		        Dialog v = new BuildTowerView(this, towerTile);
+		        v.show();
+		    }
+		}
+//			if(pTouchArea == goodButton1){
+//			    Log.d("TowerWars", timestamp + "");
+//			    if (timestamp != Math.round(System.currentTimeMillis() / 1000)) {
+//			        timestamp = Math.round(System.currentTimeMillis() / 1000);
+//			        Log.d("TowerWars", "insidan");
+//			        Dialog v = new BuildTowerView(this, WorldView.MAP_WIDTH - 500 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT * 0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
+//			        v.show();
+//			        
+//			    }
 		        /*
 				if (tower == null) {
 					Log.d("TowerWars", "s1Button");
@@ -352,34 +294,32 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 				}
 				*/
 				
-			}
-			else if(pTouchArea == goodButton2 ){
-				/*if (tower1 == null) {
-					Log.d("TowerWars", "s2Button");
-					tower1 = TowerController.createTestTower(WorldView.MAP_WIDTH - 700 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT * 0.56f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD); //new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
-					getEngine().getScene().getLastChild().attachChild(tower1);
-				}*/
-			    Log.d("TowerWars", "s2Button");
-                if (timestamp != Math.round(System.currentTimeMillis() / 1000) ) {
-                    timestamp = Math.round(System.currentTimeMillis() / 1000);
-                    Dialog v = new BuildTowerView(this, WorldView.MAP_WIDTH - 700 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT * 0.56f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
-                    v.show();
-                    
-                   }			    
-			    
-			}
-			else if(pTouchArea == badButton1){
-				if (b1Tower == null) {
-					b1Tower = TowerController.createTestTower(500 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT*0.44f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);//new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
-					getEngine().getScene().getLastChild().attachChild(b1Tower);
-				}
-			}
-			else{
-				if (b2Tower == null) {
-					b2Tower = TowerController.createTestTower(500 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT*0.56f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL); //new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
-					getEngine().getScene().getLastChild().attachChild(b2Tower);
-				}
-			}
+//			}
+//			else if(pTouchArea == goodButton2 ){
+//				/*if (tower1 == null) {
+//					Log.d("TowerWars", "s2Button");
+//					tower1 = TowerController.createTestTower(WorldView.MAP_WIDTH - 700 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT * 0.56f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD); //new TestTower(World.MAP_WIDTH - 400 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT * 0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
+//					getEngine().getScene().getLastChild().attachChild(tower1);
+//				}*/
+//
+//                if (timestamp != Math.round(System.currentTimeMillis() / 1000) ) {
+//                    timestamp = Math.round(System.currentTimeMillis() / 1000);
+//                    Dialog v = new BuildTowerView(this, WorldView.MAP_WIDTH - 700 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT * 0.56f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.GOOD);
+//                    v.show();
+//                    
+//                   }			    
+//			    
+//			}
+//			else if(pTouchArea == badButton1){
+//				if (b1Tower == null) {
+//					//b1Tower = TowerController.createTestTower(500 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT*0.44f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);//new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.4f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
+//				}
+//			}
+//			else{
+//				if (b2Tower == null) {
+//					//b2Tower = TowerController.createTestTower(500 + this.mTowerTextureRegion.getWidth() * 0.25f, WorldView.MAP_HEIGHT*0.56f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL); //new TestTower(300 + this.mTowerTextureRegion.getWidth() * 0.25f, World.MAP_HEIGHT*0.6f - this.mTowerTextureRegion.getHeight() * 0.5f, this.mTowerTextureRegion, 200, World.Team.EVIL);
+//				}
+//			}
 			
 		return false;
 		
@@ -387,7 +327,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 
     public static void setTimestamp(int i) {
         Log.d("TowerWars", "time" + i);
-        timestamp = 0;   
+        timestamp = 0;
     }
 
 

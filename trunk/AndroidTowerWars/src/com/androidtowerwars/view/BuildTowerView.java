@@ -2,15 +2,14 @@ package com.androidtowerwars.view;
 
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 
-import com.androidtowerwars.R;
-import com.androidtowerwars.controller.TowerController;
-import com.androidtowerwars.model.World.Team;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+
+import com.androidtowerwars.R;
+import com.androidtowerwars.model.TowerTile;
+import com.androidtowerwars.model.World.Team;
 
 
 
@@ -18,32 +17,20 @@ public class BuildTowerView extends Dialog {
 
     
     private final View keys[] = new View[3];
-    
-    private float pX; 
-    private float pY; 
-    private TextureRegion pTextureRegion;
-    private float range;
-    private Team team;
+    private TowerTile towerTile;
       
-    public BuildTowerView(Context context,float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
+    public BuildTowerView(Context context, TowerTile towerTile) {
         super(context);
-        this.pX             = pX;
-        this.pY             = pY;
-        this.pTextureRegion = pTextureRegion;
-        this.range          = range;
-        this.team           = team;
+        this.towerTile = towerTile;
     }
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("Wie","körs nu");
         setTitle(R.string.buildpop_title);
         setContentView(R.layout.popuppad);
         findViews();
         setListeners();
-
-
     }
     
     private void findViews() {
@@ -57,27 +44,29 @@ public class BuildTowerView extends Dialog {
             final int t = i + 1;
             keys[i].setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    sendBuild(t, pX, pY, pTextureRegion, range, team );
+                    sendBuild(t, towerTile);
                 }
             });
         }
     }
     
-    private void sendBuild (int tower, float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
+    private void sendBuild (int tower, TowerTile towerTile) {
         
         switch (tower) {
         case 1:
             //build tower 1
-            Log.d("Wie","wiiiieeeee");
-            TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+            //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+        	towerTile.action();
             break;
         case 2:
             //build tower 1
-            TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+            //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+        	towerTile.action();
             break;
         case 3:
             //build tower 1
-            TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+            //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
+        	towerTile.action();
             break;
         }
         

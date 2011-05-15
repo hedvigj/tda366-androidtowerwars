@@ -24,7 +24,7 @@ public class Tower implements ITower {
 	
 	
 	public Tower(float pX, float pY, float range, World.Team team) {
-		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-200, range, 400f); //not centered by width!
+		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-400, range, 900f); //not centered by width!
 		this.team = team;
 		this.x = pX;
 		this.y = pY;
