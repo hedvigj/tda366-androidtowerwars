@@ -10,7 +10,7 @@ public class Projectile extends Observable implements IProjectile, IObservableSp
 	
 	private float x;
 	private float y;
-	private float speed = 150f;
+	private float speed = 250f;
 	private ISoldier target;
 	private ITower parent;
 	private Vector2d direction;
@@ -39,7 +39,6 @@ public class Projectile extends Observable implements IProjectile, IObservableSp
 	private void updateDirection() {
 		direction = new Vector2d(x, y, target.getX(), target.getY());
 		direction.normalize();
-		Log.d("TowerWars", "x:"+x+", y:"+y);
 	}
 	
 	public void setPosition(float x, float y) { 

@@ -37,16 +37,14 @@ public class TowerController {//extends Entity {
 	}
 	
 	
-	public static synchronized Sprite createTestTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
+	public static synchronized void createTestTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
 		Tower tower = new Tower(pX, pY, range, team);
 		Sprite sprite = new Sprite(pX, pY, pTextureRegion);
 		towerListMap.get(team).add(tower);
 		towerSpriteMap.put(tower, sprite);
-		Log.d("Test","Bygga torn?");
 		WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
 		GameActivity.setTimestamp(0);
-		//GameActivity.buildTower(sprite);
-		return sprite;
+		return;
 	}
 
     public static void setInstance(TowerController instance) {

@@ -17,7 +17,7 @@ public class SoldierLogic {
 		soldier.setPosition(soldier.getX() + soldier.getSpeed() * pSecondsElapsed, soldier.getY());
 		for(int n=0;n<GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).size();n++) {
 			if (range.collidesWith(GameActivity.instance.soldierController.soldierSpriteMap.get(GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n)))) {
-				killSoldier(soldier);
+				//killSoldier(soldier);
 				break;
 			}
 		}

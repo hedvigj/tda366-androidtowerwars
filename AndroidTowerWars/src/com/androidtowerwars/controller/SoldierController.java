@@ -60,7 +60,7 @@ public class SoldierController extends Entity {
 	}
 	
 	private void createSprite(float pX, float pY, World.Team team) {
-		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte säker på att 5 är rätt.
+		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte sï¿½ker pï¿½ att 5 ï¿½r rï¿½tt.
 		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
 		soldierListMap.get(team).add(soldier);
 		soldierSpriteMap.put(soldier, soldierSprite);
@@ -73,7 +73,7 @@ public class SoldierController extends Entity {
 	public void createSpriteSpawnTimeHandler() {
 		soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
 		GameActivity.instance.getEngine().registerUpdateHandler(
-				spriteTimerHandler = new TimerHandler(1.0f,
+				spriteTimerHandler = new TimerHandler(1.4f,
 						new ITimerCallback() {
 							public void onTimePassed(
 									final TimerHandler pTimerHandler) {
@@ -87,7 +87,7 @@ public class SoldierController extends Entity {
 	public void createRightSpawnTimeHandler() {
 		soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
 		GameActivity.instance.getEngine().registerUpdateHandler(
-				rSpriteTimerHandler = new TimerHandler(1.0f,
+				rSpriteTimerHandler = new TimerHandler(1.4f,
 						new ITimerCallback() {
 							public void onTimePassed(
 									final TimerHandler pTimerHandler) {
