@@ -1,7 +1,5 @@
 package com.androidtowerwars.view;
 
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -9,8 +7,6 @@ import android.view.View;
 
 import com.androidtowerwars.R;
 import com.androidtowerwars.model.TowerTile;
-import com.androidtowerwars.model.World.Team;
-
 
 
 public class BuildTowerView extends Dialog {
@@ -36,7 +32,7 @@ public class BuildTowerView extends Dialog {
     private void findViews() {
         keys[0] = findViewById(R.id.keypad_1);
         keys[1] = findViewById(R.id.keypad_2);
-        keys[2] = findViewById(R.id.keypad_3);   
+        keys[2] = findViewById(R.id.keypad_3);
     }
     
     private void setListeners() {
