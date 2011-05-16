@@ -38,7 +38,10 @@ public class SoldierController extends Entity {
 	//===========================================================
 	// Methods
 	// ===========================================================
-	
+	public SoldierController() {
+		soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
+		soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
+	}
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 		super.onManagedUpdate(pSecondsElapsed);
 		for(List<ISoldier> soldierList: soldierListMap.values()) {
@@ -59,7 +62,7 @@ public class SoldierController extends Entity {
 		});
 	}
 	
-	private void createSprite(float pX, float pY, World.Team team) {
+	public void createSprite(float pX, float pY, World.Team team) {
 		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte s�ker p� att 5 �r r�tt.
 		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
 		soldierListMap.get(team).add(soldier);
@@ -70,34 +73,34 @@ public class SoldierController extends Entity {
 	/**
 	 * Creates a Timer Handler used to Spawn Sprites
 	 */
-	public void createSpriteSpawnTimeHandler() {
-		soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
-		GameActivity.instance.getEngine().registerUpdateHandler(
-				spriteTimerHandler = new TimerHandler(1.4f,
-						new ITimerCallback() {
-							public void onTimePassed(
-									final TimerHandler pTimerHandler) {
-								spriteTimerHandler.reset();
-								final float xPos = 300;
-								final float yPos = WorldView.MAP_HEIGHT*0.52f;
-								createSprite(xPos, yPos, World.Team.EVIL);
-							}
-						}));
-	}
-	public void createRightSpawnTimeHandler() {
-		soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
-		GameActivity.instance.getEngine().registerUpdateHandler(
-				rSpriteTimerHandler = new TimerHandler(1.4f,
-						new ITimerCallback() {
-							public void onTimePassed(
-									final TimerHandler pTimerHandler) {
-								rSpriteTimerHandler.reset();
-								final float xPos = WorldView.MAP_WIDTH-300;
-								final float yPos = WorldView.MAP_HEIGHT*0.52f;
-								createSprite(xPos, yPos, World.Team.GOOD);
-							}
-						}));
-	}
+//	public void createSpriteSpawnTimeHandler() {
+//		soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
+//		GameActivity.instance.getEngine().registerUpdateHandler(
+//				spriteTimerHandler = new TimerHandler(1.4f,
+//						new ITimerCallback() {
+//							public void onTimePassed(
+//									final TimerHandler pTimerHandler) {
+//								spriteTimerHandler.reset();
+//								final float xPos = 300;
+//								final float yPos = WorldView.MAP_HEIGHT*0.52f;
+//								createSprite(xPos, yPos, World.Team.EVIL);
+//							}
+//						}));
+//	}
+//	public void createRightSpawnTimeHandler() {
+//		soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
+//		GameActivity.instance.getEngine().registerUpdateHandler(
+//				rSpriteTimerHandler = new TimerHandler(1.4f,
+//						new ITimerCallback() {
+//							public void onTimePassed(
+//									final TimerHandler pTimerHandler) {
+//								rSpriteTimerHandler.reset();
+//								final float xPos = WorldView.MAP_WIDTH-300;
+//								final float yPos = WorldView.MAP_HEIGHT*0.52f;
+//								createSprite(xPos, yPos, World.Team.GOOD);
+//							}
+//						}));
+//	}
 }
 
 
