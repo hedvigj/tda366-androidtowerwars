@@ -159,7 +159,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 
 	public Scene onLoadScene() {
 		final Scene scene = new Scene(1);
-		HUD headUpDisplay = new HUD();
+		this.headUpDisplay = new HUD();
 		getEngine().registerUpdateHandler(new FPSLogger());
 		final Sprite background = new Sprite(0, 0,
 				this.mBackgroundTextureRegion);
@@ -237,7 +237,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
         
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
-        final Sprite coin = new Sprite(WorldView.CAMERA_WIDTH-175, WorldView.CAMERA_HEIGHT-10, mCoinTextureRegion);
+        final Sprite coin = new Sprite(WorldView.CAMERA_WIDTH-175, WorldView.CAMERA_HEIGHT-30, mCoinTextureRegion);
         
        
         scene.registerTouchArea(goodBarrack);

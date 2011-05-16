@@ -7,8 +7,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 
-import android.util.Log;
-
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ITower;
 import com.androidtowerwars.model.Tower;
