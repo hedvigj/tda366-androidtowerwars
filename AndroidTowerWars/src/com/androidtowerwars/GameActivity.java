@@ -1,6 +1,7 @@
 package com.androidtowerwars;
 
 import org.anddev.andengine.engine.Engine;
+import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
@@ -68,14 +69,15 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	
 	private Texture mGoodBarrackTexture;
 	private TextureRegion mGoodBarrackTextureRegion;
-	
+	private Texture mCoinTexture;
+	private TextureRegion mCoinTextureRegion;
 	private ClickButton goodBarrack;
 	private ClickButton badBarrack;
 	private Wall goodWall;
 	private Wall badWall;
-
+	private HUD headUpDisplay;
 	private static long timestamp;
-
+	private Sprite coin;
 
 	
 	MenuView menuView = new MenuView(this);
@@ -138,6 +140,10 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		this.mGoodBarrackTextureRegion = TextureRegionFactory.createFromAsset(
 				this.mGoodBarrackTexture, this,"gfx/Good_Barracks.png", 0,0);
 		
+		this.mCoinTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		this.mCoinTextureRegion = TextureRegionFactory.createFromAsset(
+				this.mCoinTexture, this, "gfx/Coin.png", 0,0);
+		
         this.mEngine.getTextureManager().loadTexture(this.mButtonTexture);
 		getEngine().getTextureManager().loadTexture(this.mBackgroundTexture);
 		getEngine().getTextureManager().loadTexture(this.mSkeletonTexture);
@@ -145,7 +151,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		getEngine().getTextureManager().loadTexture(this.mTowerTexture);
 		getEngine().getTextureManager().loadTexture(this.mWallTexture);
 		getEngine().getTextureManager().loadTexture(this.mGoodBarrackTexture);
-
+		getEngine().getTextureManager().loadTexture(this.mCoinTexture);
     
       
 
@@ -153,6 +159,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 
 	public Scene onLoadScene() {
 		final Scene scene = new Scene(1);
+		HUD headUpDisplay = new HUD();
 		getEngine().registerUpdateHandler(new FPSLogger());
 		final Sprite background = new Sprite(0, 0,
 				this.mBackgroundTextureRegion);
@@ -230,6 +237,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
         
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
+        final Sprite coin = new Sprite(WorldView.CAMERA_WIDTH-175, WorldView.CAMERA_HEIGHT-10, mCoinTextureRegion);
         
        
         scene.registerTouchArea(goodBarrack);
@@ -237,6 +245,8 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
         
         scene.getLastChild().attachChild(goodBarrack);
         scene.getLastChild().attachChild(badBarrack);
+        headUpDisplay.getLastChild().attachChild(coin);
+        WorldView.getInstance().getCamera().setHUD(this.headUpDisplay);
 		return scene;
 	}
 
