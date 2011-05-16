@@ -1,8 +1,5 @@
 package com.androidtowerwars;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
@@ -22,6 +19,7 @@ import org.anddev.andengine.ui.activity.BaseGameActivity;
 import android.app.Dialog;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.androidtowerwars.controller.DragAndZoomController;
@@ -71,12 +69,8 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	private Texture mGoodBarrackTexture;
 	private TextureRegion mGoodBarrackTextureRegion;
 	
-	//private Sprite tower;
-	//private Sprite tower1;
-	private Sprite b1Tower;
-	private Sprite b2Tower;
-	private Sprite goodBarrack;
-	private Sprite badBarrack;
+	private ClickButton goodBarrack;
+	private ClickButton badBarrack;
 	private Wall goodWall;
 	private Wall badWall;
 
@@ -196,22 +190,21 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 
 		scene.setOnSceneTouchListener(touchListener);
 
-		soldierController.createSpriteSpawnTimeHandler();
-		soldierController.createRightSpawnTimeHandler();
+		
 				
 		scene.setOnAreaTouchListener(this);
 		
 		int tileSpacing = 200;
 		for(int n = 0;n<6;n++) {
 			//good towers
-			Sprite tempSprite = new Sprite(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
+			ClickButton tempSprite = new ClickButton(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.44f , mButtonTextureRegion);
 			TowerTile tempTowerTile = new TowerTile(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.44f, mButtonTextureRegion.getWidth(),mButtonTextureRegion.getHeight(), World.Team.GOOD);
 			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 			
-			tempSprite = new Sprite(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
+			tempSprite = new ClickButton(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion);
 			tempTowerTile = new TowerTile(WorldView.MAP_WIDTH - (700 + (tileSpacing*n)), WorldView.MAP_HEIGHT * 0.56f , mButtonTextureRegion.getWidth(), mButtonTextureRegion.getHeight(), World.Team.GOOD);
 			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
@@ -219,14 +212,14 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 			scene.getLastChild().attachChild(tempSprite);
 			
 			//evil towers
-			tempSprite = new Sprite(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
+			tempSprite = new ClickButton(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion);
 			tempTowerTile = new TowerTile(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.44f, mButtonTextureRegion.getWidth(), mButtonTextureRegion.getHeight(), World.Team.EVIL);
 			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 			
-			tempSprite = new Sprite(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
+			tempSprite = new ClickButton(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion);
 			tempTowerTile = new TowerTile(500 + (tileSpacing*n), WorldView.MAP_HEIGHT*0.56f, mButtonTextureRegion.getWidth(), mButtonTextureRegion.getHeight(), World.Team.EVIL);
 			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite, tempTowerTile);
@@ -238,7 +231,7 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         
-        
+       
         scene.registerTouchArea(goodBarrack);
         scene.registerTouchArea(badBarrack);
         
@@ -269,14 +262,48 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,
 			ITouchArea pTouchArea, float pTouchAreaLocalX,
 			float pTouchAreaLocalY) {
-		TowerTile towerTile = (TowerTile) TowerTileController.towerTileSpriteMap.get(pTouchArea);
-		if (towerTile != null && towerTile.isOccupied() != true) {
-		    if (timestamp != Math.round(System.currentTimeMillis() / 1000)) {
-		        timestamp = Math.round(System.currentTimeMillis() / 1000);
-		        Dialog v = new BuildTowerView(this, towerTile);
-		        v.show();
-		    }
-		}
+		TowerTile towerTile;
+		switch(pSceneTouchEvent.getAction())
+        {
+                case MotionEvent.ACTION_DOWN:
+                	if(pTouchArea == goodBarrack){
+            			goodBarrack.touch();
+            		}
+            		else if(pTouchArea == badBarrack){
+            			badBarrack.touch();
+            		}
+                    
+                	towerTile = (TowerTile) TowerTileController.towerTileSpriteMap.get(pTouchArea);
+            		if (towerTile != null && towerTile.isOccupied() != true) {
+            		    ClickButton tileSprite = (ClickButton) pTouchArea;
+            		    tileSprite.touch();
+            		}
+                        return false;
+               
+                case MotionEvent.ACTION_UP:
+                	if(pTouchArea == goodBarrack){
+            			if(goodBarrack.releaseTouchSuccessfull()) {
+            				soldierController.createSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);            				
+            			}                		
+            		}
+            		else if(pTouchArea == badBarrack){
+            			if(badBarrack.releaseTouchSuccessfull()) {
+            				soldierController.createSprite(300, WorldView.MAP_HEIGHT*0.52f, World.Team.EVIL);
+            			}
+            			
+            		}
+                	towerTile = (TowerTile) TowerTileController.towerTileSpriteMap.get(pTouchArea);
+            		if (towerTile != null && towerTile.isOccupied() != true) {
+            			ClickButton tileSprite = (ClickButton) pTouchArea;
+            			if (tileSprite.releaseTouchSuccessfull()) {
+            		        Dialog v = new BuildTowerView(this, towerTile);
+            		        v.show();
+            		    }
+            		}
+            		
+                        return false;
+        }
+		
 //			if(pTouchArea == goodButton1){
 //			    Log.d("TowerWars", timestamp + "");
 //			    if (timestamp != Math.round(System.currentTimeMillis() / 1000)) {
