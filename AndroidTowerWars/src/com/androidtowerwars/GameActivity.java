@@ -2,15 +2,19 @@ package com.androidtowerwars;
 
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.hud.HUD;
+import org.anddev.andengine.engine.handler.timer.ITimerCallback;
+import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.sprite.Sprite;
+import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
 import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
 import org.anddev.andengine.input.touch.TouchEvent;
+import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -18,6 +22,8 @@ import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 import android.app.Dialog;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -30,6 +36,7 @@ import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.controller.WallController;
+import com.androidtowerwars.model.Player;
 import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
@@ -78,6 +85,9 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 	private HUD headUpDisplay;
 	private static long timestamp;
 	private Sprite coin;
+	private  ChangeableText goldText;
+	private Font mFont;
+	private Texture mFontTexture;
 
 	
 	MenuView menuView = new MenuView(this);
@@ -143,6 +153,14 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
 		this.mCoinTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		this.mCoinTextureRegion = TextureRegionFactory.createFromAsset(
 				this.mCoinTexture, this, "gfx/Coin.png", 0,0);
+		
+		this.mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+
+        this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.WHITE);
+
+        this.mEngine.getTextureManager().loadTexture(this.mFontTexture);
+        this.mEngine.getFontManager().loadFont(this.mFont);
+
 		
         this.mEngine.getTextureManager().loadTexture(this.mButtonTexture);
 		getEngine().getTextureManager().loadTexture(this.mBackgroundTexture);
@@ -237,16 +255,27 @@ public class GameActivity extends BaseGameActivity implements IOnAreaTouchListen
         
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
-        final Sprite coin = new Sprite(WorldView.CAMERA_WIDTH-175, WorldView.CAMERA_HEIGHT-30, mCoinTextureRegion);
-        
+        coin = new Sprite(WorldView.CAMERA_WIDTH-175, 10, mCoinTextureRegion);
+        goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, this.mFont, "", "XXXXX".length());
+
        
         scene.registerTouchArea(goodBarrack);
         scene.registerTouchArea(badBarrack);
         
+        
         scene.getLastChild().attachChild(goodBarrack);
         scene.getLastChild().attachChild(badBarrack);
         headUpDisplay.getLastChild().attachChild(coin);
+        headUpDisplay.getLastChild().attachChild(goldText);
+        
         WorldView.getInstance().getCamera().setHUD(this.headUpDisplay);
+        
+        scene.registerUpdateHandler(new TimerHandler(1 / 20.0f, true, new ITimerCallback() {
+            
+            public void onTimePassed(final TimerHandler pTimerHandler) {
+            	 goldText.setText(Integer.toString(Player.getGold()));
+            }
+    }));
 		return scene;
 	}
 

@@ -13,6 +13,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ISoldier;
+import com.androidtowerwars.model.Player;
 import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
@@ -69,6 +70,7 @@ public class SoldierController extends Entity {
 		soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
+		Player.decreaseGold(2);
 	}
 	/**
 	 * Creates a Timer Handler used to Spawn Sprites
