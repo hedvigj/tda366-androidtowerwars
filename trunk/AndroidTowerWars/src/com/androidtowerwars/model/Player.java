@@ -2,14 +2,14 @@ package com.androidtowerwars.model;
 
 public class Player {
 
-	private int gold;
+	private static int gold = 10;
 	private World.Team team;
 
 	public Player(World.Team team) {
 		this.team = team;
 	}
 
-	public int getGold() {
+	public static int getGold() {
 		return gold;
 	}
 
@@ -23,5 +23,12 @@ public class Player {
 
 	public void setTeam(World.Team team) {
 		this.team = team;
+	}
+	
+	public static void decreaseGold(int cost){
+		gold = gold-cost;
+	}
+	public static void increaseGold(int earnings){
+		gold = gold + earnings;
 	}
 }
