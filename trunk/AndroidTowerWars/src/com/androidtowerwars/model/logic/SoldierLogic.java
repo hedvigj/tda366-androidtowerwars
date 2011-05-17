@@ -22,8 +22,4 @@ public class SoldierLogic {
 			}
 		}
 	}
-	
-	public static synchronized void killSoldier(final ISoldier soldier) {
-		SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(soldier.getTeam()));
-	}
 }
