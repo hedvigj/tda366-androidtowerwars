@@ -1,4 +1,4 @@
-package com.androidtowerwars;
+package com.androidtowerwars.view;
 
 import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;

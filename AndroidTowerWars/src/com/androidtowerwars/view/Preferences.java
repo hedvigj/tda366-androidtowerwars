@@ -1,4 +1,7 @@
-package com.androidtowerwars;
+package com.androidtowerwars.view;
+
+import com.androidtowerwars.R;
+import com.androidtowerwars.R.xml;
 
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
