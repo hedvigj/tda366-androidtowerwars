@@ -12,8 +12,6 @@ import android.view.View.OnClickListener;
 import android.util.Log;
 
 
-
-
 public class StartGame extends Activity implements OnClickListener {
 
     public void onCreate(Bundle savedInstanceState) {
