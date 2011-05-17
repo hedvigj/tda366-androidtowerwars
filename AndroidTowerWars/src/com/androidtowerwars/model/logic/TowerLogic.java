@@ -6,6 +6,7 @@ import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.controller.ProjectileController;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.ITower;
+import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.World;
 
 public class TowerLogic {

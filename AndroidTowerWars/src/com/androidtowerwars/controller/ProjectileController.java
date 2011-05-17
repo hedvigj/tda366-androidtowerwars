@@ -15,6 +15,7 @@ import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.ProjectileLogic;
 import com.androidtowerwars.view.ObserverSprite;
+import com.androidtowerwars.view.ProjectileView;
 import com.androidtowerwars.view.WorldView;
 
 public class ProjectileController extends Entity {
@@ -59,7 +60,7 @@ public class ProjectileController extends Entity {
 		public static void createSprite(ISoldier target, ITower parent) {
 			World.Team team = parent.getTeam();
 			Projectile projectile = new Projectile(target, parent);
-			ObserverSprite projectileSprite = new ObserverSprite(projectile.getX(), projectile.getY(), GameActivity.instance.mArrowTextureRegion); //TODO make a projectile texture
+			ObserverSprite projectileSprite = new ObserverSprite(projectile.getX(), projectile.getY(), ProjectileView.mArrowTextureRegion); //TODO make a projectile texture
 			projectileListMap.get(team).add(projectile);
 			projectileSpriteMap.put(projectile, projectileSprite);
 			projectile.addObserver(projectileSprite);

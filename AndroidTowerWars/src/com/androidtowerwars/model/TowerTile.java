@@ -1,13 +1,12 @@
 package com.androidtowerwars.model;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
 
-import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.controller.TowerController;
-import com.androidtowerwars.view.WorldView;
+import com.androidtowerwars.view.ButtonView;
+import com.androidtowerwars.view.TowerView;
 
-public class TowerTile implements IButtonSprite	{
+public class TowerTile implements IButtonSprite{
 	private float x;
 	private float y;
 	private Rectangle area;
@@ -38,17 +37,14 @@ public class TowerTile implements IButtonSprite	{
 	
 	public boolean isOccupied() {
 		return occupied;
-	}
+	}	
 	
 	public void action() {
 		if (!occupied) {
-			TowerController.createTestTower(x-(GameActivity.instance.mTowerTextureRegion.getWidth() / 2)+(GameActivity.instance.mButtonTextureRegion.getWidth() / 2),
-											y-GameActivity.instance.mTowerTextureRegion.getHeight()+GameActivity.instance.mButtonTextureRegion.getHeight(), 
-											GameActivity.instance.mTowerTextureRegion, 200, team);
+			TowerController.createTestTower(x-(TowerView.mTowerTextureRegion.getWidth() / 2)+(ButtonView.mButtonTextureRegion.getWidth() / 2),
+											y-TowerView.mTowerTextureRegion.getHeight()+ButtonView.mButtonTextureRegion.getHeight(), 
+											TowerView.mTowerTextureRegion, 200, team);
 			occupied = true;
 		}
 	}
-
-	
-	
 }
