@@ -1,32 +1,21 @@
 package com.androidtowerwars;
 
 import org.anddev.andengine.engine.Engine;
-import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
-import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.entity.sprite.Sprite;
-import org.anddev.andengine.entity.text.ChangeableText;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
 import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
-import org.anddev.andengine.input.touch.TouchEvent;
-import org.anddev.andengine.opengl.font.Font;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
-import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.MotionEvent;
 import android.widget.Toast;
 
 import com.androidtowerwars.controller.DragAndZoomController;
@@ -42,10 +31,17 @@ import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
-import com.androidtowerwars.view.BuildTowerView;
+import com.androidtowerwars.view.BackgroundView;
+import com.androidtowerwars.view.ButtonView;
 import com.androidtowerwars.view.ClickButton;
+import com.androidtowerwars.view.CoinView;
+import com.androidtowerwars.view.FontView;
 import com.androidtowerwars.view.MenuView;
+import com.androidtowerwars.view.ProjectileView;
+import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.TouchView;
+import com.androidtowerwars.view.TowerView;
+import com.androidtowerwars.view.WallView;
 import com.androidtowerwars.view.WorldView;
 
 public class GameActivity extends BaseGameActivity {
@@ -59,33 +55,28 @@ public class GameActivity extends BaseGameActivity {
 	// ===========================================================
 
 	public static GameActivity instance = null;
-	private Texture mBackgroundTexture;
-	private Texture mSkeletonTexture;
-	private Texture mArrowTexture;
-	private Texture mTowerTexture;
-	private Texture mButtonTexture;
-	private Texture mWallTexture;
-	public TextureRegion mButtonTextureRegion;
-	private TextureRegion mBackgroundTextureRegion;
-	public TextureRegion mSkeletonTextureRegion;
-	public TextureRegion mArrowTextureRegion;
-	public TextureRegion mTowerTextureRegion;
-	private TextureRegion mWallTextureRegion;
+
 	public SoldierController soldierController;
 	public ProjectileController projectileController;
 	public TowerController towerController;
 	public WallController wallController;
 	public TowerTileController towerTileController;
 
-	private Wall goodWall;
-	private Wall badWall;
-
 	private static long timestamp;
 
 	private TouchController touchController = new TouchController(this);
 	private TouchView touchView = new TouchView(this);
+	private ButtonView buttonView = new ButtonView(this);
+	private TowerView towerView = new TowerView(this);
+	private SoldierView soldierView = new SoldierView(this);
+	private WallView wallView = new WallView(this);
+	private CoinView coinView = new CoinView(this);
+	private BackgroundView backgroundView = new BackgroundView(this);
+	private ProjectileView projectileView = new ProjectileView(this);
 	private MenuView menuView = new MenuView(this);
+	private FontView fontView = new FontView();
 	private MenuController menuController = new MenuController(this, menuView);
+
 
 	// ===========================================================
 	// Getter & Setter
@@ -110,43 +101,18 @@ public class GameActivity extends BaseGameActivity {
 	}
 
 	public void onLoadResources() {
-
+		
 		menuView.loadResources();
 		touchView.loadResources();
-		this.mBackgroundTexture = new Texture(2048, 512,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mBackgroundTextureRegion = TextureRegionFactory.createFromAsset(
-				this.mBackgroundTexture, this,
-				"gfx/parallax_background_layer_back.png", 0, 0);
-		this.mSkeletonTexture = new Texture(64, 64,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mSkeletonTextureRegion = TextureRegionFactory.createFromAsset(
-				this.mSkeletonTexture, this, "gfx/skeleton_master_wizard.png",
-				0, 0);
-		this.mArrowTexture = new Texture(64, 64,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mArrowTextureRegion = TextureRegionFactory.createFromAsset(
-				this.mArrowTexture, this, "gfx/Arrow2.png", 0, 0);
-		this.mTowerTexture = new Texture(256, 256,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mTowerTextureRegion = TextureRegionFactory.createFromAsset(
-				this.mTowerTexture, this, "gfx/tower1.png", 0, 0);
-		this.mWallTexture = new Texture(256, 256,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mWallTextureRegion = TextureRegionFactory.createFromAsset(
-				this.mWallTexture, this, "gfx/wall.png", 0, 0);
-		this.mButtonTexture = new Texture(256, 128,
-				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		towerView.loadResources();
+		buttonView.loadResources();
+		soldierView.loadResources();
+		coinView.loadResources();
+		projectileView.loadResources();
+		wallView.loadResources();
+		backgroundView.loadResources();
+		fontView.loadResources();
 
-		mButtonTextureRegion = TextureRegionFactory.createFromAsset(
-				mButtonTexture, this, "gfx/GroundTile.png", 0, 0);
-
-		this.mEngine.getTextureManager().loadTexture(this.mButtonTexture);
-		getEngine().getTextureManager().loadTexture(this.mBackgroundTexture);
-		getEngine().getTextureManager().loadTexture(this.mSkeletonTexture);
-		getEngine().getTextureManager().loadTexture(this.mArrowTexture);
-		getEngine().getTextureManager().loadTexture(this.mTowerTexture);
-		getEngine().getTextureManager().loadTexture(this.mWallTexture);
 
 	}
 
@@ -155,31 +121,32 @@ public class GameActivity extends BaseGameActivity {
 
 		getEngine().registerUpdateHandler(new FPSLogger());
 		final Sprite background = new Sprite(0, 0,
-				this.mBackgroundTextureRegion);
+				BackgroundView.mBackgroundTextureRegion);
 		scene.getLastChild().attachChild(background);
 
 		// TODO:Inte riktigt klart
 		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH
-				- mWallTextureRegion.getWidth(), WorldView.MAP_HEIGHT * 0.3f,
-				mWallTextureRegion);
+				- WallView.mWallTextureRegion.getWidth(), WorldView.MAP_HEIGHT * 0.3f,
+				WallView.mWallTextureRegion);
 		scene.getLastChild().attachChild(gWall);
 		final Sprite bWall = new Sprite(0, WorldView.MAP_HEIGHT * 0.3f,
-				mWallTextureRegion);
+				WallView.mWallTextureRegion);
 		scene.getLastChild().attachChild(bWall);
-		goodWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.5f,
-				mWallTextureRegion.getWidth(), Team.GOOD);
-		badWall = new Wall(0, WorldView.MAP_HEIGHT * 0.5f,
-				mWallTextureRegion.getWidth(), Team.EVIL);
+		WallView.goodWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.5f,
+				WallView.mWallTextureRegion.getWidth(), Team.GOOD);
+		WallView.badWall = new Wall(0, WorldView.MAP_HEIGHT * 0.5f,
+				WallView.mWallTextureRegion.getWidth(), Team.EVIL);
 
 		soldierController = new SoldierController();
 		scene.getLastChild().attachChild(soldierController);
 		projectileController = new ProjectileController();
 		scene.getLastChild().attachChild(projectileController);
-		wallController = new WallController(goodWall, badWall);
+		wallController = new WallController(WallView.goodWall, WallView.badWall);
 		scene.getLastChild().attachChild(wallController);
 		towerController = TowerController.getInstance();
 		towerTileController = new TowerTileController();
 
+		wallView.loadScene(scene);
 		touchView.loadScene(scene);
 		menuView.createMenuScene();
 
@@ -206,11 +173,11 @@ public class GameActivity extends BaseGameActivity {
 			// good towers
 			ClickButton tempSprite = new ClickButton(WorldView.MAP_WIDTH
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
-					mButtonTextureRegion);
+					ButtonView.mButtonTextureRegion);
 			TowerTile tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
-					mButtonTextureRegion.getWidth(),
-					mButtonTextureRegion.getHeight(), World.Team.GOOD);
+					ButtonView.mButtonTextureRegion.getWidth(),
+					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
 			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(
 					tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite,
@@ -220,11 +187,11 @@ public class GameActivity extends BaseGameActivity {
 
 			tempSprite = new ClickButton(WorldView.MAP_WIDTH
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
-					mButtonTextureRegion);
+					ButtonView.mButtonTextureRegion);
 			tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
-					mButtonTextureRegion.getWidth(),
-					mButtonTextureRegion.getHeight(), World.Team.GOOD);
+					ButtonView.mButtonTextureRegion.getWidth(),
+					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
 			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(
 					tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite,
@@ -234,11 +201,11 @@ public class GameActivity extends BaseGameActivity {
 
 			// evil towers
 			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.44f, mButtonTextureRegion);
+					WorldView.MAP_HEIGHT * 0.44f, ButtonView.mButtonTextureRegion);
 			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
 					WorldView.MAP_HEIGHT * 0.44f,
-					mButtonTextureRegion.getWidth(),
-					mButtonTextureRegion.getHeight(), World.Team.EVIL);
+					ButtonView.mButtonTextureRegion.getWidth(),
+					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
 			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(
 					tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite,
@@ -247,11 +214,11 @@ public class GameActivity extends BaseGameActivity {
 			scene.getLastChild().attachChild(tempSprite);
 
 			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.56f, mButtonTextureRegion);
+					WorldView.MAP_HEIGHT * 0.56f, ButtonView.mButtonTextureRegion);
 			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
 					WorldView.MAP_HEIGHT * 0.56f,
-					mButtonTextureRegion.getWidth(),
-					mButtonTextureRegion.getHeight(), World.Team.EVIL);
+					ButtonView.mButtonTextureRegion.getWidth(),
+					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
 			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(
 					tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite,
