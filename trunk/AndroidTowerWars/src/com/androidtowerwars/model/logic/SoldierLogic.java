@@ -20,21 +20,29 @@ public class SoldierLogic {
         soldier.setPosition(soldier.getX() + soldier.getSpeed() * pSecondsElapsed, soldier.getY());
         for(int n=0;n<GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).size();n++) {
             if (range.collidesWith(GameActivity.instance.soldierController.soldierSpriteMap.get(GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n)))) {
-                SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
+                //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
+                ISoldier S = soldier;
+                ISoldier R =  GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n);
                 //attackSoldier(); Should attack before kill?
-                Log.d("TowerWars", "diee!");
+                attackSoldier(S,R,team);
+                //Log.d("TowerWars", "diee!");
                 break;
             }
         }
     }
     
-    public static void attackSoldier(Soldier attacker, Soldier reciever, Team team) {
+    public static void attackSoldier(ISoldier attacker, ISoldier reciever, Team team) {
         //TODO: 
         reciever.setHealth(reciever.getHealth() - attacker.getDamage());
         if(reciever.getHealth() < 0) {
-            SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
+            SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team.opposite()));
+            Log.d("TowerWars1", reciever.getHealth()+"");
+            Log.d("TowerWars2", attacker.getHealth()+"");
         } else {
             attacker.setHealth(attacker.getHealth() - reciever.getDamage());
+            if(attacker.getHealth() < 0) {
+                SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
+            }
         }
     }
 }
