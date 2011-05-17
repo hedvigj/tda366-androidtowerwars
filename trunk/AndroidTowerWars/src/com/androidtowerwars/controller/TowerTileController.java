@@ -6,10 +6,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.anddev.andengine.entity.sprite.Sprite;
 
-import com.androidtowerwars.ClickButton;
 import com.androidtowerwars.model.IButtonSprite;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
+import com.androidtowerwars.view.ClickButton;
 
 public class TowerTileController {
 	

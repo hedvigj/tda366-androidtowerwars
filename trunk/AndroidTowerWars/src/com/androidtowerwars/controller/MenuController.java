@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.view.KeyEvent;
 
 import com.androidtowerwars.GameActivity;
-import com.androidtowerwars.Preferences;
 import com.androidtowerwars.view.MenuView;
+import com.androidtowerwars.view.Preferences;
 import com.androidtowerwars.view.WorldView;
 
 public class MenuController implements IOnMenuItemClickListener {

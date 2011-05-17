@@ -42,6 +42,7 @@ import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.view.BuildTowerView;
+import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.MenuView;
 import com.androidtowerwars.view.WorldView;
 
