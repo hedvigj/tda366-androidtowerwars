@@ -1,15 +1,11 @@
 package com.androidtowerwars.controller;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.Entity;
-import org.anddev.andengine.entity.primitive.Rectangle;
-import org.anddev.andengine.entity.sprite.Sprite;
 
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ISoldier;
@@ -19,6 +15,7 @@ import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.SoldierLogic;
 import com.androidtowerwars.view.ObserverSprite;
+import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.WorldView;
 
 
@@ -65,7 +62,7 @@ public class SoldierController extends Entity {
 	
 	public static void createSprite(float pX, float pY, World.Team team) {
 		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte s�ker p� att 5 �r r�tt.
-		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
+		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, SoldierView.mSkeletonTextureRegion);
 		soldierListMap.get(team).add(soldier);
 		soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);

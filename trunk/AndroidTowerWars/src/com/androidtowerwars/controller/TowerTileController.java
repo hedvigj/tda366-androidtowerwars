@@ -20,7 +20,4 @@ public class TowerTileController {
 		towerTileListMap.put(Team.GOOD, new CopyOnWriteArrayList<IButtonSprite>());
 		towerTileListMap.put(Team.EVIL, new CopyOnWriteArrayList<IButtonSprite>());
 	}	
-	
-
-
 }
