@@ -63,7 +63,7 @@ public class SoldierController extends Entity {
 		});
 	}
 	
-	public void createSprite(float pX, float pY, World.Team team) {
+	public static void createSprite(float pX, float pY, World.Team team) {
 		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte s�ker p� att 5 �r r�tt.
 		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, GameActivity.instance.mSkeletonTextureRegion);
 		soldierListMap.get(team).add(soldier);
