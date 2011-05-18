@@ -1,10 +1,13 @@
 package com.androidtowerwars.model;
 
+import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import android.util.Log;
 
 import com.androidtowerwars.util.Vector2d;
+import com.androidtowerwars.view.ObserverSprite;
 
 public class Projectile extends Observable implements IProjectile, IObservableSprite{
 	
@@ -14,6 +17,9 @@ public class Projectile extends Observable implements IProjectile, IObservableSp
 	private ISoldier target;
 	private ITower parent;
 	private Vector2d direction;
+	
+	public static ConcurrentHashMap<World.Team, List<IProjectile>> projectileListMap = new ConcurrentHashMap<World.Team, List<IProjectile>>();
+	public static ConcurrentHashMap<IProjectile, ObserverSprite> projectileSpriteMap = new ConcurrentHashMap<IProjectile, ObserverSprite>();
 	
 	public Projectile(ISoldier target, ITower parent) {
 		this.target = target;

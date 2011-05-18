@@ -1,15 +1,21 @@
 package com.androidtowerwars.model;
 
+import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.controller.SoldierController;
+import com.androidtowerwars.view.ObserverSprite;
 
 import android.util.Log;
 
 public class Soldier extends Observable implements ISoldier, IObservableSprite {
+	
+	public static ConcurrentHashMap<World.Team, List<ISoldier>> soldierListMap = new ConcurrentHashMap<World.Team, List<ISoldier>>();
+	public static ConcurrentHashMap<ISoldier, ObserverSprite> soldierSpriteMap = new ConcurrentHashMap<ISoldier, ObserverSprite>();
 
 	private World.Team team;
 	protected float speed = 140; // pixels per second

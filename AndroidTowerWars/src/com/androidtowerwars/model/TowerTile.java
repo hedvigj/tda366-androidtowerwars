@@ -1,9 +1,13 @@
 package com.androidtowerwars.model;
 
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.anddev.andengine.entity.primitive.Rectangle;
 
 import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.view.ButtonView;
+import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.TowerView;
 
 public class TowerTile implements IButtonSprite{
@@ -12,6 +16,10 @@ public class TowerTile implements IButtonSprite{
 	private Rectangle area;
 	private World.Team team;
 	private boolean occupied = false;
+	
+	public static ConcurrentHashMap<World.Team, List<TowerTile>> towerTileListMap = new ConcurrentHashMap<World.Team, List<TowerTile>>();
+	public static ConcurrentHashMap<ClickButton, TowerTile> towerTileSpriteMap = new ConcurrentHashMap<ClickButton, TowerTile>();
+	
 	
 	public TowerTile(float pX, float pY, float width, float heigth, World.Team team) {
 		this.x = pX;

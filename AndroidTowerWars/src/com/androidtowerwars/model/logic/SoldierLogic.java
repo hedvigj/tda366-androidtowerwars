@@ -17,13 +17,13 @@ public class SoldierLogic {
 	
     public static void updateSoldier(ISoldier soldier, float pSecondsElapsed) {
         World.Team team = soldier.getTeam();
-        Sprite range = SoldierController.soldierSpriteMap.get(soldier);//soldier.getRange();
+        Sprite range = Soldier.soldierSpriteMap.get(soldier);//soldier.getRange();
         soldier.setPosition(soldier.getX() + soldier.getSpeed() * pSecondsElapsed, soldier.getY());
-        for(int n=0;n<GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).size();n++) {
-            if (range.collidesWith(GameActivity.instance.soldierController.soldierSpriteMap.get(GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n)))) {
+        for(int n=0;n<Soldier.soldierListMap.get(team.opposite()).size();n++) {
+            if (range.collidesWith(Soldier.soldierSpriteMap.get(Soldier.soldierListMap.get(team.opposite()).get(n)))) {
                 //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
                 ISoldier S = soldier;
-                ISoldier R =  GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n);
+                ISoldier R =  Soldier.soldierListMap.get(team.opposite()).get(n);
                 //attackSoldier(); Should attack before kill?
                 attackSoldier(S,R,team);
                 break;
@@ -41,12 +41,12 @@ public class SoldierLogic {
             Log.d("TowerWars3", reciever.getHealth()+"");
             Log.d("TowerWars4", attacker.getHealth()+"");
         } else {
-            SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team.opposite()));
+            SoldierController.removeSoldier(reciever, Soldier.soldierListMap.get(team.opposite()));
             Log.d("TowerWars3", "remove");
         }
         
         if (attacker.getHealth() < 0) {
-            SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
+            SoldierController.removeSoldier(reciever, Soldier.soldierListMap.get(team));
             Log.d("TowerWars4", "remove");
         }
         

@@ -111,8 +111,6 @@ public class GameActivity extends BaseGameActivity {
 		wallView.loadResources();
 		backgroundView.loadResources();
 		fontView.loadResources();
-
-
 	}
 
 	public Scene onLoadScene() {
@@ -146,8 +144,6 @@ public class GameActivity extends BaseGameActivity {
 		towerController = TowerController.getInstance();
 		towerTileController = new TowerTileController();
 		
-		
-		
 		wallView.loadScene(scene);
 		touchView.loadScene(scene);
 		menuView.createMenuScene();
@@ -180,9 +176,9 @@ public class GameActivity extends BaseGameActivity {
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(
+			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
 					tempTowerTile);
-			TowerTileController.towerTileSpriteMap.put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -194,9 +190,9 @@ public class GameActivity extends BaseGameActivity {
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			TowerTileController.towerTileListMap.get(World.Team.GOOD).add(
+			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
 					tempTowerTile);
-			TowerTileController.towerTileSpriteMap.put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -208,9 +204,9 @@ public class GameActivity extends BaseGameActivity {
 					WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(
+			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
 					tempTowerTile);
-			TowerTileController.towerTileSpriteMap.put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			//scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -221,9 +217,9 @@ public class GameActivity extends BaseGameActivity {
 					WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			TowerTileController.towerTileListMap.get(World.Team.EVIL).add(
+			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
 					tempTowerTile);
-			TowerTileController.towerTileSpriteMap.put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			//scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
