@@ -11,6 +11,9 @@ import com.androidtowerwars.view.ObserverSprite;
 
 public class Projectile extends Observable implements IProjectile, IObservableSprite{
 	
+	public static ConcurrentHashMap<World.Team, List<IProjectile>> projectileListMap = new ConcurrentHashMap<World.Team, List<IProjectile>>();
+	public static ConcurrentHashMap<IProjectile, ObserverSprite> projectileSpriteMap = new ConcurrentHashMap<IProjectile, ObserverSprite>();
+	
 	private float x;
 	private float y;
 	private float speed = 250f;

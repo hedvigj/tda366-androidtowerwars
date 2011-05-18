@@ -19,9 +19,9 @@ public void loadScene(Scene scene){
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			World.getInstance().getTowerTileListMap().get(World.Team.GOOD).add(
+			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
 					tempTowerTile);
-			World.getInstance().getTowerTileSpriteMap().put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -33,9 +33,9 @@ public void loadScene(Scene scene){
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			World.getInstance().getTowerTileListMap().get(World.Team.GOOD).add(
+			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
 					tempTowerTile);
-			World.getInstance().getTowerTileSpriteMap().put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -47,9 +47,9 @@ public void loadScene(Scene scene){
 					WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			World.getInstance().getTowerTileListMap().get(World.Team.EVIL).add(
+			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
 					tempTowerTile);
-			World.getInstance().getTowerTileSpriteMap().put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			//scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -60,9 +60,9 @@ public void loadScene(Scene scene){
 					WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			World.getInstance().getTowerTileListMap().get(World.Team.EVIL).add(
+			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
 					tempTowerTile);
-			World.getInstance().getTowerTileSpriteMap().put(tempSprite,
+			TowerTile.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
 			//scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
