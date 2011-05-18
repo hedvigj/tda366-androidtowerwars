@@ -25,9 +25,6 @@ public class Tower implements ITower {
 	private int kills = 0;
 	public static int cost = 20;
 	
-	public static ConcurrentHashMap<World.Team, List<ITower>> towerListMap = new ConcurrentHashMap<World.Team, List<ITower>>();
-	public static ConcurrentHashMap<ITower, Sprite> towerSpriteMap = new ConcurrentHashMap<ITower, Sprite>();
-	
 	public Tower(float pX, float pY, float range, World.Team team) {
 		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-400, range, 900f); //not centered by width!
 		this.team = team;

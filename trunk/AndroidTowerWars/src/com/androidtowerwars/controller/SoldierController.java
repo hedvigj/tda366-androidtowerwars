@@ -37,12 +37,12 @@ public class SoldierController extends Entity {
 	// Methods
 	// ===========================================================
 	public SoldierController() {
-		Soldier.soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
-		Soldier.soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
+		World.getInstance().getSoldierListMap().put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
+		World.getInstance().getSoldierListMap().put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
 	}
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 		super.onManagedUpdate(pSecondsElapsed);
-		for(List<ISoldier> soldierList: Soldier.soldierListMap.values()) {
+		for(List<ISoldier> soldierList: World.getInstance().getSoldierListMap().values()) {
 			for(ISoldier soldier: soldierList) {
 				SoldierLogic.updateSoldier(soldier, pSecondsElapsed);
 			}
@@ -57,7 +57,7 @@ public class SoldierController extends Entity {
 			public void run() {
 				/* Now it is save to remove the entity! */
 				WorldView.getInstance().getScene().getLastChild()
-						.detachChild(Soldier.soldierSpriteMap.get(soldier));
+						.detachChild(World.getInstance().getSoldierSpriteMap().get(soldier));
 			}
 		});
 	}
@@ -65,8 +65,8 @@ public class SoldierController extends Entity {
 	public static void createSprite(float pX, float pY, World.Team team) {
 		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte s�ker p� att 5 �r r�tt.
 		ObserverSprite soldierSprite = new ObserverSprite(pX, pY, SoldierView.mSkeletonTextureRegion);
-		Soldier.soldierListMap.get(team).add(soldier);
-		Soldier.soldierSpriteMap.put(soldier, soldierSprite);
+		World.getInstance().getSoldierListMap().get(team).add(soldier);
+		World.getInstance().getSoldierSpriteMap().put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
 		PlayerController.playerMap.get(team).decreaseGold(soldier.getCost());
