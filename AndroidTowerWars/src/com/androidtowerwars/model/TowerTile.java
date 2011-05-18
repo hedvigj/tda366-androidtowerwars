@@ -17,6 +17,11 @@ public class TowerTile implements IButtonSprite{
 	private World.Team team;
 	private boolean occupied = false;
 	
+
+	public static ConcurrentHashMap<World.Team, List<TowerTile>> towerTileListMap = new ConcurrentHashMap<World.Team, List<TowerTile>>();
+	public static ConcurrentHashMap<ClickButton, TowerTile> towerTileSpriteMap = new ConcurrentHashMap<ClickButton, TowerTile>();
+	
+	
 	public TowerTile(float pX, float pY, float width, float heigth, World.Team team) {
 		this.x = pX;
 		this.y = pY;

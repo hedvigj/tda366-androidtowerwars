@@ -68,7 +68,7 @@ import com.androidtowerwars.view.WorldView;
 		}
 		
 		public static void buildTower() {
-			List<TowerTile> tileList = World.getInstance().getTowerTileListMap().get(team);
+			List<TowerTile> tileList = TowerTile.towerTileListMap.get(team);
 			Random r = new Random();
 			while (nBuiltTowers < tileList.size()) {
 				TowerTile tile = tileList.get(r.nextInt(tileList.size()));

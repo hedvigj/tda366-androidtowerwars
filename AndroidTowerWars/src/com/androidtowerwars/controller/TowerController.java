@@ -29,8 +29,8 @@ public class TowerController {//extends Entity {
 	
 	
 	public TowerController() {
-		World.getInstance().getTowerListMap().put(Team.GOOD, new CopyOnWriteArrayList<ITower>());
-		World.getInstance().getTowerListMap().put(Team.EVIL, new CopyOnWriteArrayList<ITower>());
+		Tower.towerListMap.put(Team.GOOD, new CopyOnWriteArrayList<ITower>());
+		Tower.towerListMap.put(Team.EVIL, new CopyOnWriteArrayList<ITower>());
 		setInstance(this);
 	}
 	
@@ -44,8 +44,8 @@ public class TowerController {//extends Entity {
     public static synchronized void createTestTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
         final Tower tower = new Tower(pX, pY, range, team);
         Sprite sprite = new Sprite(pX, pY, pTextureRegion);
-        World.getInstance().getTowerListMap().get(team).add(tower);
-        World.getInstance().getTowerSpriteMap().put(tower, sprite);
+        Tower.towerListMap.get(team).add(tower);
+        Tower.towerSpriteMap.put(tower, sprite);
         GameActivity.setTimestamp(0);
         WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
                 timerHandler = new TimerHandler(tower.getAttackSpeed(),

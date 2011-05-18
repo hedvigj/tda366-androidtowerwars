@@ -28,16 +28,16 @@ public class ProjectileController extends Entity {
 		// ===========================================================
 		
 		public ProjectileController() {
-			World.getInstance().getProjectileListMap().put(Team.EVIL, new CopyOnWriteArrayList<IProjectile>());
-			World.getInstance().getProjectileListMap().put(Team.GOOD, new CopyOnWriteArrayList<IProjectile>());
+			Projectile.projectileListMap.put(Team.EVIL, new CopyOnWriteArrayList<IProjectile>());
+			Projectile.projectileListMap.put(Team.GOOD, new CopyOnWriteArrayList<IProjectile>());
 		}
 		
 		protected void onManagedUpdate(final float pSecondsElapsed) {
 			super.onManagedUpdate(pSecondsElapsed);
-			for(List<IProjectile> projectileList: World.getInstance().getProjectileListMap().values()) {
+			for(List<IProjectile> projectileList: Projectile.projectileListMap.values()) {
 				for(IProjectile projectile: projectileList) {
 					ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
-					if (World.getInstance().getProjectileSpriteMap().get(projectile).collidesWith(World.getInstance().getSoldierSpriteMap().get(projectile.getTarget()))) {
+					if (Projectile.projectileSpriteMap.get(projectile).collidesWith(Projectile.projectileSpriteMap.get(projectile.getTarget()))) {
 						ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
 				}
 				}
@@ -50,7 +50,7 @@ public class ProjectileController extends Entity {
 				public void run() {
 					/* Now it is save to remove the entity! */
 					WorldView.getInstance().getScene().getLastChild()
-							.detachChild(World.getInstance().getProjectileSpriteMap().get(projectile));
+							.detachChild(Projectile.projectileSpriteMap.get(projectile));
 				}
 			});
 		}
@@ -59,8 +59,8 @@ public class ProjectileController extends Entity {
 			World.Team team = parent.getTeam();
 			Projectile projectile = new Projectile(target, parent);
 			ObserverSprite projectileSprite = new ObserverSprite(projectile.getX(), projectile.getY(), ProjectileView.mArrowTextureRegion); //TODO make a projectile texture
-			World.getInstance().getProjectileListMap().get(team).add(projectile);
-			World.getInstance().getProjectileSpriteMap().put(projectile, projectileSprite);
+			Projectile.projectileListMap.get(team).add(projectile);
+			Projectile.projectileSpriteMap.put(projectile, projectileSprite);
 			projectile.addObserver(projectileSprite);
 			WorldView.getInstance().getScene().getLastChild().attachChild(projectileSprite);
 		}
