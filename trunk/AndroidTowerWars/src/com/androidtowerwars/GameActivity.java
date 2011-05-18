@@ -172,7 +172,7 @@ public class GameActivity extends BaseGameActivity {
 		
 		Toast.makeText(
 				getApplicationContext(),
-				"In the land of Agarwaen the war has been raging for 30 years.",
+				"In the land of Agarwaen the war has been raging for 300 years.",
 				Toast.LENGTH_LONG).show();
 		
 	}
