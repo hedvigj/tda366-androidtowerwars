@@ -6,6 +6,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 import android.util.Log;
 
 import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.controller.PlayerController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Soldier;
@@ -25,7 +26,6 @@ public class SoldierLogic {
                 ISoldier R =  GameActivity.instance.soldierController.soldierListMap.get(team.opposite()).get(n);
                 //attackSoldier(); Should attack before kill?
                 attackSoldier(S,R,team);
-                //Log.d("TowerWars", "diee!");
                 break;
             }
         }
@@ -57,16 +57,25 @@ public class SoldierLogic {
             //SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team.opposite()));
             Log.d("TowerWars1", reciever.getHealth()+"");
             Log.d("TowerWars2", attacker.getHealth()+"");
+<<<<<<< .mine
+            PlayerController.playerMap.get(attacker.getTeam()).increaseGold((int) (reciever.getCost()*1.5));
+=======
         } else if(attacker.getHealth() < 0) {
             //SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
             Log.d("TowerWars3", reciever.getHealth()+"");
             Log.d("TowerWars4", attacker.getHealth()+"");
+>>>>>>> .r81
         } else {
             attacker.setHealth(attacker.getHealth() - reciever.getDamage());
             Log.d("TowerWars5", reciever.getHealth()+"");
             Log.d("TowerWars6", attacker.getHealth()+"");
             if(attacker.getHealth() < 0) {
+<<<<<<< .mine
+                SoldierController.removeSoldier(attacker, GameActivity.instance.soldierController.soldierListMap.get(team));
+                PlayerController.playerMap.get(reciever.getTeam()).increaseGold((int) (attacker.getCost()*1.5));
+=======
                 //SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
+>>>>>>> .r81
             }
         }*/
     }

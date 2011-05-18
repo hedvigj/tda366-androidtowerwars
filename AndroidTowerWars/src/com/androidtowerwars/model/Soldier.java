@@ -20,6 +20,8 @@ public class Soldier extends Observable implements ISoldier, IObservableSprite {
 
 	protected int damage = 33;
 	protected int value = 5;
+	
+	private int cost = 5;
 
 	private float x;
 	private float y;
@@ -51,6 +53,10 @@ public class Soldier extends Observable implements ISoldier, IObservableSprite {
 	}
 	public float getY() {
 		return y;
+	}
+	
+	public int getCost() {
+		return cost;
 	}
 
 	public void setDamage(int damage) {

@@ -62,7 +62,7 @@ public class TouchView {
         goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, this.mFont, "", "XXXXX".length());
         
         scene.registerTouchArea(goodBarrack);
-        scene.registerTouchArea(badBarrack);
+        //scene.registerTouchArea(badBarrack);
         scene.getLastChild().attachChild(goodBarrack);
         scene.getLastChild().attachChild(badBarrack);
         headUpDisplay.getLastChild().attachChild(coin);
