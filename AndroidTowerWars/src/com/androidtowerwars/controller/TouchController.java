@@ -41,7 +41,7 @@ public class TouchController implements IOnAreaTouchListener {
             			TouchView.badBarrack.touch();
             		}
                     
-                	towerTile = TowerTile.towerTileSpriteMap.get(pTouchArea);
+                	towerTile = World.getInstance().getTowerTileSpriteMap().get(pTouchArea);
             		if (towerTile != null && towerTile.isOccupied() != true) {
             		    ClickButton tileSprite = (ClickButton) pTouchArea;
             		    tileSprite.touch();
@@ -60,7 +60,7 @@ public class TouchController implements IOnAreaTouchListener {
             			}
             			
             		}
-                	towerTile = TowerTile.towerTileSpriteMap.get(pTouchArea);
+                	towerTile = World.getInstance().getTowerTileSpriteMap().get(pTouchArea);
             		if (towerTile != null && towerTile.isOccupied() != true) {
             			ClickButton tileSprite = (ClickButton) pTouchArea;
             			if (tileSprite.releaseTouchSuccessfull()) {

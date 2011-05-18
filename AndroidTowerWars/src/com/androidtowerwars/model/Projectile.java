@@ -18,9 +18,6 @@ public class Projectile extends Observable implements IProjectile, IObservableSp
 	private ITower parent;
 	private Vector2d direction;
 	
-	public static ConcurrentHashMap<World.Team, List<IProjectile>> projectileListMap = new ConcurrentHashMap<World.Team, List<IProjectile>>();
-	public static ConcurrentHashMap<IProjectile, ObserverSprite> projectileSpriteMap = new ConcurrentHashMap<IProjectile, ObserverSprite>();
-	
 	public Projectile(ISoldier target, ITower parent) {
 		this.target = target;
 		this.parent = parent;

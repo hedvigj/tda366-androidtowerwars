@@ -17,11 +17,11 @@ public class WallLogic {
 		World.Team team = wall.getTeam();
 		Rectangle range = wall.getRange();
 
-		for(int n=0;n<Soldier.soldierListMap.get(team.opposite()).size();n++) {
-		if (range.collidesWith(Soldier.soldierSpriteMap.get(Soldier.soldierListMap.get(team.opposite()).get(n)))){
+		for(int n=0;n<World.getInstance().getSoldierListMap().get(team.opposite()).size();n++) {
+		if (range.collidesWith(World.getInstance().getSoldierSpriteMap().get(World.getInstance().getSoldierListMap().get(team.opposite()).get(n)))){
 			
-			SoldierController.removeSoldier(Soldier.soldierListMap.get(team.opposite()).get(n),
-											Soldier.soldierListMap.get(Soldier.soldierListMap.get(team.opposite()).get(n).getTeam()));
+			SoldierController.removeSoldier(World.getInstance().getSoldierListMap().get(team.opposite()).get(n),
+					World.getInstance().getSoldierListMap().get(World.getInstance().getSoldierListMap().get(team.opposite()).get(n).getTeam()));
 			damageCastle(wall, team);
 			}
 		}

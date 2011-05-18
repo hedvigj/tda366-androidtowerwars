@@ -14,9 +14,9 @@ public class TowerLogic {
 	public static synchronized void updateTower(ITower tower) {
 		World.Team team = tower.getTeam();
 		Rectangle range = tower.getRange();
-		for(int n=0;n<Soldier.soldierListMap.get(team.opposite()).size();n++) {
-			if (range.collidesWith(Soldier.soldierSpriteMap.get(Soldier.soldierListMap.get(team.opposite()).get(n)))) {
-				fire(tower, Soldier.soldierListMap.get(team.opposite()).get(n));
+		for(int n=0;n<World.getInstance().getSoldierListMap().get(team.opposite()).size();n++) {
+			if (range.collidesWith(World.getInstance().getSoldierSpriteMap().get(World.getInstance().getSoldierListMap().get(team.opposite()).get(n)))) {
+				fire(tower, World.getInstance().getSoldierListMap().get(team.opposite()).get(n));
 				break;
 			}
 		}
