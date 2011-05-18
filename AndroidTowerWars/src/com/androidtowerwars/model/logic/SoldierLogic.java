@@ -1,17 +1,13 @@
 package com.androidtowerwars.model.logic;
 
-import org.anddev.andengine.entity.primitive.Rectangle;
 import org.anddev.andengine.entity.sprite.Sprite;
 
 import android.util.Log;
 
-import com.androidtowerwars.GameActivity;
-import com.androidtowerwars.controller.PlayerController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.World;
-import com.androidtowerwars.model.World.Team;
 
 public class SoldierLogic {
 	
@@ -25,15 +21,38 @@ public class SoldierLogic {
                 ISoldier S = soldier;
                 ISoldier R =  Soldier.soldierListMap.get(team.opposite()).get(n);
                 //attackSoldier(); Should attack before kill?
-                attackSoldier(S,R,team);
+                attackSoldier(S,R);
                 break;
             }
         }
     }
     
-    public static void attackSoldier(ISoldier attacker, ISoldier reciever, Team team) {
+    public static void attackSoldier(ISoldier attacker, ISoldier reciever) {
         //TODO: 
-        reciever.setHealth(reciever.getHealth() - attacker.getDamage());
+        boolean alive = true;
+        while(alive) {
+            
+            reciever.setHealth(reciever.getHealth() - attacker.getDamage());
+            
+            if(reciever.getHealth() <= 0) {
+                SoldierController.removeSoldier(reciever, Soldier.soldierListMap.get(reciever.getTeam()));
+                Log.d("TowerWars3", "removedefender"+"-"+reciever.getTeam());
+                //Log.d("TowerWars1", reciever.getHealth());
+                alive = false;
+            } else {
+                attacker.setHealth(attacker.getHealth() - reciever.getDamage());
+                //Log.d("TowerWars3", reciever.getHealth()+"");
+                //Log.d("TowerWars4", attacker.getHealth()+"");
+            }
+            
+            if (attacker.getHealth() <= 0) {
+                SoldierController.removeSoldier(attacker, Soldier.soldierListMap.get(attacker.getTeam()));
+                Log.d("TowerWars4", "removeattacker"+"-"+attacker.getTeam());
+                alive = false;
+            }
+        }
+        
+     /*   reciever.setHealth(reciever.getHealth() - attacker.getDamage());
         //Log.d("TowerWars1", reciever.getHealth()+"");
         //Log.d("TowerWars2", attacker.getHealth()+"");
         if(reciever.getHealth() > 0) {
@@ -50,7 +69,7 @@ public class SoldierLogic {
             Log.d("TowerWars4", "remove");
         }
         
-        
+        */
         
         
        /* if(reciever.getHealth() < 0) {

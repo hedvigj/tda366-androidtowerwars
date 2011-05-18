@@ -7,6 +7,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.Entity;
 
+import android.util.Log;
+
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Player;
@@ -48,7 +50,9 @@ public class SoldierController extends Entity {
 	}
 	
 	public static synchronized void removeSoldier(final ISoldier soldier, List<ISoldier> list) {
-		list.remove(soldier);
+	    Log.d("RemoveSoldier", list.get(list.lastIndexOf(soldier))+"");
+	    
+	    list.remove(soldier);
 		GameActivity.instance.runOnUpdateThread(new Runnable() {
 			public void run() {
 				/* Now it is save to remove the entity! */
