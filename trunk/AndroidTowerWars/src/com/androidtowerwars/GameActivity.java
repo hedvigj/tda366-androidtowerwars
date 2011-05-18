@@ -9,9 +9,6 @@ import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
 import org.anddev.andengine.extension.input.touch.exception.MultiTouchException;
-import org.anddev.andengine.opengl.texture.Texture;
-import org.anddev.andengine.opengl.texture.TextureOptions;
-import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 import org.anddev.andengine.ui.activity.BaseGameActivity;
 
 import android.util.Log;
@@ -20,17 +17,18 @@ import android.widget.Toast;
 
 import com.androidtowerwars.controller.DragAndZoomController;
 import com.androidtowerwars.controller.MenuController;
+import com.androidtowerwars.controller.PlayerController;
 import com.androidtowerwars.controller.ProjectileController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.controller.TouchController;
 import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.controller.WallController;
-import com.androidtowerwars.model.Player;
 import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
+import com.androidtowerwars.model.logic.ArtificialIntelligence;
 import com.androidtowerwars.view.BackgroundView;
 import com.androidtowerwars.view.ButtonView;
 import com.androidtowerwars.view.ClickButton;
@@ -61,7 +59,8 @@ public class GameActivity extends BaseGameActivity {
 	public TowerController towerController;
 	public WallController wallController;
 	public TowerTileController towerTileController;
-
+	public PlayerController playerController;
+	
 	private static long timestamp;
 
 	private TouchController touchController = new TouchController(this);
@@ -137,6 +136,7 @@ public class GameActivity extends BaseGameActivity {
 		WallView.badWall = new Wall(0, WorldView.MAP_HEIGHT * 0.5f,
 				WallView.mWallTextureRegion.getWidth(), Team.EVIL);
 
+		playerController = new PlayerController();
 		soldierController = new SoldierController();
 		scene.getLastChild().attachChild(soldierController);
 		projectileController = new ProjectileController();
@@ -145,7 +145,9 @@ public class GameActivity extends BaseGameActivity {
 		scene.getLastChild().attachChild(wallController);
 		towerController = TowerController.getInstance();
 		towerTileController = new TowerTileController();
-
+		
+		
+		
 		wallView.loadScene(scene);
 		touchView.loadScene(scene);
 		menuView.createMenuScene();
@@ -210,7 +212,7 @@ public class GameActivity extends BaseGameActivity {
 					tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
-			scene.registerTouchArea(tempSprite);
+			//scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 
 			tempSprite = new ClickButton(500 + (tileSpacing * n),
@@ -223,15 +225,15 @@ public class GameActivity extends BaseGameActivity {
 					tempTowerTile);
 			TowerTileController.towerTileSpriteMap.put(tempSprite,
 					tempTowerTile);
-			scene.registerTouchArea(tempSprite);
+			//scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 		}
-
+		
 		scene.registerUpdateHandler(new TimerHandler(1 / 20.0f, true,
 				new ITimerCallback() {
 
 					public void onTimePassed(final TimerHandler pTimerHandler) {
-						TouchView.goldText.setText(Integer.toString(Player
+						TouchView.goldText.setText(Integer.toString(PlayerController.playerMap.get(World.Team.GOOD)
 								.getGold()));
 					}
 				}));
@@ -239,10 +241,17 @@ public class GameActivity extends BaseGameActivity {
 	}
 
 	public void onLoadComplete() {
+		Log.d("TowerWars", "gold: "+ PlayerController.playerMap.get(World.Team.EVIL).getGold());
+		ArtificialIntelligence.buildTower();
+		ArtificialIntelligence.buildTower();
+		ArtificialIntelligence.trainSoldier();
+		Log.d("TowerWars", "gold: "+ PlayerController.playerMap.get(World.Team.EVIL).getGold());
+		
 		Toast.makeText(
 				getApplicationContext(),
 				"In the land of Agarwaen the war has been raging for 30 years.",
 				Toast.LENGTH_LONG).show();
+		
 	}
 
 	// ===========================================================

@@ -1,6 +1,7 @@
 package com.androidtowerwars.model.logic;
 
 import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.controller.PlayerController;
 import com.androidtowerwars.controller.ProjectileController;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.IProjectile;
@@ -17,6 +18,7 @@ public class ProjectileLogic {
 			if (projectile.getTarget().getHealth() <= 0) {
 				SoldierController.removeSoldier(projectile.getTarget(),GameActivity.instance.soldierController.soldierListMap.get(projectile.getTarget().getTeam()));
 				projectile.getParent().increaseKills();
+				PlayerController.playerMap.get(projectile.getParent().getTeam()).increaseGold((int) (projectile.getTarget().getCost()*1.5));
 			}
 			ProjectileController.removeProjectile(projectile, GameActivity.instance.projectileController.projectileListMap.get(projectile.getParent().getTeam()));
 		

@@ -19,6 +19,7 @@ public class Tower implements ITower {
 	private int damage = 55;
 	private float attack_speed = 0.7f; //seconds delay
 	private int kills = 0;
+	public static int cost = 20;
 	
 	public Tower(float pX, float pY, float range, World.Team team) {
 		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-400, range, 900f); //not centered by width!
@@ -32,7 +33,7 @@ public class Tower implements ITower {
 		return this.attack_speed;
 	}
 
-
+	
 	public World.Team getTeam() {
 		return team;
 	}
@@ -43,7 +44,11 @@ public class Tower implements ITower {
 
 	public int sellTower() {
 		// TODO Auto-generated method stub
-		return 0;
+		return (int) (cost*0.8f);
+	}
+	
+	public int getCost() {
+		return cost;
 	}
 
 	public void setDamage(int damage) {

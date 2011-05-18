@@ -42,8 +42,7 @@ public class TowerController {//extends Entity {
 		}
 		return instance;
 	}
-	
-	
+
     public static synchronized void createTestTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
         final Tower tower = new Tower(pX, pY, range, team);
         Sprite sprite = new Sprite(pX, pY, pTextureRegion);
@@ -61,8 +60,10 @@ public class TowerController {//extends Entity {
                         });
                 timerHandlerList.add(timerHandler);
         WorldView.getInstance().registerUpdateHandler(timerHandler);
+        PlayerController.playerMap.get(team).decreaseGold(tower.getCost());
         return;
     }
+
 
     public static void setInstance(TowerController instance) {
         TowerController.instance = instance;

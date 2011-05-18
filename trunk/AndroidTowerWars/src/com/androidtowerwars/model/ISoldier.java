@@ -27,4 +27,6 @@ public interface ISoldier {
 	public void setSpeed(float speed);
 
 	public Rectangle getRange();
+
+	public int getCost();
 }

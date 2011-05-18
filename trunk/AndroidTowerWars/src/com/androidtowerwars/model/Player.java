@@ -1,15 +1,18 @@
 package com.androidtowerwars.model;
 
-public class Player {
+import java.util.Observable;
 
-	private static int gold = 10;
+public class Player extends Observable {
+
+	private int gold = 80;
 	private World.Team team;
 
 	public Player(World.Team team) {
 		this.team = team;
+		
 	}
 
-	public static int getGold() {
+	public int getGold() {
 		return gold;
 	}
 
@@ -19,16 +22,25 @@ public class Player {
 
 	public void setGold(int gold) {
 		this.gold = gold;
+
 	}
 
 	public void setTeam(World.Team team) {
 		this.team = team;
 	}
 	
-	public static void decreaseGold(int cost){
+	public void decreaseGold(int cost){
 		gold = gold-cost;
 	}
-	public static void increaseGold(int earnings){
+	public void increaseGold(int earnings){
 		gold = gold + earnings;
+		setChanged();
+		notifyObservers();
+	}
+	
+	public void updateAI() {
+		setChanged();
+		notifyObservers();
+		return;
 	}
 }

@@ -67,7 +67,7 @@ public class SoldierController extends Entity {
 		soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
-		Player.decreaseGold(2);
+		PlayerController.playerMap.get(team).decreaseGold(soldier.getCost());
 	}
 	/**
 	 * Creates a Timer Handler used to Spawn Sprites
