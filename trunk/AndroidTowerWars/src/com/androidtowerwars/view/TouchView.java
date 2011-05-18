@@ -61,20 +61,20 @@ public class TouchView {
 		this.mCoinTextureRegion = TextureRegionFactory.createFromAsset(
 				mCoinTexture, gameActivity, "gfx/Coin.png", 0,0);
 		
-		this.mMeleeButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mMeleeButtonTextureRegion = TextureRegionFactory.createFromAsset(
+		mMeleeButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mMeleeButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				mMeleeButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
 		
-		this.mRangerButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mRangerButtonTextureRegion = TextureRegionFactory.createFromAsset(
+		mRangerButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mRangerButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				mRangerButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
 		
-		this.mWizardButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mWizardButtonTextureRegion = TextureRegionFactory.createFromAsset(
+		mWizardButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mWizardButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				mWizardButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
 		
-		this.mGigantButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mGigantButtonTextureRegion = TextureRegionFactory.createFromAsset(
+		mGigantButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mGigantButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				mGigantButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
 		
 		this.mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -95,14 +95,17 @@ public class TouchView {
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         
-        meleeSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mMeleeButtonTextureRegion);
-        rangerSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mRangerButtonTextureRegion);
-        wizardSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-290,WorldView.CAMERA_HEIGHT-90 , mWizardButtonTextureRegion);
-        gigantSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-385,WorldView.CAMERA_HEIGHT-90 , mGigantButtonTextureRegion);
+        meleeSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-385,WorldView.CAMERA_HEIGHT-90 , mMeleeButtonTextureRegion);
+        rangerSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-290,WorldView.CAMERA_HEIGHT-90 , mRangerButtonTextureRegion);
+        wizardSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mWizardButtonTextureRegion);
+        gigantSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mGigantButtonTextureRegion);
         coin = new Sprite(WorldView.CAMERA_WIDTH-175, 10, mCoinTextureRegion);
         goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, this.mFont, "", "XXXXX".length());
         
         headUpDisplay.registerTouchArea(meleeSoldierButton);
+        headUpDisplay.registerTouchArea(rangerSoldierButton);
+        headUpDisplay.registerTouchArea(wizardSoldierButton);
+        headUpDisplay.registerTouchArea(gigantSoldierButton);
         scene.registerTouchArea(goodBarrack);
         //scene.registerTouchArea(badBarrack);
         scene.getLastChild().attachChild(goodBarrack);
