@@ -34,15 +34,40 @@ public class SoldierLogic {
     public static void attackSoldier(ISoldier attacker, ISoldier reciever, Team team) {
         //TODO: 
         reciever.setHealth(reciever.getHealth() - attacker.getDamage());
-        if(reciever.getHealth() < 0) {
+        //Log.d("TowerWars1", reciever.getHealth()+"");
+        //Log.d("TowerWars2", attacker.getHealth()+"");
+        if(reciever.getHealth() > 0) {
+            attacker.setHealth(attacker.getHealth() - reciever.getDamage());
+            Log.d("TowerWars3", reciever.getHealth()+"");
+            Log.d("TowerWars4", attacker.getHealth()+"");
+        } else {
             SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team.opposite()));
+            Log.d("TowerWars3", "remove");
+        }
+        
+        if (attacker.getHealth() < 0) {
+            SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
+            Log.d("TowerWars4", "remove");
+        }
+        
+        
+        
+        
+       /* if(reciever.getHealth() < 0) {
+            //SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team.opposite()));
             Log.d("TowerWars1", reciever.getHealth()+"");
             Log.d("TowerWars2", attacker.getHealth()+"");
+        } else if(attacker.getHealth() < 0) {
+            //SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
+            Log.d("TowerWars3", reciever.getHealth()+"");
+            Log.d("TowerWars4", attacker.getHealth()+"");
         } else {
             attacker.setHealth(attacker.getHealth() - reciever.getDamage());
+            Log.d("TowerWars5", reciever.getHealth()+"");
+            Log.d("TowerWars6", attacker.getHealth()+"");
             if(attacker.getHealth() < 0) {
-                SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
+                //SoldierController.removeSoldier(reciever, GameActivity.instance.soldierController.soldierListMap.get(team));
             }
-        }
+        }*/
     }
 }
