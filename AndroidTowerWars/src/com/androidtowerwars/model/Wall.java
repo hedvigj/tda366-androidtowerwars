@@ -2,10 +2,6 @@ package com.androidtowerwars.model;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
-import com.androidtowerwars.model.World.Team;
-import com.androidtowerwars.view.ObserverSprite;
-import com.androidtowerwars.view.WorldView;
-
 public class Wall implements IWall {
 	private int maxHealth = 200;
 	private int health = maxHealth;

@@ -4,7 +4,6 @@ import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.scene.Scene;
-import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.entity.util.FPSLogger;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouch;
 import org.anddev.andengine.extension.input.touch.controller.MultiTouchController;
@@ -25,20 +24,16 @@ import com.androidtowerwars.controller.TouchController;
 import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.controller.WallController;
-import com.androidtowerwars.model.TowerTile;
-import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
-import com.androidtowerwars.model.World.Team;
-import com.androidtowerwars.model.logic.ArtificialIntelligence;
 import com.androidtowerwars.view.BackgroundView;
 import com.androidtowerwars.view.ButtonView;
-import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.CoinView;
 import com.androidtowerwars.view.FontView;
 import com.androidtowerwars.view.MenuView;
 import com.androidtowerwars.view.ProjectileView;
 import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.TouchView;
+import com.androidtowerwars.view.TowerTileView;
 import com.androidtowerwars.view.TowerView;
 import com.androidtowerwars.view.WallView;
 import com.androidtowerwars.view.WorldView;
@@ -66,6 +61,7 @@ public class GameActivity extends BaseGameActivity {
 
 	private TouchController touchController = new TouchController(this);
 	private TouchView touchView = new TouchView(this);
+	private TowerTileView towerTileView = new TowerTileView();
 	private ButtonView buttonView = new ButtonView(this);
 	private TowerView towerView = new TowerView(this);
 	private SoldierView soldierView = new SoldierView(this);
@@ -115,26 +111,14 @@ public class GameActivity extends BaseGameActivity {
 	}
 
 	public Scene onLoadScene() {
+		
 		final Scene scene = new Scene(1);
 
 		getEngine().registerUpdateHandler(new FPSLogger());
-		final Sprite background = new Sprite(0, 0,
-				BackgroundView.mBackgroundTextureRegion);
-		scene.getLastChild().attachChild(background);
-
-		// TODO:Inte riktigt klart
-		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH
-				- WallView.mWallTextureRegion.getWidth(), WorldView.MAP_HEIGHT * 0.3f,
-				WallView.mWallTextureRegion);
-		scene.getLastChild().attachChild(gWall);
-		final Sprite bWall = new Sprite(0, WorldView.MAP_HEIGHT * 0.3f,
-				WallView.mWallTextureRegion);
-		scene.getLastChild().attachChild(bWall);
-		WallView.goodWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.5f,
-				WallView.mWallTextureRegion.getWidth(), Team.GOOD);
-		WallView.badWall = new Wall(0, WorldView.MAP_HEIGHT * 0.5f,
-				WallView.mWallTextureRegion.getWidth(), Team.EVIL);
-
+		
+		backgroundView.loadScene(scene);
+		wallView.loadScene(scene);
+		
 		playerController = new PlayerController();
 		soldierController = new SoldierController();
 		scene.getLastChild().attachChild(soldierController);
@@ -145,7 +129,6 @@ public class GameActivity extends BaseGameActivity {
 		towerController = TowerController.getInstance();
 		towerTileController = new TowerTileController();
 		
-		wallView.loadScene(scene);
 		touchView.loadScene(scene);
 		menuView.createMenuScene();
 
@@ -167,64 +150,7 @@ public class GameActivity extends BaseGameActivity {
 
 		scene.setOnAreaTouchListener(touchController);
 
-		int tileSpacing = 200;
-		for (int n = 0; n < 6; n++) {
-			// good towers
-			ClickButton tempSprite = new ClickButton(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
-					ButtonView.mButtonTextureRegion);
-			TowerTile tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
-					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
-			scene.registerTouchArea(tempSprite);
-			scene.getLastChild().attachChild(tempSprite);
-
-			tempSprite = new ClickButton(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
-					ButtonView.mButtonTextureRegion);
-			tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
-					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
-			scene.registerTouchArea(tempSprite);
-			scene.getLastChild().attachChild(tempSprite);
-
-			// evil towers
-			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.44f, ButtonView.mButtonTextureRegion);
-			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.44f,
-					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
-			//scene.registerTouchArea(tempSprite);
-			scene.getLastChild().attachChild(tempSprite);
-
-			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.56f, ButtonView.mButtonTextureRegion);
-			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.56f,
-					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
-			//scene.registerTouchArea(tempSprite);
-			scene.getLastChild().attachChild(tempSprite);
-		}
+		towerTileView.loadScene(scene);
 		
 		scene.registerUpdateHandler(new TimerHandler(1 / 20.0f, true,
 				new ITimerCallback() {

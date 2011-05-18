@@ -1,5 +1,7 @@
 package com.androidtowerwars.view;
 
+import org.anddev.andengine.entity.scene.Scene;
+import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -26,6 +28,13 @@ public class BackgroundView {
 		WorldView.getInstance().getTextureManager().loadTexture(mBackgroundTexture);
 	}
 
+	public void loadScene(Scene scene){
+		
+		final Sprite background = new Sprite(0, 0,
+				BackgroundView.mBackgroundTextureRegion);
+		scene.getLastChild().attachChild(background);
+		
+	}
 	
 
 }

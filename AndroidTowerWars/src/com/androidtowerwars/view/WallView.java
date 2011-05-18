@@ -31,12 +31,18 @@ public class WallView {
 	}
 	
 	public void loadScene(Scene scene){
-		goodWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.5f, mWallTextureRegion.getWidth(), Team.GOOD);
-		badWall = new Wall(0, WorldView.MAP_HEIGHT*0.5f, mWallTextureRegion.getWidth(), Team.EVIL);
-		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH - WallView.mWallTextureRegion.getWidth(), WorldView.MAP_HEIGHT * 0.3f, WallView.mWallTextureRegion);
+		
+		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH
+				- WallView.mWallTextureRegion.getWidth(), WorldView.MAP_HEIGHT * 0.3f,
+				WallView.mWallTextureRegion);
 		scene.getLastChild().attachChild(gWall);
-		final Sprite bWall = new Sprite(0, WorldView.MAP_HEIGHT*0.3f, WallView.mWallTextureRegion);
+		final Sprite bWall = new Sprite(0, WorldView.MAP_HEIGHT * 0.3f,
+				WallView.mWallTextureRegion);
 		scene.getLastChild().attachChild(bWall);
+		WallView.goodWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.5f,
+				WallView.mWallTextureRegion.getWidth(), Team.GOOD);
+		WallView.badWall = new Wall(0, WorldView.MAP_HEIGHT * 0.5f,
+				WallView.mWallTextureRegion.getWidth(), Team.EVIL);
 	}
 
 }
