@@ -4,6 +4,9 @@ import java.util.Observable;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
+import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.controller.SoldierController;
+
 import android.util.Log;
 
 public class Soldier extends Observable implements ISoldier, IObservableSprite {
@@ -55,8 +58,12 @@ public class Soldier extends Observable implements ISoldier, IObservableSprite {
 	}
 
 	public void setHealth(int health) {
-		this.health = health;
-
+	/*    if (health < 0) {
+	        setDamage(0);
+	        SoldierController.removeSoldier(this, GameActivity.instance.soldierController.soldierListMap.get(team));
+	    } else {*/
+	        this.health = health;
+	    //}
 	}
 
 	public void setPosition(float x, float y) {
