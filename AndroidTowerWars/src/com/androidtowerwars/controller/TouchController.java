@@ -34,8 +34,8 @@ public class TouchController implements IOnAreaTouchListener {
 		switch(pSceneTouchEvent.getAction())
         {
                 case MotionEvent.ACTION_DOWN:
-                	if(pTouchArea == TouchView.goodBarrack){
-                		TouchView.goodBarrack.touch();
+                	if(pTouchArea == TouchView.meleeSoldierButton){
+                		TouchView.meleeSoldierButton.touch();
             		}
             		else if(pTouchArea == TouchView.badBarrack){
             			TouchView.badBarrack.touch();
@@ -49,8 +49,8 @@ public class TouchController implements IOnAreaTouchListener {
                         return false;
                
                 case MotionEvent.ACTION_UP:
-                	if(pTouchArea == TouchView.goodBarrack){
-            			if(TouchView.goodBarrack.releaseTouchSuccessfull()) {
+                	if(pTouchArea == TouchView.meleeSoldierButton){
+            			if(TouchView.meleeSoldierButton.releaseTouchSuccessfull()) {
             				SoldierController.createSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);            				
             			}                		
             		}

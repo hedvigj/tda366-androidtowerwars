@@ -1,6 +1,7 @@
 package com.androidtowerwars;
 
 import org.anddev.andengine.engine.Engine;
+import org.anddev.andengine.engine.camera.hud.HUD;
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.scene.Scene;
@@ -113,6 +114,7 @@ public class GameActivity extends BaseGameActivity {
 	public Scene onLoadScene() {
 		
 		final Scene scene = new Scene(1);
+		
 
 		getEngine().registerUpdateHandler(new FPSLogger());
 		
@@ -129,7 +131,9 @@ public class GameActivity extends BaseGameActivity {
 		towerController = TowerController.getInstance();
 		towerTileController = new TowerTileController();
 		
+		
 		touchView.loadScene(scene);
+		
 		menuView.createMenuScene();
 
 		/* Limit scene size */
@@ -147,8 +151,13 @@ public class GameActivity extends BaseGameActivity {
 				WorldView.getInstance().getCamera());
 
 		scene.setOnSceneTouchListener(touchListener);
-
 		scene.setOnAreaTouchListener(touchController);
+		
+		
+		
+		WorldView.getInstance().getCamera().getHUD().setOnAreaTouchListener(touchController);
+		
+		
 
 		towerTileView.loadScene(scene);
 		
