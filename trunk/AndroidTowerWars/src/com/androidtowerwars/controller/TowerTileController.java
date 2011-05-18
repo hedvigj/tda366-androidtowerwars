@@ -11,11 +11,8 @@ import com.androidtowerwars.view.ClickButton;
 
 public class TowerTileController {
 	
-	public static ConcurrentHashMap<World.Team, List<TowerTile>> towerTileListMap = new ConcurrentHashMap<World.Team, List<TowerTile>>();
-	public static ConcurrentHashMap<ClickButton, TowerTile> towerTileSpriteMap = new ConcurrentHashMap<ClickButton, TowerTile>();
-	
 	public TowerTileController() {
-		towerTileListMap.put(Team.GOOD, new CopyOnWriteArrayList<TowerTile>());
-		towerTileListMap.put(Team.EVIL, new CopyOnWriteArrayList<TowerTile>());
+		TowerTile.towerTileListMap.put(Team.GOOD, new CopyOnWriteArrayList<TowerTile>());
+		TowerTile.towerTileListMap.put(Team.EVIL, new CopyOnWriteArrayList<TowerTile>());
 	}	
 }
