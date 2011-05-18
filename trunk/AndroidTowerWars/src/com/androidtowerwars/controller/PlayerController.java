@@ -17,14 +17,14 @@ public class PlayerController {
 	
 	public PlayerController() {
 		Player evilPlayer = new Player(World.Team.EVIL);
-		ArtificialIntelligence evilAI = new ArtificialIntelligence(evilPlayer);
+		ArtificialIntelligenceController evilAI = new ArtificialIntelligenceController(evilPlayer);
 		evilPlayer.addObserver(evilAI);
          final TimerHandler timerHandler = new TimerHandler(evilAI.getUpdateInterval(),
                  new ITimerCallback() {
                      public void onTimePassed(
                              final TimerHandler pTimerHandler) {
                          pTimerHandler.reset();
-                         ArtificialIntelligence.updateByTime();
+                         ArtificialIntelligenceController.updateByTime();
                      }
                  });
          WorldView.getInstance().registerUpdateHandler(timerHandler);

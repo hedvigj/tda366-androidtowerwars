@@ -22,8 +22,6 @@ import com.androidtowerwars.view.WorldView;
 
 public class TowerController {//extends Entity {
 	
-	public static ConcurrentHashMap<World.Team, List<ITower>> towerListMap = new ConcurrentHashMap<World.Team, List<ITower>>();
-	public static ConcurrentHashMap<ITower, Sprite> towerSpriteMap = new ConcurrentHashMap<ITower, Sprite>();
 	private static TowerController instance = null;
 	private static List<TimerHandler> timerHandlerList = new ArrayList<TimerHandler>();
 	private static TimerHandler timerHandler;
@@ -31,8 +29,8 @@ public class TowerController {//extends Entity {
 	
 	
 	public TowerController() {
-		towerListMap.put(Team.GOOD, new CopyOnWriteArrayList<ITower>());
-		towerListMap.put(Team.EVIL, new CopyOnWriteArrayList<ITower>());
+		Tower.towerListMap.put(Team.GOOD, new CopyOnWriteArrayList<ITower>());
+		Tower.towerListMap.put(Team.EVIL, new CopyOnWriteArrayList<ITower>());
 		setInstance(this);
 	}
 	
@@ -46,8 +44,8 @@ public class TowerController {//extends Entity {
     public static synchronized void createTestTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
         final Tower tower = new Tower(pX, pY, range, team);
         Sprite sprite = new Sprite(pX, pY, pTextureRegion);
-        towerListMap.get(team).add(tower);
-        towerSpriteMap.put(tower, sprite);
+        Tower.towerListMap.get(team).add(tower);
+        Tower.towerSpriteMap.put(tower, sprite);
         GameActivity.setTimestamp(0);
         WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
                 timerHandler = new TimerHandler(tower.getAttackSpeed(),

@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
+import com.androidtowerwars.controller.ArtificialIntelligenceController;
 import com.androidtowerwars.controller.DragAndZoomController;
 import com.androidtowerwars.controller.MenuController;
 import com.androidtowerwars.controller.PlayerController;
@@ -238,9 +239,9 @@ public class GameActivity extends BaseGameActivity {
 
 	public void onLoadComplete() {
 		Log.d("TowerWars", "gold: "+ PlayerController.playerMap.get(World.Team.EVIL).getGold());
-		ArtificialIntelligence.buildTower();
-		ArtificialIntelligence.buildTower();
-		ArtificialIntelligence.trainSoldier();
+		ArtificialIntelligenceController.buildTower();
+		ArtificialIntelligenceController.buildTower();
+		ArtificialIntelligenceController.trainSoldier();
 		Log.d("TowerWars", "gold: "+ PlayerController.playerMap.get(World.Team.EVIL).getGold());
 		
 		Toast.makeText(
