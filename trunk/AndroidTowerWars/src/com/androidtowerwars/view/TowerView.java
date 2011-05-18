@@ -1,11 +1,14 @@
 package com.androidtowerwars.view;
 
+import org.anddev.andengine.entity.scene.Scene;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 
 import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.model.TowerTile;
+import com.androidtowerwars.model.World;
 
 public class TowerView {
 	
@@ -18,12 +21,11 @@ public class TowerView {
 	}
 	
 	public void loadResources(){
-		this.mTowerTexture = new Texture(256, 256,
+		mTowerTexture = new Texture(256, 256,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mTowerTextureRegion = TextureRegionFactory.createFromAsset(
 				mTowerTexture, gameActivity, "gfx/tower1.png",
 				0, 0);
-		WorldView.getInstance().getTextureManager().loadTexture(this.mTowerTexture);
+		WorldView.getInstance().getTextureManager().loadTexture(mTowerTexture);
 	}
-
 }
