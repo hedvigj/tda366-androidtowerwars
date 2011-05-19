@@ -65,11 +65,10 @@ public class GameActivity extends BaseGameActivity {
 	private TowerTileView towerTileView = new TowerTileView();
 	private ButtonView buttonView = new ButtonView(this);
 	private TowerView towerView = new TowerView(this);
-	private SoldierView soldierView = new SoldierView(this);
 	private WallView wallView = new WallView(this);
 	private CoinView coinView = new CoinView(this);
 	private BackgroundView backgroundView = new BackgroundView(this);
-	private ProjectileView projectileView = new ProjectileView(this);
+
 	private MenuView menuView = new MenuView(this);
 	private FontView fontView = new FontView();
 	private MenuController menuController = new MenuController(this, menuView);
@@ -103,9 +102,9 @@ public class GameActivity extends BaseGameActivity {
 		touchView.loadResources();
 		towerView.loadResources();
 		buttonView.loadResources();
-		soldierView.loadResources();
+		SoldierView.loadResources(this);
 		coinView.loadResources();
-		projectileView.loadResources();
+		ProjectileView.loadResources(this);
 		wallView.loadResources();
 		backgroundView.loadResources();
 		fontView.loadResources();

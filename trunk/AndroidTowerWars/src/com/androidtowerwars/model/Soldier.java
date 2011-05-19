@@ -5,18 +5,14 @@ import java.util.Observable;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
-import org.anddev.andengine.entity.sprite.Sprite;
 
-import com.androidtowerwars.GameActivity;
-import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.view.ObserverSprite;
-
-import android.util.Log;
+import com.androidtowerwars.view.SoldierView;
 
 public class Soldier extends Observable implements ISoldier, IObservableSprite {
 	
 	public static ConcurrentHashMap<World.Team, List<ISoldier>> soldierListMap = new ConcurrentHashMap<World.Team, List<ISoldier>>();
-	public static ConcurrentHashMap<ISoldier, ObserverSprite> soldierSpriteMap = new ConcurrentHashMap<ISoldier, ObserverSprite>();
+	public static ConcurrentHashMap<ISoldier, SoldierView> soldierSpriteMap = new ConcurrentHashMap<ISoldier, SoldierView>();
 	
 	private World.Team team;
 	protected float speed = 140; // pixels per second

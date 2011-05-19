@@ -5,6 +5,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.anddev.andengine.entity.Entity;
 
+import android.util.Log;
+
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.IProjectile;
 import com.androidtowerwars.model.ISoldier;
@@ -26,7 +28,7 @@ public class ProjectileController extends Entity {
 		//===========================================================
 		// Methods
 		// ===========================================================
-		
+	
 		public ProjectileController() {
 			Projectile.projectileListMap.put(Team.EVIL, new CopyOnWriteArrayList<IProjectile>());
 			Projectile.projectileListMap.put(Team.GOOD, new CopyOnWriteArrayList<IProjectile>());
@@ -37,7 +39,7 @@ public class ProjectileController extends Entity {
 			for(List<IProjectile> projectileList: Projectile.projectileListMap.values()) {
 				for(IProjectile projectile: projectileList) {
 					ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
-					if (Projectile.projectileSpriteMap.get(projectile).collidesWith(Projectile.projectileSpriteMap.get(projectile.getTarget()))) {
+					if (Projectile.projectileSpriteMap.get(projectile).collidesWith(Soldier.soldierSpriteMap.get(projectile.getTarget()))) {
 						ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
 				}
 				}
@@ -51,6 +53,7 @@ public class ProjectileController extends Entity {
 					/* Now it is save to remove the entity! */
 					WorldView.getInstance().getScene().getLastChild()
 							.detachChild(Projectile.projectileSpriteMap.get(projectile));
+					Log.d("Tower","K÷÷÷÷R");
 				}
 			});
 		}

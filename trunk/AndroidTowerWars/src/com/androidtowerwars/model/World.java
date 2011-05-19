@@ -12,6 +12,8 @@ import com.androidtowerwars.view.WorldView;
 
 public class World{
 	
+	
+	
     public enum Team {
     	 GOOD, EVIL;
     	 
