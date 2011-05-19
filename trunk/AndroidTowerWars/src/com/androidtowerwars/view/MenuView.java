@@ -17,27 +17,21 @@ public class MenuView {
 	
 	//private TextureRegion mResetTextureRegion; 
 	//private Texture mResetTexture;
-	private Texture mQuitTexture;
-	private Texture mSettingsTexture;
-	private TextureRegion mQuitTextureRegion;
-	private TextureRegion mSettingsTextureRegion;
+	private static Texture mQuitTexture;
+	private static Texture mSettingsTexture;
+	private static TextureRegion mQuitTextureRegion;
+	private static TextureRegion mSettingsTextureRegion;
 	protected static MenuScene mScene;
-	private GameActivity gameActivity;
-	
+
 	public static final int MENU_RESET = 0;
     public static final int MENU_QUIT = MENU_RESET + 2;
     public static final int MENU_SETTINGS = 1;
-	
-	public MenuView(GameActivity gameActivity){
-	this.gameActivity = gameActivity;
-		
-	}
 	
 	public void close() {
 		mScene.back();
 	}
 	
-	public void loadResources() {		
+	public static void loadResources(GameActivity gameActivity) {		
 		//mResetTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         mQuitTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         mSettingsTexture = new Texture(256, 128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);

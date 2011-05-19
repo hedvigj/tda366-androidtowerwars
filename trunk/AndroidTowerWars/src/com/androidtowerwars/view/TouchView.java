@@ -25,40 +25,34 @@ public class TouchView {
 	public static ClickButton gigantSoldierButton;
 	public static ChangeableText goldText;
 	
-	private Texture mGoodBarrackTexture;
-	private TextureRegion mGoodBarrackTextureRegion;
-	private Texture mMeleeButtonTexture;
-	private TextureRegion mMeleeButtonTextureRegion;
-	private Texture mRangerButtonTexture;
-	private TextureRegion mRangerButtonTextureRegion;
-	private Texture mWizardButtonTexture;
-	private TextureRegion mWizardButtonTextureRegion;
-	private Texture mGigantButtonTexture;
-	private TextureRegion mGigantButtonTextureRegion;
-	private Texture mCoinTexture;
-	private TextureRegion mCoinTextureRegion;
-	private Sprite coin;
+	private static Texture mGoodBarrackTexture;
+	private static TextureRegion mGoodBarrackTextureRegion;
+	private static Texture mMeleeButtonTexture;
+	private static TextureRegion mMeleeButtonTextureRegion;
+	private static Texture mRangerButtonTexture;
+	private static TextureRegion mRangerButtonTextureRegion;
+	private static Texture mWizardButtonTexture;
+	private static TextureRegion mWizardButtonTextureRegion;
+	private static Texture mGigantButtonTexture;
+	private static TextureRegion mGigantButtonTextureRegion;
+	private static Texture mCoinTexture;
+	private static TextureRegion mCoinTextureRegion;
+	private static Sprite coin;
 	
-	private GameActivity gameActivity;
-	private HUD headUpDisplay;
+	private static HUD headUpDisplay;
 	
-	private Font mFont;
-	private Texture mFontTexture;
+	private static Font mFont;
+	private static Texture mFontTexture;
 	
-	public TouchView(GameActivity gameActivity){
-		this.gameActivity = gameActivity;
-			
-		}
-	
-	public void loadResources() {
+	public static void loadResources(GameActivity gameActivity) {
 		mGoodBarrackTexture = new Texture(512,256,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mGoodBarrackTextureRegion = TextureRegionFactory.createFromAsset(
 				mGoodBarrackTexture, gameActivity,"gfx/Good_Barracks.png", 0,0);
 		
 		
-		this.mCoinTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mCoinTextureRegion = TextureRegionFactory.createFromAsset(
+		mCoinTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mCoinTextureRegion = TextureRegionFactory.createFromAsset(
 				mCoinTexture, gameActivity, "gfx/Coin.png", 0,0);
 		
 		mMeleeButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -77,21 +71,21 @@ public class TouchView {
 		mGigantButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				mGigantButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
 		
-		this.mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-        this.mFont = new Font(this.mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.WHITE);
+		mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        mFont = new Font(mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.WHITE);
        
-        WorldView.getInstance().getTextureManager().loadTexture(this.mFontTexture);
-        WorldView.getInstance().getFontManager().loadFont(this.mFont);
-        WorldView.getInstance().getTextureManager().loadTexture(this.mGoodBarrackTexture);
-        WorldView.getInstance().getTextureManager().loadTexture(this.mMeleeButtonTexture);
-        WorldView.getInstance().getTextureManager().loadTexture(this.mRangerButtonTexture);
-        WorldView.getInstance().getTextureManager().loadTexture(this.mWizardButtonTexture);
-        WorldView.getInstance().getTextureManager().loadTexture(this.mGigantButtonTexture);
-        WorldView.getInstance().getTextureManager().loadTexture(this.mCoinTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mFontTexture);
+        WorldView.getInstance().getFontManager().loadFont(mFont);
+        WorldView.getInstance().getTextureManager().loadTexture(mGoodBarrackTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mMeleeButtonTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mRangerButtonTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mWizardButtonTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mGigantButtonTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mCoinTexture);
 	}
 
-	public void loadScene(Scene scene){
-		this.headUpDisplay = new HUD();
+	public static void loadScene(Scene scene){
+		headUpDisplay = new HUD();
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         
@@ -100,7 +94,7 @@ public class TouchView {
         wizardSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mWizardButtonTextureRegion);
         gigantSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mGigantButtonTextureRegion);
         coin = new Sprite(WorldView.CAMERA_WIDTH-175, 10, mCoinTextureRegion);
-        goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, this.mFont, "", "XXXXX".length());
+        goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, mFont, "", "XXXXX".length());
         
         headUpDisplay.registerTouchArea(meleeSoldierButton);
         headUpDisplay.registerTouchArea(rangerSoldierButton);
@@ -117,6 +111,6 @@ public class TouchView {
         headUpDisplay.getLastChild().attachChild(coin);
         headUpDisplay.getLastChild().attachChild(goldText);
         
-        WorldView.getInstance().getCamera().setHUD(this.headUpDisplay);
+        WorldView.getInstance().getCamera().setHUD(headUpDisplay);
 	}
 }

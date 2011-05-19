@@ -9,21 +9,17 @@ import com.androidtowerwars.GameActivity;
 
 public class CoinView {
 	
-	public static Texture mCoinTexture;
-	public static TextureRegion mCoinTextureRegion;
-	private GameActivity gameActivity;
+	private static Texture mCoinTexture;
+	private static TextureRegion mCoinTextureRegion;
+
 	
-	public CoinView(GameActivity gameActivity){
-		this.gameActivity = gameActivity;
-	}
-	
-	public void loadResources(){
+	public static void loadResources(GameActivity gameActivity){
 		
 		mCoinTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mCoinTextureRegion = TextureRegionFactory.createFromAsset(
 				mCoinTexture, gameActivity, "gfx/Coin.png", 0,0);
 		
-		WorldView.getInstance().getTextureManager().loadTexture(this.mCoinTexture);
+		WorldView.getInstance().getTextureManager().loadTexture(mCoinTexture);
 	}
 
 }

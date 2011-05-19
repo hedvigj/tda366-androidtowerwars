@@ -10,14 +10,9 @@ import com.androidtowerwars.GameActivity;
 public class ButtonView {
 
 	public static TextureRegion mButtonTextureRegion;
-	public static Texture mButtonTexture;
-	private GameActivity gameActivity;
+	private static Texture mButtonTexture;
 	
-	public ButtonView(GameActivity gameActivity){
-		this.gameActivity = gameActivity;
-	}
-	
-	public void loadResources(){
+	public static void loadResources(GameActivity  gameActivity){
 		
 		mButtonTexture = new Texture(256, 128,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);

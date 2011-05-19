@@ -14,16 +14,11 @@ import com.androidtowerwars.model.World.Team;
 public class WallView {
 	
 	public static Texture mWallTexture;
-	public static TextureRegion mWallTextureRegion;
-	private GameActivity gameActivity;
+	public static TextureRegion mWallTextureRegion;	
 	public static Wall goodWall;
 	public static Wall badWall;
 	
-	public WallView(GameActivity gameActivity){
-		this.gameActivity = gameActivity;
-	}
-	
-	public void loadResources(){
+	public static void loadResources(GameActivity gameActivity){
 		mWallTexture = new Texture(256,256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mWallTextureRegion = TextureRegionFactory.createFromAsset(
 				mWallTexture, gameActivity, "gfx/wall.png", 0,0);

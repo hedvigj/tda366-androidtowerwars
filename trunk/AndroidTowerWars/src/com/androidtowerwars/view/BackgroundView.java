@@ -11,15 +11,10 @@ import com.androidtowerwars.GameActivity;
 
 public class BackgroundView {
 	
-	private Texture mBackgroundTexture;
-	public static TextureRegion mBackgroundTextureRegion;
-	private GameActivity gameActivity;
+	private static Texture mBackgroundTexture;
+	private static TextureRegion mBackgroundTextureRegion;
 	
-	public BackgroundView(GameActivity gameActivity){
-		this.gameActivity = gameActivity;
-	}
-	
-	public void loadResources(){
+	public static void loadResources(GameActivity gameActivity){
 		mBackgroundTexture = new Texture(2048, 512,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mBackgroundTextureRegion = TextureRegionFactory.createFromAsset(
@@ -28,7 +23,7 @@ public class BackgroundView {
 		WorldView.getInstance().getTextureManager().loadTexture(mBackgroundTexture);
 	}
 
-	public void loadScene(Scene scene){
+	public static void loadScene(Scene scene){
 		
 		final Sprite background = new Sprite(0, 0,
 				BackgroundView.mBackgroundTextureRegion);

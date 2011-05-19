@@ -12,13 +12,8 @@ public class TowerView {
 
 	public static Texture mTowerTexture;
 	public static TextureRegion mTowerTextureRegion;
-	private GameActivity gameActivity;
-
-	public TowerView(GameActivity gameActivity) {
-		this.gameActivity = gameActivity;
-	}
-
-	public void loadResources() {
+	
+	public static void loadResources(GameActivity gameActivity) {
 		mTowerTexture = new Texture(256, 256,
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mTowerTextureRegion = TextureRegionFactory.createFromAsset(
