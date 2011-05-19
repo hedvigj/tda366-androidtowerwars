@@ -13,7 +13,6 @@ import com.androidtowerwars.model.logic.TowerLogic;
 import com.androidtowerwars.view.WorldView;
 
 public class PlayerController {
-	public static Map<World.Team, Player> playerMap = new HashMap<World.Team, Player>();
 	
 	public PlayerController() {
 		Player evilPlayer = new Player(World.Team.EVIL);
@@ -28,8 +27,8 @@ public class PlayerController {
                      }
                  });
          WorldView.getInstance().registerUpdateHandler(timerHandler);
-		playerMap.put(World.Team.GOOD, new Player(World.Team.GOOD));
-		playerMap.put(World.Team.EVIL, evilPlayer);
+		Player.playerMap.put(World.Team.GOOD, new Player(World.Team.GOOD));
+		Player.playerMap.put(World.Team.EVIL, evilPlayer);
 		
 	}
 	

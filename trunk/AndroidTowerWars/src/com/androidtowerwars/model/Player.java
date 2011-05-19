@@ -1,8 +1,12 @@
 package com.androidtowerwars.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 public class Player extends Observable {
+	
+	public static Map<World.Team, Player> playerMap = new HashMap<World.Team, Player>();
 
 	private int gold = 80;
 	private World.Team team;
