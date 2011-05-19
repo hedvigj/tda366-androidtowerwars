@@ -1,12 +1,10 @@
 package com.androidtowerwars.controller;
 
-import org.anddev.andengine.entity.Entity;
 import org.anddev.andengine.entity.scene.Scene.IOnAreaTouchListener;
 import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.input.touch.TouchEvent;
 
 import android.app.Dialog;
-import android.util.Log;
 import android.view.MotionEvent;
 
 import com.androidtowerwars.GameActivity;
@@ -15,6 +13,7 @@ import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.BuildTowerView;
 import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.TouchView;
+import com.androidtowerwars.view.TowerTileView;
 import com.androidtowerwars.view.WorldView;
 
 public class TouchController implements IOnAreaTouchListener {
@@ -41,7 +40,7 @@ public class TouchController implements IOnAreaTouchListener {
             			TouchView.badBarrack.touch();
             		}
                     
-                	towerTile = TowerTile.towerTileSpriteMap.get(pTouchArea);
+                	towerTile = TowerTileView.towerTileSpriteMap.get(pTouchArea);
             		if (towerTile != null && towerTile.isOccupied() != true) {
             		    ClickButton tileSprite = (ClickButton) pTouchArea;
             		    tileSprite.touch();
@@ -60,7 +59,7 @@ public class TouchController implements IOnAreaTouchListener {
             			}
             			
             		}
-                	towerTile = TowerTile.towerTileSpriteMap.get(pTouchArea);
+                	towerTile = TowerTileView.towerTileSpriteMap.get(pTouchArea);
             		if (towerTile != null && towerTile.isOccupied() != true) {
             			ClickButton tileSprite = (ClickButton) pTouchArea;
             			if (tileSprite.releaseTouchSuccessfull()) {

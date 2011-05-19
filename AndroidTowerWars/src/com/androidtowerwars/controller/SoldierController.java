@@ -37,12 +37,12 @@ public class SoldierController extends Entity {
 	// Methods
 	// ===========================================================
 	public SoldierController() {
-		Soldier.soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
-		Soldier.soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
+		World.soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
+		World.soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
 	}
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 		super.onManagedUpdate(pSecondsElapsed);
-		for(List<ISoldier> soldierList: Soldier.soldierListMap.values()) {
+		for(List<ISoldier> soldierList: World.soldierListMap.values()) {
 			for(ISoldier soldier: soldierList) {
 				SoldierLogic.updateSoldier(soldier, pSecondsElapsed);
 			}
@@ -52,11 +52,12 @@ public class SoldierController extends Entity {
 	public static synchronized void removeSoldier(final ISoldier soldier, List<ISoldier> list) {
 	   // Log.d("RemoveSoldier", list.get(list.lastIndexOf(soldier))+"");
 	    list.remove(soldier);
-		GameActivity.instance.runOnUpdateThread(new Runnable() {
+	    //GameActivity.instance.
+		WorldView.getInstance().runOnUpdateThread(new Runnable() {
 			public void run() {
 				/* Now it is save to remove the entity! */
 				WorldView.getInstance().getScene().getLastChild()
-						.detachChild(Soldier.soldierSpriteMap.get(soldier));
+						.detachChild(SoldierView.soldierSpriteMap.get(soldier));
 			}
 		});
 	}
@@ -64,8 +65,8 @@ public class SoldierController extends Entity {
 	public static void createSprite(float pX, float pY, World.Team team) {
 		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte s�ker p� att 5 �r r�tt.
 		SoldierView soldierSprite = new SoldierView(pX, pY, soldier);
-		Soldier.soldierListMap.get(team).add(soldier);
-		Soldier.soldierSpriteMap.put(soldier, soldierSprite);
+		World.soldierListMap.get(team).add(soldier);
+		SoldierView.soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
 		Player.playerMap.get(team).decreaseGold(soldier.getCost());

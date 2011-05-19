@@ -16,13 +16,13 @@ import com.androidtowerwars.view.WorldView;
 
 public class Tower implements ITower {
 
-	private Rectangle range;
+	public Rectangle range;
 	private World.Team team;
 	private float x;
 	private float y;
-	private int damage = 55;
-	private float attack_speed = 0.7f; //seconds delay
-	private int kills = 0;
+	public int damage = 55;
+	public float attack_speed = 0.7f; //seconds delay
+	public int kills = 0;
 	public static int cost = 20;
 	
 	public static ConcurrentHashMap<World.Team, List<ITower>> towerListMap = new ConcurrentHashMap<World.Team, List<ITower>>();

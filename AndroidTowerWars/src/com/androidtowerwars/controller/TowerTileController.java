@@ -12,7 +12,7 @@ import com.androidtowerwars.view.ClickButton;
 public class TowerTileController {
 	
 	public TowerTileController() {
-		TowerTile.towerTileListMap.put(Team.GOOD, new CopyOnWriteArrayList<TowerTile>());
-		TowerTile.towerTileListMap.put(Team.EVIL, new CopyOnWriteArrayList<TowerTile>());
+		World.towerTileListMap.put(Team.GOOD, new CopyOnWriteArrayList<TowerTile>());
+		World.towerTileListMap.put(Team.EVIL, new CopyOnWriteArrayList<TowerTile>());
 	}	
 }

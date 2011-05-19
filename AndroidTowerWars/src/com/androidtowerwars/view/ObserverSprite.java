@@ -8,11 +8,12 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.vertex.RectangleVertexBuffer;
 
 import com.androidtowerwars.model.IObservableSprite;
+import com.androidtowerwars.model.TowerTile;
 
 public class ObserverSprite extends Sprite implements Observer {
 
-	public ObserverSprite(float pX, float pY, TextureRegion pTextureRegion) {
-		super(pX, pY, pTextureRegion);
+	public ObserverSprite(float pX, float pY, TextureRegion mSkeletonTextureRegion) {
+		super(pX, pY, mSkeletonTextureRegion);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -1,5 +1,7 @@
 package com.androidtowerwars.view;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
@@ -12,6 +14,8 @@ public class SoldierView extends ObserverSprite {
 
 	public static Texture mSkeletonTexture;
 	public static TextureRegion mSkeletonTextureRegion;
+	public static ConcurrentHashMap<ISoldier, SoldierView> soldierSpriteMap = new ConcurrentHashMap<ISoldier, SoldierView>();
+	
 	
 	public SoldierView(float pX, float pY, ISoldier soldier){
 		super(pX, pY, mSkeletonTextureRegion);
