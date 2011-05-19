@@ -21,7 +21,7 @@ public class MenuView {
 	private Texture mSettingsTexture;
 	private TextureRegion mQuitTextureRegion;
 	private TextureRegion mSettingsTextureRegion;
-	protected MenuScene mScene;
+	protected static MenuScene mScene;
 	private GameActivity gameActivity;
 	
 	public static final int MENU_RESET = 0;
@@ -59,17 +59,17 @@ public class MenuView {
 	}
 	
     public void createMenuScene() {
-    	this.mScene = new MenuScene(WorldView.getInstance().getCamera());
+    	mScene = new MenuScene(WorldView.getInstance().getCamera());
     	
     	addMenuItem(mScene, mSettingsTextureRegion, MENU_SETTINGS);
     	addMenuItem(mScene, mQuitTextureRegion, MENU_QUIT);
     	
-        this.mScene.buildAnimations();
-        this.mScene.setBackgroundEnabled(false);
-        this.mScene.setOnMenuItemClickListener(new MenuController(gameActivity, this));
+        mScene.buildAnimations();
+        mScene.setBackgroundEnabled(false);
+      
 }
     
-    public MenuScene getMenuScene() {
+    public static MenuScene getMenuScene() {
     	return mScene;
     }
 
