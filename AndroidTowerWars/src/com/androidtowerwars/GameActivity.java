@@ -135,6 +135,7 @@ public class GameActivity extends BaseGameActivity {
 		touchView.loadScene(scene);
 		
 		menuView.createMenuScene();
+		menuController.loadScene();
 
 		/* Limit scene size */
 		WorldView.getInstance().getCamera()

@@ -25,6 +25,10 @@ public class MenuController implements IOnMenuItemClickListener {
 		this.gameActivity = gameActivity;
 		this.menuView = menuView;
 	}
+	
+	public void loadScene(){
+		  MenuView.getMenuScene().setOnMenuItemClickListener(this);
+	}
 
     public boolean onMenuItemClicked(final MenuScene pMenuScene, final IMenuItem pMenuItem, final float pMenuItemLocalX, final float pMenuItemLocalY) {
         switch(pMenuItem.getID()) {
