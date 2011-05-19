@@ -61,16 +61,10 @@ public class GameActivity extends BaseGameActivity {
 	private static long timestamp;
 
 	private TouchController touchController = new TouchController(this);
-	private TouchView touchView = new TouchView(this);
 	private TowerTileView towerTileView = new TowerTileView();
-	private ButtonView buttonView = new ButtonView(this);
-	private TowerView towerView = new TowerView(this);
-	private WallView wallView = new WallView(this);
-	private CoinView coinView = new CoinView(this);
-	private BackgroundView backgroundView = new BackgroundView(this);
+	private WallView wallView = new WallView();
 
-	private MenuView menuView = new MenuView(this);
-	private FontView fontView = new FontView();
+	private MenuView menuView = new MenuView();
 	private MenuController menuController = new MenuController(this, menuView);
 
 
@@ -98,16 +92,16 @@ public class GameActivity extends BaseGameActivity {
 
 	public void onLoadResources() {
 		
-		menuView.loadResources();
-		touchView.loadResources();
-		towerView.loadResources();
-		buttonView.loadResources();
+		MenuView.loadResources(this);
+		TouchView.loadResources(this);
+		TowerView.loadResources(this);
+		ButtonView.loadResources(this);
 		SoldierView.loadResources(this);
-		coinView.loadResources();
+		CoinView.loadResources(this);
 		ProjectileView.loadResources(this);
-		wallView.loadResources();
-		backgroundView.loadResources();
-		fontView.loadResources();
+		WallView.loadResources(this);
+		BackgroundView.loadResources(this);
+		FontView.loadResources();
 	}
 
 	public Scene onLoadScene() {
@@ -117,7 +111,7 @@ public class GameActivity extends BaseGameActivity {
 
 		getEngine().registerUpdateHandler(new FPSLogger());
 		
-		backgroundView.loadScene(scene);
+		BackgroundView.loadScene(scene);
 		wallView.loadScene(scene);
 		
 		playerController = new PlayerController();
@@ -131,7 +125,7 @@ public class GameActivity extends BaseGameActivity {
 		towerTileController = new TowerTileController();
 		
 		
-		touchView.loadScene(scene);
+		TouchView.loadScene(scene);
 		
 		menuView.createMenuScene();
 		menuController.loadScene();

@@ -12,7 +12,7 @@ public class FontView {
 	public static Texture mFontTexture;
 	public static Font mFont;
 	
-	public void loadResources(){
+	public static void loadResources(){
 		mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mFont = new Font(mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.WHITE);
 
