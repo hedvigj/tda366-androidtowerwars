@@ -1,14 +1,18 @@
 package com.androidtowerwars.view;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.anddev.andengine.entity.scene.Scene;
 
 import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.World;
 
 public class TowerTileView {
-	
-public void loadScene(Scene scene){
-		
+
+	public static ConcurrentHashMap<ClickButton, TowerTile> towerTileSpriteMap = new ConcurrentHashMap<ClickButton, TowerTile>();
+
+	public void loadScene(Scene scene) {
+
 		int tileSpacing = 200;
 		for (int n = 0; n < 6; n++) {
 			// good towers
@@ -18,11 +22,10 @@ public void loadScene(Scene scene){
 			TowerTile tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
+					ButtonView.mButtonTextureRegion.getHeight(),
+					World.Team.GOOD);
+			World.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
+			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 
@@ -32,39 +35,38 @@ public void loadScene(Scene scene){
 			tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.GOOD);
-			TowerTile.towerTileListMap.get(World.Team.GOOD).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
+					ButtonView.mButtonTextureRegion.getHeight(),
+					World.Team.GOOD);
+			World.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
+			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 
 			// evil towers
 			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.44f, ButtonView.mButtonTextureRegion);
+					WorldView.MAP_HEIGHT * 0.44f,
+					ButtonView.mButtonTextureRegion);
 			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
 					WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
-			//scene.registerTouchArea(tempSprite);
+					ButtonView.mButtonTextureRegion.getHeight(),
+					World.Team.EVIL);
+			World.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
+			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
+			// scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 
 			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.56f, ButtonView.mButtonTextureRegion);
+					WorldView.MAP_HEIGHT * 0.56f,
+					ButtonView.mButtonTextureRegion);
 			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
 					WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
-					ButtonView.mButtonTextureRegion.getHeight(), World.Team.EVIL);
-			TowerTile.towerTileListMap.get(World.Team.EVIL).add(
-					tempTowerTile);
-			TowerTile.towerTileSpriteMap.put(tempSprite,
-					tempTowerTile);
-			//scene.registerTouchArea(tempSprite);
+					ButtonView.mButtonTextureRegion.getHeight(),
+					World.Team.EVIL);
+			World.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
+			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
+			// scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 		}
 	}

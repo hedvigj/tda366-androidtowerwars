@@ -1,10 +1,17 @@
 package com.androidtowerwars.view;
 
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.anddev.andengine.engine.Engine;
 import org.anddev.andengine.engine.camera.ZoomCamera;
 import org.anddev.andengine.engine.options.EngineOptions;
 import org.anddev.andengine.engine.options.EngineOptions.ScreenOrientation;
 import org.anddev.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+
+import com.androidtowerwars.model.ISoldier;
+import com.androidtowerwars.model.TowerTile;
+import com.androidtowerwars.model.World;
 
 
 public class WorldView extends Engine {

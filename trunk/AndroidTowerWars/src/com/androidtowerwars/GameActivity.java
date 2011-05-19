@@ -107,8 +107,6 @@ public class GameActivity extends BaseGameActivity {
 	public Scene onLoadScene() {
 		
 		final Scene scene = new Scene(1);
-		
-
 		getEngine().registerUpdateHandler(new FPSLogger());
 		
 		BackgroundView.loadScene(scene);
@@ -147,11 +145,7 @@ public class GameActivity extends BaseGameActivity {
 		scene.setOnSceneTouchListener(touchListener);
 		scene.setOnAreaTouchListener(touchController);
 		
-		
-		
 		WorldView.getInstance().getCamera().getHUD().setOnAreaTouchListener(touchController);
-		
-		
 
 		towerTileView.loadScene(scene);
 		

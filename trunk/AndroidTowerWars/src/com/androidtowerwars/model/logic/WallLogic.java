@@ -4,11 +4,11 @@ import org.anddev.andengine.entity.primitive.Rectangle;
 
 import android.util.Log;
 
-import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
+import com.androidtowerwars.view.SoldierView;
 
 
 public class WallLogic {
@@ -17,11 +17,11 @@ public class WallLogic {
 		World.Team team = wall.getTeam();
 		Rectangle range = wall.getRange();
 
-		for(int n=0;n<Soldier.soldierListMap.get(team.opposite()).size();n++) {
-		if (range.collidesWith(Soldier.soldierSpriteMap.get(Soldier.soldierListMap.get(team.opposite()).get(n)))){
+		for(int n=0;n<World.soldierListMap.get(team.opposite()).size();n++) {
+		if (range.collidesWith(SoldierView.soldierSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))){
 			
-			SoldierController.removeSoldier(Soldier.soldierListMap.get(team.opposite()).get(n),
-					Soldier.soldierListMap.get(Soldier.soldierListMap.get(team.opposite()).get(n).getTeam()));
+			SoldierController.removeSoldier(World.soldierListMap.get(team.opposite()).get(n),
+					World.soldierListMap.get(World.soldierListMap.get(team.opposite()).get(n).getTeam()));
 			damageCastle(wall, team);
 			}
 		}
