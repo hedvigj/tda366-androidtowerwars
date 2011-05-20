@@ -118,15 +118,7 @@ public class SoldierLogic {
     public static ISoldier getAttacker(){
     	return mAttacker;
     }
-    
-    public static boolean setrVariable(){
-    	return rVariable = false;
-    }
-    
-    public static boolean setaVariable(){
-    	return aVariable = false;
-    }
-    
+   
     public static boolean getrVariable(){
     	return rVariable;
     }
