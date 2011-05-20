@@ -1,22 +1,18 @@
 package com.androidtowerwars.controller;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.Entity;
 
-import android.util.Log;
-
-import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Player;
 import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
+import com.androidtowerwars.model.logic.ProjectileLogic;
 import com.androidtowerwars.model.logic.SoldierLogic;
-import com.androidtowerwars.view.ObserverSprite;
 import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.WorldView;
 
@@ -49,11 +45,13 @@ public class SoldierController extends Entity {
 				
 				if(SoldierLogic.getrVariable()){
 					removeSoldier(SoldierLogic.getReciver(), World.soldierListMap.get(SoldierLogic.getReciver().getTeam()));
-					SoldierLogic.setrVariable();
 				}
 				if(SoldierLogic.getaVariable()){
 					removeSoldier(SoldierLogic.getAttacker(), World.soldierListMap.get(SoldierLogic.getAttacker().getTeam()));
-					SoldierLogic.setaVariable();
+				}
+				if(ProjectileLogic.getCheck()){
+					removeSoldier(ProjectileLogic.mProjectile.getTarget(),World.soldierListMap.get(ProjectileLogic.mProjectile.getTarget().getTeam()));
+					ProjectileLogic.resetCheck();
 				}
 			}
 		}

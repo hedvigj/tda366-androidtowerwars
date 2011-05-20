@@ -40,6 +40,7 @@ public class ProjectileController extends Entity {
 					ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
 					if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(SoldierView.soldierSpriteMap.get(projectile.getTarget()))) {
 						ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
+						removeProjectile(projectile, World.projectileListMap.get(projectile.getParent().getTeam()));
 				}
 				}
 			}
