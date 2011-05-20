@@ -44,7 +44,17 @@ public class SoldierController extends Entity {
 		super.onManagedUpdate(pSecondsElapsed);
 		for(List<ISoldier> soldierList: World.soldierListMap.values()) {
 			for(ISoldier soldier: soldierList) {
+				
 				SoldierLogic.updateSoldier(soldier, pSecondsElapsed);
+				
+				if(SoldierLogic.getrVariable()){
+					removeSoldier(SoldierLogic.getReciver(), World.soldierListMap.get(SoldierLogic.getReciver().getTeam()));
+					SoldierLogic.setrVariable();
+				}
+				if(SoldierLogic.getaVariable()){
+					removeSoldier(SoldierLogic.getAttacker(), World.soldierListMap.get(SoldierLogic.getAttacker().getTeam()));
+					SoldierLogic.setaVariable();
+				}
 			}
 		}
 	}

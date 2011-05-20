@@ -12,8 +12,13 @@ import com.androidtowerwars.view.SoldierView;
 
 public class SoldierLogic {
 	
+	public static boolean rVariable = false;
+	public static boolean aVariable = false;
+	public static ISoldier mReciever;
+	public static ISoldier mAttacker;
+	
     public static void updateSoldier(ISoldier soldier, float pSecondsElapsed) {
-        World.Team team = soldier.getTeam();
+        World.Team team = soldier.getTeam();   
         Sprite range = SoldierView.soldierSpriteMap.get(soldier);//soldier.getRange();
         soldier.setPosition(soldier.getX() + soldier.getSpeed() * pSecondsElapsed, soldier.getY());
         for(int n=0;n<World.soldierListMap.get(team.opposite()).size();n++) {
@@ -27,16 +32,19 @@ public class SoldierLogic {
             }
         }
     }
+   
     
     public static void attackSoldier(ISoldier attacker, ISoldier reciever) {
         //TODO: 
+    	mAttacker = attacker;
+    	mReciever = reciever;
         boolean alive = true;
         while(alive) {
             
             reciever.setHealth(reciever.getHealth() - attacker.getDamage());
             
             if(reciever.getHealth() <= 0) {
-                SoldierController.removeSoldier(reciever, World.soldierListMap.get(reciever.getTeam()));
+                rVariable = true;
                 Log.d("TowerWars3", "removedefender"+"-"+reciever.getTeam());
                 //Log.d("TowerWars1", reciever.getHealth());
                 alive = false;
@@ -47,11 +55,13 @@ public class SoldierLogic {
             }
             
             if (attacker.getHealth() <= 0) {
-                SoldierController.removeSoldier(attacker, World.soldierListMap.get(attacker.getTeam()));
+            	aVariable = true;
                 Log.d("TowerWars4", "removeattacker"+"-"+attacker.getTeam());
                 alive = false;
             }
         }
+        
+        
         
      /*   reciever.setHealth(reciever.getHealth() - attacker.getDamage());
         //Log.d("TowerWars1", reciever.getHealth()+"");
@@ -99,4 +109,29 @@ public class SoldierLogic {
             }
         }*/
     }
+    
+    
+    public static ISoldier getReciver(){
+    	return mReciever;
+    }
+    
+    public static ISoldier getAttacker(){
+    	return mAttacker;
+    }
+    
+    public static boolean setrVariable(){
+    	return rVariable = false;
+    }
+    
+    public static boolean setaVariable(){
+    	return aVariable = false;
+    }
+    
+    public static boolean getrVariable(){
+    	return rVariable;
+    }
+    public static boolean getaVariable(){
+    	return aVariable;
+    }
+    
 }
