@@ -5,14 +5,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.Entity;
+import org.anddev.andengine.entity.sprite.AnimatedSprite;
 
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Player;
+import com.androidtowerwars.model.Ranger;
 import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.ProjectileLogic;
 import com.androidtowerwars.model.logic.SoldierLogic;
+import com.androidtowerwars.view.RangerView;
 import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.WorldView;
 
@@ -41,7 +44,9 @@ public class SoldierController extends Entity {
 		for(List<ISoldier> soldierList: World.soldierListMap.values()) {
 			for(ISoldier soldier: soldierList) {
 				
+				
 				SoldierLogic.updateSoldier(soldier, pSecondsElapsed);
+				SoldierLogic.updateRanger(soldier, pSecondsElapsed);
 				
 				if(SoldierLogic.getrVariable()){
 					removeSoldier(SoldierLogic.getReciver(), World.soldierListMap.get(SoldierLogic.getReciver().getTeam()));
@@ -78,6 +83,20 @@ public class SoldierController extends Entity {
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
 		Player.playerMap.get(team).decreaseGold(soldier.getCost());
+	}
+	
+	public static void createAnimatedSprite(float pX, float pY, World.Team team){
+		Ranger ranger = new Ranger(pX, pY, 7, team);
+		RangerView rangerSprite = new RangerView(pX, pY, ranger);
+		final AnimatedSprite cyclop = new AnimatedSprite(100, 50, RangerView.mCyclopTextureRegion);
+        cyclop.animate(100);
+        World.soldierListMap.get(team).add(ranger);
+        RangerView.rangerSpriteMap.put(ranger, rangerSprite);
+        ranger.addObserver(rangerSprite);
+        WorldView.getInstance().getScene().getLastChild().attachChild(cyclop);
+        WorldView.getInstance().getScene().getLastChild().attachChild(rangerSprite);
+        Player.playerMap.get(team).decreaseGold(ranger.getCost());
+
 	}
 	/**
 	 * Creates a Timer Handler used to Spawn Sprites

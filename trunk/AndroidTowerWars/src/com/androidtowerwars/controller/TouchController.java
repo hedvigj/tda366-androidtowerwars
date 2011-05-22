@@ -36,8 +36,8 @@ public class TouchController implements IOnAreaTouchListener {
                 	if(pTouchArea == TouchView.meleeSoldierButton){
                 		TouchView.meleeSoldierButton.touch();
             		}
-            		else if(pTouchArea == TouchView.badBarrack){
-            			TouchView.badBarrack.touch();
+            		else if(pTouchArea == TouchView.rangerSoldierButton){
+            			TouchView.rangerSoldierButton.touch();
             		}
                     
                 	towerTile = TowerTileView.towerTileSpriteMap.get(pTouchArea);
@@ -53,9 +53,9 @@ public class TouchController implements IOnAreaTouchListener {
             				SoldierController.createSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);            				
             			}                		
             		}
-            		else if(pTouchArea == TouchView.badBarrack){
-            			if(TouchView.badBarrack.releaseTouchSuccessfull()) {
-            				SoldierController.createSprite(300, WorldView.MAP_HEIGHT*0.52f, World.Team.EVIL);
+            		else if(pTouchArea == TouchView.rangerSoldierButton){
+            			if(TouchView.rangerSoldierButton.releaseTouchSuccessfull()) {
+            				SoldierController.createAnimatedSprite(300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);
             			}
             			
             		}

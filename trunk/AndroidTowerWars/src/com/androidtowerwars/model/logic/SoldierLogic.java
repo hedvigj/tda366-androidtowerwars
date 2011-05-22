@@ -1,5 +1,6 @@
 package com.androidtowerwars.model.logic;
 
+import org.anddev.andengine.entity.sprite.AnimatedSprite;
 import org.anddev.andengine.entity.sprite.Sprite;
 
 import android.util.Log;
@@ -8,6 +9,7 @@ import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.World;
+import com.androidtowerwars.view.RangerView;
 import com.androidtowerwars.view.SoldierView;
 
 public class SoldierLogic {
@@ -25,6 +27,21 @@ public class SoldierLogic {
             if (range.collidesWith(SoldierView.soldierSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))) {
                 //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
                 ISoldier S = soldier;
+                ISoldier R =  World.soldierListMap.get(team.opposite()).get(n);
+                //attackSoldier(); Should attack before kill?
+                attackSoldier(S,R);
+                break;
+            }
+        }
+    }
+    public static void updateRanger(ISoldier ranger, float pSecondsElapsed) {
+        World.Team team = ranger.getTeam();   
+        AnimatedSprite range = RangerView.rangerSpriteMap.get(ranger);//soldier.getRange();
+        ranger.setPosition(ranger.getX() + ranger.getSpeed() * pSecondsElapsed, ranger.getY());
+        for(int n=0;n<World.soldierListMap.get(team.opposite()).size();n++) {
+            if (range.collidesWith(RangerView.rangerSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))) {
+                //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
+                ISoldier S = ranger;
                 ISoldier R =  World.soldierListMap.get(team.opposite()).get(n);
                 //attackSoldier(); Should attack before kill?
                 attackSoldier(S,R);
