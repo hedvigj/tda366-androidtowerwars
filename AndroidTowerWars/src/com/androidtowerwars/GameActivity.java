@@ -32,6 +32,7 @@ import com.androidtowerwars.view.CoinView;
 import com.androidtowerwars.view.FontView;
 import com.androidtowerwars.view.MenuView;
 import com.androidtowerwars.view.ProjectileView;
+import com.androidtowerwars.view.RangerView;
 import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.TouchView;
 import com.androidtowerwars.view.TowerTileView;
@@ -97,6 +98,7 @@ public class GameActivity extends BaseGameActivity {
 		TowerView.loadResources(this);
 		ButtonView.loadResources(this);
 		SoldierView.loadResources(this);
+		RangerView.loadResources(this);
 		CoinView.loadResources(this);
 		ProjectileView.loadResources(this);
 		WallView.loadResources(this);
