@@ -21,7 +21,7 @@ public class ProjectileLogic {
 			if (projectile.getTarget().getHealth() <= 0) {
 				check = true;
 				projectile.getParent().increaseKills();
-				Player.playerMap.get(projectile.getParent().getTeam()).increaseGold((int) (projectile.getTarget().getCost()*1.5));
+				World.playerMap.get(projectile.getParent().getTeam()).increaseGold((int) (projectile.getTarget().getCost()*1.5));
 			}
 	}
 	
