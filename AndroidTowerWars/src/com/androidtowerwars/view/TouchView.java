@@ -27,6 +27,8 @@ public class TouchView {
 	
 	private static Texture mGoodBarrackTexture;
 	private static TextureRegion mGoodBarrackTextureRegion;
+	private static Texture mBadBarrackTexture;
+	private static TextureRegion mBadBarrackTextureRegion;
 	private static Texture mMeleeButtonTexture;
 	private static TextureRegion mMeleeButtonTextureRegion;
 	private static Texture mRangerButtonTexture;
@@ -49,6 +51,11 @@ public class TouchView {
 				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mGoodBarrackTextureRegion = TextureRegionFactory.createFromAsset(
 				mGoodBarrackTexture, gameActivity,"gfx/Good_Barracks.png", 0,0);
+		
+		mBadBarrackTexture = new Texture(512,256,
+				TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mBadBarrackTextureRegion = TextureRegionFactory.createFromAsset(
+				mBadBarrackTexture, gameActivity,"gfx/Bad_Barracks.png", 0,0);
 		
 		
 		mCoinTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
@@ -77,6 +84,7 @@ public class TouchView {
         WorldView.getInstance().getTextureManager().loadTexture(mFontTexture);
         WorldView.getInstance().getFontManager().loadFont(mFont);
         WorldView.getInstance().getTextureManager().loadTexture(mGoodBarrackTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mBadBarrackTexture);
         WorldView.getInstance().getTextureManager().loadTexture(mMeleeButtonTexture);
         WorldView.getInstance().getTextureManager().loadTexture(mRangerButtonTexture);
         WorldView.getInstance().getTextureManager().loadTexture(mWizardButtonTexture);
@@ -87,7 +95,7 @@ public class TouchView {
 	public static void loadScene(Scene scene){
 		headUpDisplay = new HUD();
         goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
-        badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
+        badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mBadBarrackTextureRegion);
         
         meleeSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-385,WorldView.CAMERA_HEIGHT-90 , mMeleeButtonTextureRegion);
         rangerSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-290,WorldView.CAMERA_HEIGHT-90 , mRangerButtonTextureRegion);
