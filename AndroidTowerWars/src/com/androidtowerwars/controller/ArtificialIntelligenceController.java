@@ -5,9 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Random;
 
-import android.util.Log;
-
 import com.androidtowerwars.model.Player;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.logic.ArtificialIntelligence;
@@ -15,7 +14,7 @@ import com.androidtowerwars.view.WorldView;
 
 	public class ArtificialIntelligenceController implements Observer{
 	
-		private static World.Team team;
+		private static Team team;
 		private static float updateInterval = 0.5f;
 		private static int nBuiltTowers = 0;
 		
@@ -82,7 +81,7 @@ import com.androidtowerwars.view.WorldView;
 		}
 		
 		public static void trainSoldier() {
-			SoldierController.createSprite(300, WorldView.MAP_HEIGHT*0.52f, World.Team.EVIL);
+			SoldierController.createSprite(300, WorldView.MAP_HEIGHT*0.52f, Team.EVIL);
 			return;
 		}
 		

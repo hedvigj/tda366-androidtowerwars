@@ -25,7 +25,7 @@ import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.controller.WallController;
 import com.androidtowerwars.model.Player;
-import com.androidtowerwars.model.World;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.view.BackgroundView;
 import com.androidtowerwars.view.ButtonView;
 import com.androidtowerwars.view.CoinView;
@@ -155,7 +155,7 @@ public class GameActivity extends BaseGameActivity {
 				new ITimerCallback() {
 
 					public void onTimePassed(final TimerHandler pTimerHandler) {
-						TouchView.goldText.setText(Integer.toString(Player.playerMap.get(World.Team.GOOD)
+						TouchView.goldText.setText(Integer.toString(Player.playerMap.get(Team.GOOD)
 								.getGold()));
 					}
 				}));
@@ -163,11 +163,11 @@ public class GameActivity extends BaseGameActivity {
 	}
 
 	public void onLoadComplete() {
-		Log.d("TowerWars", "gold: "+ Player.playerMap.get(World.Team.EVIL).getGold());
+		Log.d("TowerWars", "gold: "+ Player.playerMap.get(Team.EVIL).getGold());
 		ArtificialIntelligenceController.buildTower();
 		ArtificialIntelligenceController.buildTower();
 		ArtificialIntelligenceController.trainSoldier();
-		Log.d("TowerWars", "gold: "+ Player.playerMap.get(World.Team.EVIL).getGold());
+		Log.d("TowerWars", "gold: "+ Player.playerMap.get(Team.EVIL).getGold());
 		
 		Toast.makeText(
 				getApplicationContext(),

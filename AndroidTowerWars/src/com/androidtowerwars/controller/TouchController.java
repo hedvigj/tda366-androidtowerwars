@@ -9,8 +9,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.TowerTile;
-import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.BuildTowerView;
 import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.TouchView;
@@ -58,12 +58,12 @@ public class TouchController implements IOnAreaTouchListener {
                 case MotionEvent.ACTION_UP:
                 	if(pTouchArea == TouchView.meleeSoldierButton){
             			if(TouchView.meleeSoldierButton.releaseTouchSuccessfull()) {
-            				SoldierController.createSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);            				
+            				SoldierController.createSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, Team.GOOD);            				
             			}                		
             		}
             		else if(pTouchArea == TouchView.rangerSoldierButton){
             			if(TouchView.rangerSoldierButton.releaseTouchSuccessfull()) {
-            				SoldierController.createAnimatedSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);
+            				SoldierController.createAnimatedSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, Team.GOOD);
             			}
             			
             		}

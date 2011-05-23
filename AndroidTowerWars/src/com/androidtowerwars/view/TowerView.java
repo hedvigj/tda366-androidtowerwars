@@ -1,11 +1,15 @@
 package com.androidtowerwars.view;
 
+import java.util.concurrent.ConcurrentHashMap;
+
+import org.anddev.andengine.entity.sprite.Sprite;
 import org.anddev.andengine.opengl.texture.Texture;
 import org.anddev.andengine.opengl.texture.TextureOptions;
 import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 
 import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.model.ITower;
 
 
 public class TowerView {
@@ -14,6 +18,8 @@ public class TowerView {
 	public static TextureRegion mTowerTextureRegion;
 	public static Texture mMagmaPitTowerTexture;
 	public static TextureRegion mMagmaPitTowerTextureRegion;
+	
+	public static ConcurrentHashMap<ITower, Sprite> towerSpriteMap = new ConcurrentHashMap<ITower, Sprite>();
 	
 	public static void loadResources(GameActivity gameActivity) {
 		mTowerTexture = new Texture(256, 256,

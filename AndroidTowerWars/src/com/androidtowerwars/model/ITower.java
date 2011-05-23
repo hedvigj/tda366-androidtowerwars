@@ -3,7 +3,7 @@ package com.androidtowerwars.model;
 import org.anddev.andengine.entity.primitive.Rectangle;
 
 public interface ITower {
-	public World.Team getTeam();
+	public Team getTeam();
 
 	public float getX();
 	

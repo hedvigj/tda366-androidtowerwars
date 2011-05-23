@@ -11,7 +11,7 @@ import com.androidtowerwars.view.SoldierView;
 
 public class Soldier extends Observable implements ISoldier, IObservableSprite {
 	
-	private World.Team team;
+	private Team team;
 	protected float speed = 140; // pixels per second
 	protected Rectangle range;
 
@@ -26,12 +26,12 @@ public class Soldier extends Observable implements ISoldier, IObservableSprite {
 	private float x;
 	private float y;
 
-	public Soldier(float pX, float pY, float range, World.Team team) {
+	public Soldier(float pX, float pY, float range, Team team) {
 		x = pX;
 		y = pY;
 		this.team = team;
 		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-200, range, 400f);
-		if (team == World.Team.GOOD) {
+		if (team == Team.GOOD) {
 			speed = -speed;
 		}
 	}
@@ -87,7 +87,7 @@ public class Soldier extends Observable implements ISoldier, IObservableSprite {
 		this.speed = speed;
 	}
 
-	public World.Team getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 	

@@ -4,7 +4,7 @@ import org.anddev.andengine.entity.primitive.Rectangle;
 
 public interface ISoldier {
 	
-	public World.Team getTeam();
+	public Team getTeam();
 	
 	public void setHealth(int health);
 

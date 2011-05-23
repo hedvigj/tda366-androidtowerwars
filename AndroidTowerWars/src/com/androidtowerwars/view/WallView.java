@@ -8,8 +8,8 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 
 import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.Wall;
-import com.androidtowerwars.model.World.Team;
 
 public class WallView {
 	

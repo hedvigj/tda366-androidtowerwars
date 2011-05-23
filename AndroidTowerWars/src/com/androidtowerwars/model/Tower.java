@@ -17,7 +17,7 @@ import com.androidtowerwars.view.WorldView;
 public class Tower implements ITower {
 
 	public Rectangle range;
-	private World.Team team;
+	private Team team;
 	private float x;
 	private float y;
 	public int damage = 55;
@@ -25,10 +25,9 @@ public class Tower implements ITower {
 	public int kills = 0;
 	public static int cost = 20;
 	
-	public static ConcurrentHashMap<World.Team, List<ITower>> towerListMap = new ConcurrentHashMap<World.Team, List<ITower>>();
-	public static ConcurrentHashMap<ITower, Sprite> towerSpriteMap = new ConcurrentHashMap<ITower, Sprite>();
-	
-	public Tower(float pX, float pY, float range, World.Team team) {
+	public static ConcurrentHashMap<Team, List<IProjectile>> projectileListMap = new ConcurrentHashMap<Team, List<IProjectile>>();
+
+	public Tower(float pX, float pY, float range, Team team) {
 		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-400, range, 900f); //not centered by width!
 		this.team = team;
 		this.x = pX;
@@ -41,7 +40,7 @@ public class Tower implements ITower {
 	}
 
 	
-	public World.Team getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 	public int getDamage() {

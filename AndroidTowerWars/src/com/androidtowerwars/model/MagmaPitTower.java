@@ -2,8 +2,6 @@ package com.androidtowerwars.model;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
-import com.androidtowerwars.model.World.Team;
-
 public class MagmaPitTower extends Tower {
 
 	public MagmaPitTower(float pX, float pY, float range, Team team) {

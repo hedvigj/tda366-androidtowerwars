@@ -5,7 +5,8 @@ import org.anddev.andengine.entity.primitive.Rectangle;
 import android.util.Log;
 
 import com.androidtowerwars.controller.SoldierController;
-import com.androidtowerwars.model.Soldier;
+import com.androidtowerwars.model.Barrack;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.SoldierView;
@@ -14,20 +15,20 @@ import com.androidtowerwars.view.SoldierView;
 public class WallLogic {
 
 	public synchronized static void updateWall(Wall wall, float pSecondsElapsed){
-		World.Team team = wall.getTeam();
+		Team team = wall.getTeam();
 		Rectangle range = wall.getRange();
 
-		for(int n=0;n<World.soldierListMap.get(team.opposite()).size();n++) {
-		if (range.collidesWith(SoldierView.soldierSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))){
+		for(int n=0;n<Barrack.soldierListMap.get(team.opposite()).size();n++) {
+		if (range.collidesWith(SoldierView.soldierSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n)))){
 			
-			SoldierController.removeSoldier(World.soldierListMap.get(team.opposite()).get(n),
-					World.soldierListMap.get(World.soldierListMap.get(team.opposite()).get(n).getTeam()));
+			SoldierController.removeSoldier(Barrack.soldierListMap.get(team.opposite()).get(n),
+					Barrack.soldierListMap.get(Barrack.soldierListMap.get(team.opposite()).get(n).getTeam()));
 			damageCastle(wall, team);
 			}
 		}
 	}
 	
-	public static synchronized void damageCastle(Wall wall, World.Team team){
+	public static synchronized void damageCastle(Wall wall, Team team){
 		final int health = wall.getHealth();
 		if(health <= 0){
 			Log.d("TowerWars", "Muren �r f�rst�rd");

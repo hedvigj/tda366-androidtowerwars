@@ -13,10 +13,11 @@ import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ITower;
 import com.androidtowerwars.model.MagmaPitTower;
 import com.androidtowerwars.model.Player;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.World;
-import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.TowerLogic;
+import com.androidtowerwars.view.TowerView;
 import com.androidtowerwars.view.WorldView;
 
 public class TowerController {//extends Entity {
@@ -28,8 +29,8 @@ public class TowerController {//extends Entity {
 	
 	
 	public TowerController() {
-		Tower.towerListMap.put(Team.GOOD, new CopyOnWriteArrayList<ITower>());
-		Tower.towerListMap.put(Team.EVIL, new CopyOnWriteArrayList<ITower>());
+		World.towerListMap.put(Team.GOOD, new CopyOnWriteArrayList<ITower>());
+		World.towerListMap.put(Team.EVIL, new CopyOnWriteArrayList<ITower>());
 		setInstance(this);
 	}
 	
@@ -40,11 +41,11 @@ public class TowerController {//extends Entity {
 		return instance;
 	}
 
-    public static synchronized void createTestTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
+    public static synchronized void createTestTower(float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
         final Tower tower = new Tower(pX, pY, range, team);
         Sprite sprite = new Sprite(pX, pY, pTextureRegion);
-        Tower.towerListMap.get(team).add(tower);
-        Tower.towerSpriteMap.put(tower, sprite);
+        World.towerListMap.get(team).add(tower);
+       	TowerView.towerSpriteMap.put(tower, sprite);
         GameActivity.setTimestamp(0);
         WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
                 timerHandler = new TimerHandler(tower.getAttackSpeed(),
@@ -60,11 +61,11 @@ public class TowerController {//extends Entity {
         Player.playerMap.get(team).decreaseGold(tower.getCost());
         return;
     }
-    public static synchronized void createMagmaPitTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
+    public static synchronized void createMagmaPitTower(float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
         final MagmaPitTower tower = new MagmaPitTower(pX, pY, range, team);
         Sprite sprite = new Sprite(pX, pY, pTextureRegion);
-        MagmaPitTower.towerListMap.get(team).add(tower);
-        MagmaPitTower.towerSpriteMap.put(tower, sprite);
+        World.towerListMap.get(team).add(tower);
+        TowerView.towerSpriteMap.put(tower, sprite);
         GameActivity.setTimestamp(0);
         WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
                 timerHandler = new TimerHandler(tower.getAttackSpeed(),

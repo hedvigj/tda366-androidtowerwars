@@ -1,10 +1,15 @@
 package com.androidtowerwars.model;
 
-import com.androidtowerwars.model.World.Team;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
+
 
 public class Barrack implements IBarrack{
 	
-	private World.Team team;
+
+	public static ConcurrentHashMap<Team, List<ISoldier>> soldierListMap = new ConcurrentHashMap<Team, List<ISoldier>>();
+	
+	private Team team;
 
 	public Team getTeam() {
 		return team;

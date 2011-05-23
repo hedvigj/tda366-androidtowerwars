@@ -1,32 +1,25 @@
 package com.androidtowerwars.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-
-import org.anddev.andengine.entity.sprite.Sprite;
-
-import com.androidtowerwars.view.ClickButton;
-import com.androidtowerwars.view.ObserverSprite;
-import com.androidtowerwars.view.WorldView;
 
 
 public class World{
 	
-
-	public static ConcurrentHashMap<World.Team, List<ISoldier>> soldierListMap = new ConcurrentHashMap<World.Team, List<ISoldier>>();
-	public static ConcurrentHashMap<World.Team, List<TowerTile>> towerTileListMap = new ConcurrentHashMap<World.Team, List<TowerTile>>();
-	public static ConcurrentHashMap<World.Team, List<IProjectile>> projectileListMap = new ConcurrentHashMap<World.Team, List<IProjectile>>();
+	public static ConcurrentHashMap<Team, List<TowerTile>> towerTileListMap = new ConcurrentHashMap<Team, List<TowerTile>>();
+	public static ConcurrentHashMap<Team, List<ITower>> towerListMap = new ConcurrentHashMap<Team, List<ITower>>();
 	
+	private List<ISoldier> goodSoldier = new ArrayList<ISoldier>();
+	private List<ISoldier> badSoldier = new ArrayList<ISoldier>();
 	
-    public enum Team {
-    	 GOOD, EVIL;
-    	 
-    	 public Team opposite() {
-    		 if (this == Team.EVIL)
-    			 return Team.GOOD;
-    		 else
-    			 return Team.EVIL;
-    	 }
-    	}
+	private static World instance = null;
+	
+	public static World getInstance() {
+		if (instance == null) {
+			instance = new World(); 
+		}
+		return instance;
+	}
 }    
 
