@@ -47,7 +47,7 @@ public class TouchController implements IOnAreaTouchListener {
             		    ClickButton tileSprite = (ClickButton) pTouchArea;
             		    tileSprite.touch();
             		    Log.d("wie", "blö");
-            		} else {
+            		} else if (towerTile != null && towerTile.isOccupied() == true) {
             		    //Log.d("ja", "rätt?");
                         Log.d("kebab", "omnom");
                         Dialog v = new UpgradeTowerView(gameActivity, towerTile);
