@@ -39,7 +39,8 @@ public class SoldierLogic {
         AnimatedSprite range = RangerView.rangerSpriteMap.get(ranger);//soldier.getRange();
         ranger.setPosition(ranger.getX() + ranger.getSpeed() * pSecondsElapsed, ranger.getY());
         for(int n=0;n<World.soldierListMap.get(team.opposite()).size();n++) {
-            if (range.collidesWith(RangerView.rangerSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))) {
+            if (range.collidesWith(RangerView.rangerSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n))) ||
+                    range.collidesWith(SoldierView.soldierSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))) {
                 //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
                 ISoldier S = ranger;
                 ISoldier R =  World.soldierListMap.get(team.opposite()).get(n);
