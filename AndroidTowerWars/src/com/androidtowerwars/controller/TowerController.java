@@ -11,6 +11,7 @@ import org.anddev.andengine.opengl.texture.region.TextureRegion;
 
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ITower;
+import com.androidtowerwars.model.MagmaPitTower;
 import com.androidtowerwars.model.Player;
 import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.World;
@@ -44,6 +45,26 @@ public class TowerController {//extends Entity {
         Sprite sprite = new Sprite(pX, pY, pTextureRegion);
         Tower.towerListMap.get(team).add(tower);
         Tower.towerSpriteMap.put(tower, sprite);
+        GameActivity.setTimestamp(0);
+        WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
+                timerHandler = new TimerHandler(tower.getAttackSpeed(),
+                        new ITimerCallback() {
+                            public void onTimePassed(
+                                    final TimerHandler pTimerHandler) {
+                                pTimerHandler.reset();
+                                TowerLogic.updateTower(tower);
+                            }
+                        });
+                timerHandlerList.add(timerHandler);
+        WorldView.getInstance().registerUpdateHandler(timerHandler);
+        Player.playerMap.get(team).decreaseGold(tower.getCost());
+        return;
+    }
+    public static synchronized void createMagmaPitTower(float pX, float pY, TextureRegion pTextureRegion, float range, World.Team team) {
+        final MagmaPitTower tower = new MagmaPitTower(pX, pY, range, team);
+        Sprite sprite = new Sprite(pX, pY, pTextureRegion);
+        MagmaPitTower.towerListMap.get(team).add(tower);
+        MagmaPitTower.towerSpriteMap.put(tower, sprite);
         GameActivity.setTimestamp(0);
         WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
                 timerHandler = new TimerHandler(tower.getAttackSpeed(),
