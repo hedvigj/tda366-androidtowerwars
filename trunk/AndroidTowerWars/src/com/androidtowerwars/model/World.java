@@ -1,16 +1,20 @@
 package com.androidtowerwars.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class World {
 
 	public static ConcurrentHashMap<Team, List<TowerTile>> towerTileListMap = new ConcurrentHashMap<Team, List<TowerTile>>();
 	public static ConcurrentHashMap<Team, List<ITower>> towerListMap = new ConcurrentHashMap<Team, List<ITower>>();
+	public static Map<Team, Player> playerMap = new HashMap<Team, Player>();
+	
 
-	private List<ISoldier> goodSoldier = new ArrayList<ISoldier>();
-	private List<ISoldier> evilSoldier = new ArrayList<ISoldier>();
+	private Player goodPlayer = new Player(Team.GOOD);
+	private Player evilPlayer = new Player(Team.EVIL);
 
 	private static World instance = null;
 
@@ -21,19 +25,10 @@ public class World {
 		return instance;
 	}
 
-	public List<ISoldier> getSoldier(Team team) {
+	public Player getPlayer(Team team) {
 		if (team == Team.EVIL) {
-			return evilSoldier;
-		} else {
-			return goodSoldier;
-		}
-	}
-
-	public void addSoldier(ISoldier soldier, Team team) {
-		if (team == Team.EVIL) {
-			evilSoldier.add(soldier);
-		} else {
-			goodSoldier.add(soldier);
-		}
+			return evilPlayer;
+		} else
+			return goodPlayer;
 	}
 }

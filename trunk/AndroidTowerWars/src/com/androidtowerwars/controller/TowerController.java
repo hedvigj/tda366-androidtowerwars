@@ -58,7 +58,7 @@ public class TowerController {//extends Entity {
                         });
                 timerHandlerList.add(timerHandler);
         WorldView.getInstance().registerUpdateHandler(timerHandler);
-        Player.playerMap.get(team).decreaseGold(tower.getCost());
+        World.playerMap.get(team).decreaseGold(tower.getCost());
         return;
     }
     public static synchronized void createMagmaPitTower(float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
@@ -78,7 +78,7 @@ public class TowerController {//extends Entity {
                         });
                 timerHandlerList.add(timerHandler);
         WorldView.getInstance().registerUpdateHandler(timerHandler);
-        Player.playerMap.get(team).decreaseGold(tower.getCost());
+        World.playerMap.get(team).decreaseGold(tower.getCost());
         return;
     }
 

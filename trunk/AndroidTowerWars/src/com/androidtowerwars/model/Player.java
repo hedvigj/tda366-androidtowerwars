@@ -6,10 +6,10 @@ import java.util.Observable;
 
 public class Player extends Observable {
 	
-	public static Map<Team, Player> playerMap = new HashMap<Team, Player>();
 
 	private int gold = 80;
 	private Team team;
+	private Barrack barrack = new Barrack();
 
 	public Player(Team team) {
 		this.team = team;
@@ -46,5 +46,8 @@ public class Player extends Observable {
 		setChanged();
 		notifyObservers();
 		return;
+	}
+	public Barrack getBarrack(){
+		return barrack;
 	}
 }
