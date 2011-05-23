@@ -63,7 +63,7 @@ public class BuildTowerView extends Dialog {
         case 3:
             //build tower 1
             //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
-        	towerTile.action();
+        	towerTile.magma_action();
             break;
         }
         
