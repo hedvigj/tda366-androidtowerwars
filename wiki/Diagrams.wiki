@@ -2,15 +2,15 @@ SequenceDiagrams, ModelDiagrams, UserCaseDiagram
 
 = Introduction =
 
-ModelDiagram:
+*ModelDiagram*:
 
 http://dl.dropbox.com/u/19803932/Ny%20mapp/modelDiagram.pdf
 
-UserCaseDiagram:
+*UserCaseDiagram*:
 
 http://dl.dropbox.com/u/19803932/Ny%20mapp/UsercaseDiagram.pdf
 
-SequenceDiagrams:
+*SequenceDiagrams*:
 
 http://dl.dropbox.com/u/19803932/Ny%20mapp/BuildSoldier%20sequence%20diagram.pdf
 
