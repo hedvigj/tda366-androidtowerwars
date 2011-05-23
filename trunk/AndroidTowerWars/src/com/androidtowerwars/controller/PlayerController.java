@@ -1,21 +1,16 @@
 package com.androidtowerwars.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.anddev.andengine.engine.handler.timer.ITimerCallback;
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 
 import com.androidtowerwars.model.Player;
-import com.androidtowerwars.model.World;
-import com.androidtowerwars.model.logic.ArtificialIntelligence;
-import com.androidtowerwars.model.logic.TowerLogic;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.view.WorldView;
 
 public class PlayerController {
 	
 	public PlayerController() {
-		Player evilPlayer = new Player(World.Team.EVIL);
+		Player evilPlayer = new Player(Team.EVIL);
 		ArtificialIntelligenceController evilAI = new ArtificialIntelligenceController(evilPlayer);
 		evilPlayer.addObserver(evilAI);
          final TimerHandler timerHandler = new TimerHandler(evilAI.getUpdateInterval(),
@@ -27,8 +22,8 @@ public class PlayerController {
                      }
                  });
          WorldView.getInstance().registerUpdateHandler(timerHandler);
-		Player.playerMap.put(World.Team.GOOD, new Player(World.Team.GOOD));
-		Player.playerMap.put(World.Team.EVIL, evilPlayer);
+		Player.playerMap.put(Team.GOOD, new Player(Team.GOOD));
+		Player.playerMap.put(Team.EVIL, evilPlayer);
 		
 	}
 	

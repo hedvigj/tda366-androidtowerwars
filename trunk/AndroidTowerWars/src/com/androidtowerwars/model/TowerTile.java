@@ -15,11 +15,11 @@ public class TowerTile implements IButtonSprite {
 	private float x;
 	private float y;
 	private Rectangle area;
-	private World.Team team;
+	private Team team;
 	private boolean occupied = false;
 
 	public TowerTile(float pX, float pY, float width, float heigth,
-			World.Team team) {
+			Team team) {
 		this.x = pX;
 		this.y = pY;
 		this.area = new Rectangle(x, y, width, heigth);
@@ -38,7 +38,7 @@ public class TowerTile implements IButtonSprite {
 		return y;
 	}
 
-	public World.Team getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 

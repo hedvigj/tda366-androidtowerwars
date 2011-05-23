@@ -2,8 +2,6 @@ package com.androidtowerwars.model;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
-import com.androidtowerwars.model.World.Team;
-
 public class Giant extends Soldier {
 
 	public Giant(float pX, float pY, float range, Team team) {

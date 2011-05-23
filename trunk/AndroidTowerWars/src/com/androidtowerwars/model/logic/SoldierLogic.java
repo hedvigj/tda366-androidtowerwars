@@ -5,9 +5,9 @@ import org.anddev.andengine.entity.sprite.Sprite;
 
 import android.util.Log;
 
-import com.androidtowerwars.controller.SoldierController;
+import com.androidtowerwars.model.Barrack;
 import com.androidtowerwars.model.ISoldier;
-import com.androidtowerwars.model.Soldier;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.RangerView;
 import com.androidtowerwars.view.SoldierView;
@@ -20,14 +20,14 @@ public class SoldierLogic {
 	public static ISoldier mAttacker;
 	
     public static void updateSoldier(ISoldier soldier, float pSecondsElapsed) {
-        World.Team team = soldier.getTeam();   
+        Team team = soldier.getTeam();   
         Sprite range = SoldierView.soldierSpriteMap.get(soldier);//soldier.getRange();
         soldier.setPosition(soldier.getX() + soldier.getSpeed() * pSecondsElapsed, soldier.getY());
-        for(int n=0;n<World.soldierListMap.get(team.opposite()).size();n++) {
-            if (range.collidesWith(SoldierView.soldierSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))) {
+        for(int n=0;n<Barrack.soldierListMap.get(team.opposite()).size();n++) {
+            if (range.collidesWith(SoldierView.soldierSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n)))) {
                 //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
                 ISoldier S = soldier;
-                ISoldier R =  World.soldierListMap.get(team.opposite()).get(n);
+                ISoldier R =  Barrack.soldierListMap.get(team.opposite()).get(n);
                 //attackSoldier(); Should attack before kill?
                 attackSoldier(S,R);
                 break;
@@ -35,15 +35,15 @@ public class SoldierLogic {
         }
     }
     public static void updateRanger(ISoldier ranger, float pSecondsElapsed) {
-        World.Team team = ranger.getTeam();   
+        Team team = ranger.getTeam();   
         AnimatedSprite range = RangerView.rangerSpriteMap.get(ranger);//soldier.getRange();
         ranger.setPosition(ranger.getX() + ranger.getSpeed() * pSecondsElapsed, ranger.getY());
-        for(int n=0;n<World.soldierListMap.get(team.opposite()).size();n++) {
-            if (range.collidesWith(RangerView.rangerSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n))) ||
-                    range.collidesWith(SoldierView.soldierSpriteMap.get(World.soldierListMap.get(team.opposite()).get(n)))) {
+        for(int n=0;n<Barrack.soldierListMap.get(team.opposite()).size();n++) {
+            if (range.collidesWith(RangerView.rangerSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n))) ||
+                    range.collidesWith(SoldierView.soldierSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n)))) {
                 //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
                 ISoldier S = ranger;
-                ISoldier R =  World.soldierListMap.get(team.opposite()).get(n);
+                ISoldier R =  Barrack.soldierListMap.get(team.opposite()).get(n);
                 //attackSoldier(); Should attack before kill?
                 attackSoldier(S,R);
                 break;

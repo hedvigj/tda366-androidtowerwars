@@ -7,12 +7,13 @@ import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.Entity;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
 
+import com.androidtowerwars.model.Barrack;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Player;
 import com.androidtowerwars.model.Ranger;
 import com.androidtowerwars.model.Soldier;
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.World;
-import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.ProjectileLogic;
 import com.androidtowerwars.model.logic.SoldierLogic;
 import com.androidtowerwars.view.RangerView;
@@ -36,12 +37,12 @@ public class SoldierController extends Entity {
 	// Methods
 	// ===========================================================
 	public SoldierController() {
-		World.soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
-		World.soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
+		Barrack.soldierListMap.put(Team.GOOD, new CopyOnWriteArrayList<ISoldier>());
+		Barrack.soldierListMap.put(Team.EVIL, new CopyOnWriteArrayList<ISoldier>());
 	}
 	protected void onManagedUpdate(final float pSecondsElapsed) {
 		super.onManagedUpdate(pSecondsElapsed);
-		for(List<ISoldier> soldierList: World.soldierListMap.values()) {
+		for(List<ISoldier> soldierList: Barrack.soldierListMap.values()) {
 			for(ISoldier soldier: soldierList) {
 				
 				if (soldier.getClass().equals(Soldier.class)) {
@@ -53,13 +54,13 @@ public class SoldierController extends Entity {
 				
 				
 				if(SoldierLogic.getrVariable()){
-					removeSoldier(SoldierLogic.getReciver(), World.soldierListMap.get(SoldierLogic.getReciver().getTeam()));
+					removeSoldier(SoldierLogic.getReciver(), Barrack.soldierListMap.get(SoldierLogic.getReciver().getTeam()));
 				}
 				if(SoldierLogic.getaVariable()){
-					removeSoldier(SoldierLogic.getAttacker(), World.soldierListMap.get(SoldierLogic.getAttacker().getTeam()));
+					removeSoldier(SoldierLogic.getAttacker(), Barrack.soldierListMap.get(SoldierLogic.getAttacker().getTeam()));
 				}
 				if(ProjectileLogic.getCheck()){
-					removeSoldier(ProjectileLogic.mProjectile.getTarget(),World.soldierListMap.get(ProjectileLogic.mProjectile.getTarget().getTeam()));
+					removeSoldier(ProjectileLogic.mProjectile.getTarget(),Barrack.soldierListMap.get(ProjectileLogic.mProjectile.getTarget().getTeam()));
 					ProjectileLogic.resetCheck();
 				}
 			}
@@ -81,22 +82,22 @@ public class SoldierController extends Entity {
 		});
 	}
 	
-	public static void createSprite(float pX, float pY, World.Team team) {
+	public static void createSprite(float pX, float pY, Team team) {
 		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte s�ker p� att 5 �r r�tt.
 		SoldierView soldierSprite = new SoldierView(pX, pY, soldier);
-		World.soldierListMap.get(team).add(soldier);
+		Barrack.soldierListMap.get(team).add(soldier);
 		SoldierView.soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
 		Player.playerMap.get(team).decreaseGold(soldier.getCost());
 	}
 	
-	public static void createAnimatedSprite(float pX, float pY, World.Team team){
+	public static void createAnimatedSprite(float pX, float pY,Team team){
 		Ranger ranger = new Ranger(pX, pY, 7, team);
 		RangerView rangerSprite = new RangerView(pX, pY, ranger);
 		final AnimatedSprite cyclop = new AnimatedSprite(100, 50, RangerView.mCyclopTextureRegion);
         cyclop.animate(100);
-        World.soldierListMap.get(team).add(ranger);
+        Barrack.soldierListMap.get(team).add(ranger);
         RangerView.rangerSpriteMap.put(ranger, rangerSprite);
         ranger.addObserver(rangerSprite);
         WorldView.getInstance().getScene().getLastChild().attachChild(cyclop);

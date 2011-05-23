@@ -4,6 +4,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.anddev.andengine.entity.scene.Scene;
 
+import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.World;
 
@@ -23,8 +24,8 @@ public class TowerTileView {
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
-					World.Team.GOOD);
-			World.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
+					Team.GOOD);
+			World.towerTileListMap.get(Team.GOOD).add(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -36,8 +37,8 @@ public class TowerTileView {
 					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
-					World.Team.GOOD);
-			World.towerTileListMap.get(World.Team.GOOD).add(tempTowerTile);
+					Team.GOOD);
+			World.towerTileListMap.get(Team.GOOD).add(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -50,8 +51,8 @@ public class TowerTileView {
 					WorldView.MAP_HEIGHT * 0.44f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
-					World.Team.EVIL);
-			World.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
+					Team.EVIL);
+			World.towerTileListMap.get(Team.EVIL).add(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			// scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -63,8 +64,8 @@ public class TowerTileView {
 					WorldView.MAP_HEIGHT * 0.56f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
-					World.Team.EVIL);
-			World.towerTileListMap.get(World.Team.EVIL).add(tempTowerTile);
+					Team.EVIL);
+			World.towerTileListMap.get(Team.EVIL).add(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			// scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);

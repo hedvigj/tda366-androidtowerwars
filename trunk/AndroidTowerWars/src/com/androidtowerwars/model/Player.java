@@ -6,12 +6,12 @@ import java.util.Observable;
 
 public class Player extends Observable {
 	
-	public static Map<World.Team, Player> playerMap = new HashMap<World.Team, Player>();
+	public static Map<Team, Player> playerMap = new HashMap<Team, Player>();
 
 	private int gold = 80;
-	private World.Team team;
+	private Team team;
 
-	public Player(World.Team team) {
+	public Player(Team team) {
 		this.team = team;
 		
 	}
@@ -20,7 +20,7 @@ public class Player extends Observable {
 		return gold;
 	}
 
-	public World.Team getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 
@@ -29,7 +29,7 @@ public class Player extends Observable {
 
 	}
 
-	public void setTeam(World.Team team) {
+	public void setTeam(Team team) {
 		this.team = team;
 	}
 	

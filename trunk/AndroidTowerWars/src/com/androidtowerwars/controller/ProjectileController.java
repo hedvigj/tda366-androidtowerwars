@@ -11,10 +11,10 @@ import com.androidtowerwars.model.IProjectile;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.ITower;
 import com.androidtowerwars.model.Projectile;
+import com.androidtowerwars.model.Team;
+import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.World;
-import com.androidtowerwars.model.World.Team;
 import com.androidtowerwars.model.logic.ProjectileLogic;
-import com.androidtowerwars.view.ObserverSprite;
 import com.androidtowerwars.view.ProjectileView;
 import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.WorldView;
@@ -29,18 +29,18 @@ public class ProjectileController extends Entity {
 		// ===========================================================
 	
 		public ProjectileController() {
-			World.projectileListMap.put(Team.EVIL, new CopyOnWriteArrayList<IProjectile>());
-			World.projectileListMap.put(Team.GOOD, new CopyOnWriteArrayList<IProjectile>());
+			Tower.projectileListMap.put(Team.EVIL, new CopyOnWriteArrayList<IProjectile>());
+			Tower.projectileListMap.put(Team.GOOD, new CopyOnWriteArrayList<IProjectile>());
 		}
 		
 		protected void onManagedUpdate(final float pSecondsElapsed) {
 			super.onManagedUpdate(pSecondsElapsed);
-			for(List<IProjectile> projectileList: World.projectileListMap.values()) {
+			for(List<IProjectile> projectileList: Tower.projectileListMap.values()) {
 				for(IProjectile projectile: projectileList) {
 					ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
 					if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(SoldierView.soldierSpriteMap.get(projectile.getTarget()))) {
 						ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
-						removeProjectile(projectile, World.projectileListMap.get(projectile.getParent().getTeam()));
+						removeProjectile(projectile, Tower.projectileListMap.get(projectile.getParent().getTeam()));
 				}
 				}
 			}
@@ -60,10 +60,10 @@ public class ProjectileController extends Entity {
 		}
 		
 		public static void createSprite(ISoldier target, ITower parent) {
-			World.Team team = parent.getTeam();
+			Team team = parent.getTeam();
 			Projectile projectile = new Projectile(target, parent);
 			ProjectileView projectileSprite = new ProjectileView(projectile.getX(), projectile.getY()); //TODO make a projectile texture
-			World.projectileListMap.get(team).add(projectile);
+			Tower.projectileListMap.get(team).add(projectile);
 			ProjectileView.projectileSpriteMap.put(projectile, projectileSprite);
 			projectile.addObserver(projectileSprite);
 			WorldView.getInstance().getScene().getLastChild().attachChild(projectileSprite);

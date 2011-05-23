@@ -2,6 +2,6 @@ package com.androidtowerwars.model;
 
 public interface IBarrack {
 	
-	public World.Team getTeam();
+	public Team getTeam();
 	
 }
