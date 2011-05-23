@@ -55,7 +55,7 @@ public class TouchController implements IOnAreaTouchListener {
             		}
             		else if(pTouchArea == TouchView.rangerSoldierButton){
             			if(TouchView.rangerSoldierButton.releaseTouchSuccessfull()) {
-            				SoldierController.createAnimatedSprite(300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);
+            				SoldierController.createAnimatedSprite(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.52f, World.Team.GOOD);
             			}
             			
             		}
