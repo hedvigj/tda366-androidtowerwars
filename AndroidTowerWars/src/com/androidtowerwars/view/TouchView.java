@@ -68,7 +68,7 @@ public class TouchView {
 		
 		mRangerButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mRangerButtonTextureRegion = TextureRegionFactory.createFromAsset(
-				mRangerButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
+				mRangerButtonTexture, gameActivity, "gfx/cyclopButton.png", 0,0);
 		
 		mWizardButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mWizardButtonTextureRegion = TextureRegionFactory.createFromAsset(
