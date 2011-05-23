@@ -75,6 +75,8 @@ public class SoldierController extends Entity {
 				/* Now it is save to remove the entity! */
 				WorldView.getInstance().getScene().getLastChild()
 						.detachChild(SoldierView.soldierSpriteMap.get(soldier));
+				WorldView.getInstance().getScene().getLastChild()
+				.detachChild(RangerView.rangerSpriteMap.get(soldier));
 			}
 		});
 	}
