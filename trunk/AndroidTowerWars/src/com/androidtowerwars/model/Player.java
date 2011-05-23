@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-public class Player extends Observable {
+public class Player extends Observable implements IPlayer{
 	
 
 	private int gold = 80;
