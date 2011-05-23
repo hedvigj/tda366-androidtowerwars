@@ -44,9 +44,13 @@ public class SoldierController extends Entity {
 		for(List<ISoldier> soldierList: World.soldierListMap.values()) {
 			for(ISoldier soldier: soldierList) {
 				
+				if (soldier.getClass().equals(Soldier.class)) {
+					SoldierLogic.updateSoldier(soldier, pSecondsElapsed);
+				}
+				if (soldier.getClass().equals(Ranger.class)) {
+					SoldierLogic.updateRanger(soldier, pSecondsElapsed);
+				}
 				
-				SoldierLogic.updateSoldier(soldier, pSecondsElapsed);
-				SoldierLogic.updateRanger(soldier, pSecondsElapsed);
 				
 				if(SoldierLogic.getrVariable()){
 					removeSoldier(SoldierLogic.getReciver(), World.soldierListMap.get(SoldierLogic.getReciver().getTeam()));
