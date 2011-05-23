@@ -5,6 +5,7 @@ import org.anddev.andengine.entity.scene.Scene.ITouchArea;
 import org.anddev.andengine.input.touch.TouchEvent;
 
 import android.app.Dialog;
+import android.util.Log;
 import android.view.MotionEvent;
 
 import com.androidtowerwars.GameActivity;
@@ -14,6 +15,7 @@ import com.androidtowerwars.view.BuildTowerView;
 import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.TouchView;
 import com.androidtowerwars.view.TowerTileView;
+import com.androidtowerwars.view.UpgradeTowerView;
 import com.androidtowerwars.view.WorldView;
 
 public class TouchController implements IOnAreaTouchListener {
@@ -44,6 +46,12 @@ public class TouchController implements IOnAreaTouchListener {
             		if (towerTile != null && towerTile.isOccupied() != true) {
             		    ClickButton tileSprite = (ClickButton) pTouchArea;
             		    tileSprite.touch();
+            		    Log.d("wie", "blö");
+            		} else {
+            		    //Log.d("ja", "rätt?");
+                        Log.d("kebab", "omnom");
+                        Dialog v = new UpgradeTowerView(gameActivity, towerTile);
+                        v.show();
             		}
                         return false;
                
