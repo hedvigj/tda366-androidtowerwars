@@ -1,12 +1,12 @@
 package com.androidtowerwars.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.Entity;
 import org.anddev.andengine.entity.sprite.AnimatedSprite;
+import org.anddev.andengine.opengl.texture.region.TiledTextureRegion;
 
 import com.androidtowerwars.model.Barrack;
 import com.androidtowerwars.model.ISoldier;
@@ -92,14 +92,18 @@ public class SoldierController extends Entity {
 	}
 	
 	public static void createAnimatedSprite(float pX, float pY,Team team){
+		TiledTextureRegion textureRegion = RangerView.mCyclopTextureRegion;
+		if (team == Team.EVIL) {
+        	textureRegion = RangerView.mCyclopFacingRightTextureRegion;
+        }
 		Ranger ranger = new Ranger(pX, pY, 7, team);
-		RangerView rangerSprite = new RangerView(pX, pY, ranger);
-		final AnimatedSprite cyclop = new AnimatedSprite(100, 50, RangerView.mCyclopTextureRegion);
-        cyclop.animate(100);
+		RangerView rangerSprite = new RangerView(pX, pY, textureRegion);
+		rangerSprite.animate(100);
+
         World.getInstance().getPlayer(team).getBarrack().addSoldiers(ranger);
         RangerView.rangerSpriteMap.put(ranger, rangerSprite);
         ranger.addObserver(rangerSprite);
-        WorldView.getInstance().getScene().getLastChild().attachChild(cyclop);
+
         WorldView.getInstance().getScene().getLastChild().attachChild(rangerSprite);
         World.getPlayer(team).decreaseGold(ranger.getCost());
 
