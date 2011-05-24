@@ -1,33 +1,59 @@
 package com.androidtowerwars.model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
 import android.util.Log;
 
 import com.androidtowerwars.controller.TowerController;
-import com.androidtowerwars.view.BuildTowerView;
 import com.androidtowerwars.view.ButtonView;
-import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.TowerView;
 
 public class TowerTile implements IButtonSprite {
+	
+
+	private List<ITower> towerList= new ArrayList<ITower>();
 	
 	private float x;
 	private float y;
 	private Rectangle area;
 	private Team team;
+	private float width;
+	private float height;
 	private boolean occupied = false;
 	private Tower tower;
+	private TowerTile towerTile;
 
 	public TowerTile(float pX, float pY, float width, float heigth,
 			Team team) {
 		this.x = pX;
 		this.y = pY;
+		this.height = height;
+		this.width = width;
 		this.area = new Rectangle(x, y, width, heigth);
 		this.team = team;
+	}
+	
+	public TowerTile(){
+		if(towerTile == null){
+		towerTile = new TowerTile(x,y,width,height,team);
+		}
+		towerTile = this;
+	}
+	
+	public List<ITower> getTowers() {
+		return towerList;
+	}
+	
+	public void addTowers(Tower tower){
+		towerList.add(tower);
+	}
+	
+	public void putTowerList(List<ITower> tower){
+		towerList = new CopyOnWriteArrayList<ITower>(tower);
 	}
 
 	public Rectangle getRectangle() {

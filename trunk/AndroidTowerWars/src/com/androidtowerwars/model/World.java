@@ -8,8 +8,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class World {
 
-	
-	public static ConcurrentHashMap<Team, List<ITower>> towerListMap = new ConcurrentHashMap<Team, List<ITower>>();
 	public static Map<Team, Player> playerMap = new HashMap<Team, Player>();
 	
 
