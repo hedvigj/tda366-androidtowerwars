@@ -16,16 +16,16 @@ public class BackgroundView {
 	
 	public static void loadResources(GameActivity gameActivity){
 		
-		mBackgroundTexture = new Texture(2048, 512);
-		mBackgroundTextureRegion = TextureRegionFactory.createFromAsset(
-		mBackgroundTexture, gameActivity,"gfx/parallax_background_layer_back.png", 0, 0);
-		WorldView.getInstance().getTextureManager().loadTexture(mBackgroundTexture);
+//		mBackgroundTexture = new Texture(2048, 512);
+//		mBackgroundTextureRegion = TextureRegionFactory.createFromAsset(
+//		mBackgroundTexture, gameActivity,"gfx/parallax_background_layer_back.png", 0, 0);
+//		WorldView.getInstance().getTextureManager().loadTexture(mBackgroundTexture);
 
-		//mBackgroundTexture = new Texture(4096, 2048);
-		//mBackgroundTextureRegion = TextureRegionFactory.createFromAsset(
-		//		mBackgroundTexture, gameActivity,
-		//		"gfx/Optimized-Background_Test.png", 0, 0);
-		//WorldView.getInstance().getTextureManager().loadTexture(mBackgroundTexture);
+		mBackgroundTexture = new Texture(4096, 2048);
+		mBackgroundTextureRegion = TextureRegionFactory.createFromAsset(
+				mBackgroundTexture, gameActivity,
+				"gfx/Optimized-Background_Test.jpg", 0, 0);
+		WorldView.getInstance().getTextureManager().loadTexture(mBackgroundTexture);
 	}
 
 	public static void loadScene(Scene scene){
