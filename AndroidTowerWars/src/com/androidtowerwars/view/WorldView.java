@@ -19,7 +19,7 @@ public class WorldView extends Engine {
 	public static final int CAMERA_WIDTH = 800;
     public static final int CAMERA_HEIGHT = 480;
     public static final int MAP_WIDTH = 4000;
-    public static final int MAP_HEIGHT = 2000;
+    public static final int MAP_HEIGHT = 1040;
 
 	private static WorldView instance = null;
 	
