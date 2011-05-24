@@ -5,6 +5,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
+import android.util.Log;
+
 import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.view.BuildTowerView;
 import com.androidtowerwars.view.ButtonView;
@@ -17,6 +19,7 @@ public class TowerTile implements IButtonSprite {
 	private Rectangle area;
 	private Team team;
 	private boolean occupied = false;
+	private Tower tower;
 
 	public TowerTile(float pX, float pY, float width, float heigth,
 			Team team) {
@@ -48,23 +51,29 @@ public class TowerTile implements IButtonSprite {
 
 	public void action() {
 		if (!occupied) {
-			TowerController.createTestTower(
+			this.tower = TowerController.createTestTower(
 					x - (TowerView.mTowerTextureRegion.getWidth() / 2)
 							+ (ButtonView.mButtonTextureRegion.getWidth() / 2),
 					y - TowerView.mTowerTextureRegion.getHeight()
 							+ ButtonView.mButtonTextureRegion.getHeight(),
 					TowerView.mTowerTextureRegion, 200, team);
 			occupied = true;
+			
 		}
 	}
 
 	public void magma_action() {
 		if (!occupied) {
-			TowerController.createMagmaPitTower(x
+			this.tower = TowerController.createMagmaPitTower(x
 					- (TowerView.mMagmaPitTowerTextureRegion.getWidth() / 2)
 					+ (ButtonView.mButtonTextureRegion.getWidth() / 2) + 30, y,
 					TowerView.mMagmaPitTowerTextureRegion, 200, team);
 			occupied = true;
 		}
+	}
+	
+	public Tower getTower() {
+	    Log.d("test","null här?");
+	    return this.tower;
 	}
 }
