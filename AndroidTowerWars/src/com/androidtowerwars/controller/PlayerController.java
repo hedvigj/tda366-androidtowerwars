@@ -11,7 +11,7 @@ import com.androidtowerwars.view.WorldView;
 public class PlayerController {
 	
 	public PlayerController() {
-		Player evilPlayer = World.getInstance().getPlayer(Team.EVIL);
+		Player evilPlayer = World.getPlayer(Team.EVIL);
 		ArtificialIntelligenceController evilAI = new ArtificialIntelligenceController(evilPlayer);
 		evilPlayer.addObserver(evilAI);
          final TimerHandler timerHandler = new TimerHandler(evilAI.getUpdateInterval(),
@@ -23,8 +23,6 @@ public class PlayerController {
                      }
                  });
          WorldView.getInstance().registerUpdateHandler(timerHandler);
-		World.playerMap.put(Team.GOOD, World.getInstance().getPlayer(Team.GOOD));
-		World.playerMap.put(Team.EVIL, evilPlayer);
 		
 	}
 	

@@ -23,4 +23,5 @@ public interface ITower {
 	public void increaseKills();
 	
 	public int getKills();
+	
 }

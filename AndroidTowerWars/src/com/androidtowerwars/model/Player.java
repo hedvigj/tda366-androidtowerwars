@@ -8,12 +8,25 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Player extends Observable implements IPlayer{
 	
 	private List<TowerTile> towerTileList = new ArrayList<TowerTile>();
-
+	private List<ITower> towerList= new ArrayList<ITower>();
+	
 	private int gold = 80;
 	private Team team;
 	private Barrack barrack = new Barrack();
 	private TowerTile towerTile = new TowerTile();
 	
+	
+	public boolean removeTower(ITower tower) {
+		return towerList.remove(tower);
+	}
+	
+	public void addTower(Tower tower){
+		towerList.add(tower);
+	}
+	
+	public void putTowerList(List<ITower> tower){
+		towerList = new CopyOnWriteArrayList<ITower>(tower);
+	}
 	
 	public List<TowerTile> getTowerTiles() {
 		return towerTileList;
@@ -23,8 +36,8 @@ public class Player extends Observable implements IPlayer{
 		towerTileList.add(towerTile);
 	}
 	
-	public void putTowerTileList(List<TowerTile> towerTile){
-		towerTileList = new CopyOnWriteArrayList<TowerTile>(towerTile);
+	public void putTowerTileList(List<TowerTile> towerTiles){
+		towerTileList = new CopyOnWriteArrayList<TowerTile>(towerTiles);
 	}
 
 	public Player(Team team) {

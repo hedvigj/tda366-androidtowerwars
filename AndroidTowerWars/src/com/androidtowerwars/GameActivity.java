@@ -155,7 +155,7 @@ public class GameActivity extends BaseGameActivity {
 				new ITimerCallback() {
 
 					public void onTimePassed(final TimerHandler pTimerHandler) {
-						TouchView.goldText.setText(Integer.toString(World.playerMap.get(Team.GOOD)
+						TouchView.goldText.setText(Integer.toString(World.getPlayer(Team.GOOD)
 								.getGold()));
 					}
 				}));
@@ -163,11 +163,9 @@ public class GameActivity extends BaseGameActivity {
 	}
 
 	public void onLoadComplete() {
-		Log.d("TowerWars", "gold: "+ World.playerMap.get(Team.EVIL).getGold());
 		ArtificialIntelligenceController.buildTower();
 		ArtificialIntelligenceController.buildTower();
 		ArtificialIntelligenceController.trainSoldier();
-		Log.d("TowerWars", "gold: "+ World.playerMap.get(Team.EVIL).getGold());
 		
 		Toast.makeText(
 				getApplicationContext(),

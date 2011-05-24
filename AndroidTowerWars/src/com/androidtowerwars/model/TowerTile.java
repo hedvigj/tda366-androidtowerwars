@@ -15,7 +15,7 @@ import com.androidtowerwars.view.TowerView;
 public class TowerTile implements IButtonSprite {
 	
 
-	private List<ITower> towerList= new ArrayList<ITower>();
+	
 	
 	private float x;
 	private float y;
@@ -44,17 +44,7 @@ public class TowerTile implements IButtonSprite {
 		towerTile = this;
 	}
 	
-	public List<ITower> getTowers() {
-		return towerList;
-	}
-	
-	public void addTowers(Tower tower){
-		towerList.add(tower);
-	}
-	
-	public void putTowerList(List<ITower> tower){
-		towerList = new CopyOnWriteArrayList<ITower>(tower);
-	}
+
 
 	public Rectangle getRectangle() {
 		return area;
@@ -100,7 +90,7 @@ public class TowerTile implements IButtonSprite {
 	}
 	
 	public Tower getTower() {
-	    Log.d("test","null här?");
+	    Log.d("test","null hï¿½r?");
 	    return tower;
 	}
 }
