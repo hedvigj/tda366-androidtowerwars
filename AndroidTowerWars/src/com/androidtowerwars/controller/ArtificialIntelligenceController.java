@@ -86,7 +86,7 @@ import com.androidtowerwars.view.WorldView;
 			return;
 		}
 		public static void trainRanger(){
-			SoldierController.createAnimatedSprite(300, WorldView.MAP_HEIGHT*0.66f-32, Team.EVIL);
+			SoldierController.createAnimatedSprite(300, WorldView.MAP_HEIGHT*0.66f-64, Team.EVIL);
 		}
 		
 		public static float getUpdateInterval() {

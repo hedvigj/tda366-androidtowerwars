@@ -18,6 +18,7 @@ import com.androidtowerwars.model.TowerTile;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.logic.ProjectileLogic;
 import com.androidtowerwars.view.ProjectileView;
+import com.androidtowerwars.view.RangerView;
 import com.androidtowerwars.view.SoldierView;
 import com.androidtowerwars.view.WorldView;
 
@@ -42,6 +43,10 @@ public class ProjectileController extends Entity {
 							for(IProjectile projectile : tower.getProjectiles()) {
 								ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
 								if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(SoldierView.soldierSpriteMap.get(projectile.getTarget()))) {
+									ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
+									removeProjectile(projectile, tower.getProjectiles());
+								}
+								else if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(RangerView.rangerSpriteMap.get(projectile.getTarget()))) {
 									ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
 									removeProjectile(projectile, tower.getProjectiles());
 								}
