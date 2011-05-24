@@ -13,6 +13,7 @@ import android.util.Log;
 import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.ITower;
 import com.androidtowerwars.model.MagmaPitTower;
+import com.androidtowerwars.model.TarTower;
 import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.TowerTile;
@@ -82,6 +83,26 @@ public class TowerController {//extends Entity {
         return tower;
     }
 
+    public static synchronized Tower createTarTower(float pX, float pY, TextureRegion pTextureRegion, float range, Team team) {
+        final TarTower tower = new TarTower(pX, pY, range, team);
+        Sprite sprite = new Sprite(pX, pY, pTextureRegion);
+        World.getPlayer(team).addTower(tower);
+        TowerView.towerSpriteMap.put(tower, sprite);
+        GameActivity.setTimestamp(0);
+        WorldView.getInstance().getScene().getLastChild().attachChild(sprite);
+        TimerHandler timerHandler = new TimerHandler(tower.getAttackSpeed(),
+                        new ITimerCallback() {
+                            public void onTimePassed(
+                                    final TimerHandler pTimerHandler) {
+                                pTimerHandler.reset();
+                                TowerLogic.updateTower(tower);
+                            }
+                        });
+        timerHandlerMap.put(tower, timerHandler);
+        WorldView.getInstance().registerUpdateHandler(timerHandler);
+        World.getPlayer(team).decreaseGold(tower.getCost());
+        return tower;
+    }
     public static synchronized void sellTower(final TowerTile towerTile) {
         int i = (int) ((int) towerTile.getTower().getCost()*0.75);
         World.getPlayer(towerTile.getTeam()).increaseGold(i);

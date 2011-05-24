@@ -58,7 +58,7 @@ public class BuildTowerView extends Dialog {
         case 2:
             //build tower 1
             //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
-        	towerTile.action();
+        	towerTile.tar_action();
             break;
         case 3:
             //build tower 1

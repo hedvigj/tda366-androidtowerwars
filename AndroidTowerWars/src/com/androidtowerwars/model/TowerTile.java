@@ -13,10 +13,7 @@ import com.androidtowerwars.view.ButtonView;
 import com.androidtowerwars.view.TowerView;
 
 public class TowerTile implements IButtonSprite {
-	
 
-	
-	
 	private float x;
 	private float y;
 	private Rectangle area;
@@ -24,8 +21,7 @@ public class TowerTile implements IButtonSprite {
 	private boolean occupied = false;
 	private Tower tower;
 
-	public TowerTile(float pX, float pY, float width, float heigth,
-			Team team) {
+	public TowerTile(float pX, float pY, float width, float heigth, Team team) {
 		this.x = pX;
 		this.y = pY;
 		this.area = new Rectangle(x, y, width, heigth);
@@ -51,21 +47,21 @@ public class TowerTile implements IButtonSprite {
 	public boolean isOccupied() {
 		return occupied;
 	}
-	
-	public boolean resetOccupied(){
+
+	public boolean resetOccupied() {
 		return occupied = false;
 	}
 
 	public void action() {
 		if (!occupied) {
-			this.tower = TowerController.createTestTower(
-					x - (TowerView.mTowerTextureRegion.getWidth() / 2)
-							+ (ButtonView.mButtonTextureRegion.getWidth() / 2),
-					y - TowerView.mTowerTextureRegion.getHeight()
-							+ ButtonView.mButtonTextureRegion.getHeight(),
+			this.tower = TowerController.createTestTower(x
+					- (TowerView.mTowerTextureRegion.getWidth() / 2)
+					+ (ButtonView.mButtonTextureRegion.getWidth() / 2), y
+					- TowerView.mTowerTextureRegion.getHeight()
+					+ ButtonView.mButtonTextureRegion.getHeight(),
 					TowerView.mTowerTextureRegion, 200, team);
 			occupied = true;
-			
+
 		}
 	}
 
@@ -78,8 +74,18 @@ public class TowerTile implements IButtonSprite {
 			occupied = true;
 		}
 	}
-	
+
+	public void tar_action() {
+		if (!occupied) {
+			this.tower = TowerController.createTarTower(x
+					- (TowerView.mTarTowerTextureRegion.getWidth() / 2)
+					+ (ButtonView.mButtonTextureRegion.getWidth() / 2)+20, y-80,
+					TowerView.mTarTowerTextureRegion, 200, team);
+			occupied = true;
+		}
+	}
+
 	public Tower getTower() {
-	    return tower;
+		return tower;
 	}
 }
