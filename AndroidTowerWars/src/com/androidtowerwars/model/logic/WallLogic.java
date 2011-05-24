@@ -2,14 +2,13 @@ package com.androidtowerwars.model.logic;
 
 import org.anddev.andengine.entity.primitive.Rectangle;
 
-import android.util.Log;
-
+import com.androidtowerwars.controller.PlayerController;
 import com.androidtowerwars.controller.SoldierController;
-import com.androidtowerwars.model.Barrack;
 import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.SoldierView;
+import com.androidtowerwars.view.TouchView;
 
 
 public class WallLogic {
@@ -23,15 +22,18 @@ public class WallLogic {
 			
 			SoldierController.removeSoldier(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n),
 					World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n).getTeam()));
-			damageCastle(wall, team);
+			damageCastle(wall);
 			}
 		}
 	}
 	
-	public static synchronized void damageCastle(Wall wall, Team team){
+	public static synchronized void damageCastle(Wall wall){
 		final int health = wall.getHealth();
 		if(health <= 0){
-			Log.d("TowerWars", "Muren �r f�rst�rd");
+			if (wall.getTeam() == Team.EVIL )
+				PlayerController.gameOver(true);
+			else
+				PlayerController.gameOver(false);
 		}
 		else
 			wall.setHealth(health-10);
