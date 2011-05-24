@@ -14,6 +14,7 @@ import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.TowerView;
 
 public class TowerTile implements IButtonSprite {
+	
 	private float x;
 	private float y;
 	private Rectangle area;
@@ -74,6 +75,6 @@ public class TowerTile implements IButtonSprite {
 	
 	public Tower getTower() {
 	    Log.d("test","null här?");
-	    return this.tower;
+	    return tower;
 	}
 }

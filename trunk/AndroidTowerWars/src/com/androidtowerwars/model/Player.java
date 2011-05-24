@@ -1,15 +1,30 @@
 package com.androidtowerwars.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Player extends Observable implements IPlayer{
 	
+	private List<TowerTile> towerTileList = new ArrayList<TowerTile>();
 
 	private int gold = 80;
 	private Team team;
 	private Barrack barrack = new Barrack();
+	
+	
+	public List<TowerTile> getTowerTiles() {
+		return towerTileList;
+	}
+	
+	public void addTowerTiles(TowerTile towerTile){
+		towerTileList.add(towerTile);
+	}
+	
+	public void putTowerTileList(List<TowerTile> towerTile){
+		towerTileList = new CopyOnWriteArrayList<TowerTile>(towerTile);
+	}
 
 	public Player(Team team) {
 		this.team = team;
