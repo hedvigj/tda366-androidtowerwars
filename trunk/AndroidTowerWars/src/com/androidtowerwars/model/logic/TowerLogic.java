@@ -7,6 +7,7 @@ import com.androidtowerwars.model.Barrack;
 import com.androidtowerwars.model.ITower;
 import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.World;
+import com.androidtowerwars.view.RangerView;
 import com.androidtowerwars.view.SoldierView;
 
 public class TowerLogic {
@@ -17,6 +18,14 @@ public class TowerLogic {
 		for (int n = 0; n < World.getInstance().getPlayer(team.opposite())
 				.getBarrack().getSoldiers().size(); n++) {
 			if (range.collidesWith(SoldierView.soldierSpriteMap.get(World
+					.getInstance().getPlayer(team.opposite()).getBarrack()
+					.getSoldiers().get(n)))) {
+				ProjectileController.createSprite(World.getInstance()
+						.getPlayer(team.opposite()).getBarrack().getSoldiers()
+						.get(n), tower);
+				break;
+			}
+			else if (range.collidesWith(RangerView.rangerSpriteMap.get(World
 					.getInstance().getPlayer(team.opposite()).getBarrack()
 					.getSoldiers().get(n)))) {
 				ProjectileController.createSprite(World.getInstance()
