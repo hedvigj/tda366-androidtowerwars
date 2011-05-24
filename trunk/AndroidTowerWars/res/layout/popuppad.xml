@@ -17,7 +17,7 @@
         android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/arrow_tower_button">
+        android:background="@drawable/tar_tower_button">
 		</Button>		
 		<Button android:id="@+id/keypad_3"
         android:padding="5dp"
