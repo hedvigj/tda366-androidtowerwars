@@ -103,4 +103,8 @@ public class TowerController {//extends Entity {
     public static void setInstance(TowerController instance) {
         TowerController.instance = instance;
     }
+
+    public static void upgradeTower(TowerTile towerTile) {
+        //future
+    }
 }
