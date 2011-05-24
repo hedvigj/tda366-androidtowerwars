@@ -9,7 +9,7 @@ import com.androidtowerwars.model.World;
 public class TowerTileController {
 	
 	public TowerTileController() {
-		World.towerTileListMap.put(Team.GOOD, new CopyOnWriteArrayList<TowerTile>());
-		World.towerTileListMap.put(Team.EVIL, new CopyOnWriteArrayList<TowerTile>());
+		World.getInstance().getPlayer(Team.GOOD).putTowerTileList(new CopyOnWriteArrayList<TowerTile>());
+		World.getInstance().getPlayer(Team.EVIL).putTowerTileList(new CopyOnWriteArrayList<TowerTile>());
 	}	
 }

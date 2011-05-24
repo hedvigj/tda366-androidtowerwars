@@ -95,7 +95,7 @@ public class TowerController {//extends Entity {
         WorldView.getInstance().runOnUpdateThread(new Runnable() {
             public void run() {
                 World.towerListMap.get(towerTile.getTeam()).remove(towerTile.getTower());
-                World.towerTileListMap.get(towerTile.getTeam()).remove(towerTile);
+                World.getInstance().getPlayer(towerTile.getTeam()).getTowerTiles().remove(towerTile);
                 WorldView.getInstance().getScene().getLastChild().detachChild(TowerView.towerSpriteMap.get(towerTile.getTower()));
             }
         });

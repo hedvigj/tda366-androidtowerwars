@@ -25,7 +25,7 @@ public class TowerTileView {
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.GOOD);
-			World.towerTileListMap.get(Team.GOOD).add(tempTowerTile);
+			World.getInstance().getPlayer(Team.GOOD).addTowerTiles(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -38,7 +38,7 @@ public class TowerTileView {
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.GOOD);
-			World.towerTileListMap.get(Team.GOOD).add(tempTowerTile);
+			World.getInstance().getPlayer(Team.GOOD).addTowerTiles(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -52,7 +52,7 @@ public class TowerTileView {
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.EVIL);
-			World.towerTileListMap.get(Team.EVIL).add(tempTowerTile);
+			World.getInstance().getPlayer(Team.EVIL).addTowerTiles(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			// scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
@@ -65,7 +65,7 @@ public class TowerTileView {
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.EVIL);
-			World.towerTileListMap.get(Team.EVIL).add(tempTowerTile);
+			World.getInstance().getPlayer(Team.EVIL).addTowerTiles(tempTowerTile);
 			TowerTileView.towerTileSpriteMap.put(tempSprite, tempTowerTile);
 			// scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
