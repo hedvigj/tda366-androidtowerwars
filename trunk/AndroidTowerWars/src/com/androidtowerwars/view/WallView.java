@@ -30,9 +30,13 @@ public class WallView {
 		final Sprite gWall = new Sprite(WorldView.MAP_WIDTH
 				- WallView.mWallTextureRegion.getWidth(), WorldView.MAP_HEIGHT * 0.3f,
 				WallView.mWallTextureRegion);
+		gWall.setAlpha(0.0f);
+		gWall.setScale(0.00001f);
 		scene.getLastChild().attachChild(gWall);
 		final Sprite bWall = new Sprite(0, WorldView.MAP_HEIGHT * 0.3f,
 				WallView.mWallTextureRegion);
+		bWall.setAlpha(0.0f);
+		bWall.setScale(0.00001f);
 		scene.getLastChild().attachChild(bWall);
 		WallView.goodWall = new Wall(WorldView.MAP_WIDTH, WorldView.MAP_HEIGHT * 0.5f,
 				WallView.mWallTextureRegion.getWidth(), Team.GOOD);
