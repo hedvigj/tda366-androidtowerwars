@@ -80,11 +80,6 @@ public class TowerTile implements IButtonSprite {
 	}
 	
 	public Tower getTower() {
-	    Log.d("test","null h�r?");
 	    return tower;
-	}
-	
-	public void reset() {
-		occupied = false;
 	}
 }
