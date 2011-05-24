@@ -21,30 +21,16 @@ public class TowerTile implements IButtonSprite {
 	private float y;
 	private Rectangle area;
 	private Team team;
-	private float width;
-	private float height;
 	private boolean occupied = false;
 	private Tower tower;
-	private TowerTile towerTile;
 
 	public TowerTile(float pX, float pY, float width, float heigth,
 			Team team) {
 		this.x = pX;
 		this.y = pY;
-		this.height = height;
-		this.width = width;
 		this.area = new Rectangle(x, y, width, heigth);
 		this.team = team;
 	}
-	
-	public TowerTile(){
-		if(towerTile == null){
-		towerTile = new TowerTile(x,y,width,height,team);
-		}
-		towerTile = this;
-	}
-	
-
 
 	public Rectangle getRectangle() {
 		return area;
