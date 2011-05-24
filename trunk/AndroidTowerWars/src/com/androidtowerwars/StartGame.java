@@ -18,7 +18,7 @@ public class StartGame extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         View continueButton = findViewById(R.id.continue_button);
-        continueButton.setOnClickListener(this);
+       	continueButton.setOnClickListener(this);
         View newButton = findViewById(R.id.new_button);
         newButton.setOnClickListener(this);
         View aboutButton = findViewById(R.id.about_button);
