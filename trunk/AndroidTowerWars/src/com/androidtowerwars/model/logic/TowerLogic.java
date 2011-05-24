@@ -10,13 +10,18 @@ import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.SoldierView;
 
 public class TowerLogic {
-	
+
 	public static synchronized void updateTower(ITower tower) {
 		Team team = tower.getTeam();
 		Rectangle range = tower.getRange();
-		for(int n=0;n<Barrack.soldierListMap.get(team.opposite()).size();n++) {
-			if (range.collidesWith(SoldierView.soldierSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n)))) {
-				ProjectileController.createSprite(Barrack.soldierListMap.get(team.opposite()).get(n),tower);
+		for (int n = 0; n < World.getInstance().getPlayer(team.opposite())
+				.getBarrack().getSoldiers().size(); n++) {
+			if (range.collidesWith(SoldierView.soldierSpriteMap.get(World
+					.getInstance().getPlayer(team.opposite()).getBarrack()
+					.getSoldiers().get(n)))) {
+				ProjectileController.createSprite(World.getInstance()
+						.getPlayer(team.opposite()).getBarrack().getSoldiers()
+						.get(n), tower);
 				break;
 			}
 		}

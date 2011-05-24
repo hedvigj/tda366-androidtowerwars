@@ -23,11 +23,11 @@ public class SoldierLogic {
         Team team = soldier.getTeam();   
         Sprite range = SoldierView.soldierSpriteMap.get(soldier);//soldier.getRange();
         soldier.setPosition(soldier.getX() + soldier.getSpeed() * pSecondsElapsed, soldier.getY());
-        for(int n=0;n<Barrack.soldierListMap.get(team.opposite()).size();n++) {
-            if (range.collidesWith(SoldierView.soldierSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n)))) {
+        for(int n=0;n<World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().size();n++) {
+            if (range.collidesWith(SoldierView.soldierSpriteMap.get(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n)))) {
                 //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
                 ISoldier S = soldier;
-                ISoldier R =  Barrack.soldierListMap.get(team.opposite()).get(n);
+                ISoldier R =  World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n);
                 //attackSoldier(); Should attack before kill?
                 attackSoldier(S,R);
                 break;
@@ -38,12 +38,12 @@ public class SoldierLogic {
         Team team = ranger.getTeam();   
         AnimatedSprite range = RangerView.rangerSpriteMap.get(ranger);//soldier.getRange();
         ranger.setPosition(ranger.getX() + ranger.getSpeed() * pSecondsElapsed, ranger.getY());
-        for(int n=0;n<Barrack.soldierListMap.get(team.opposite()).size();n++) {
-            if (range.collidesWith(RangerView.rangerSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n))) ||
-                    range.collidesWith(SoldierView.soldierSpriteMap.get(Barrack.soldierListMap.get(team.opposite()).get(n)))) {
+        for(int n=0;n<World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().size();n++) {
+            if (range.collidesWith(RangerView.rangerSpriteMap.get(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n))) ||
+                    range.collidesWith(SoldierView.soldierSpriteMap.get(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n)))) {
                 //SoldierController.removeSoldier(soldier, GameActivity.instance.soldierController.soldierListMap.get(team));
                 ISoldier S = ranger;
-                ISoldier R =  Barrack.soldierListMap.get(team.opposite()).get(n);
+                ISoldier R =  World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n);
                 //attackSoldier(); Should attack before kill?
                 attackSoldier(S,R);
                 break;
