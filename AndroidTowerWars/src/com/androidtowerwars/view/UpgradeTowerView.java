@@ -31,7 +31,6 @@ public class UpgradeTowerView extends Dialog {
         findViewById(R.id.remove).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //send delete
-            	towerTile.resetOccupied();
                 TowerController.sellTower(towerTile);
                 //WorldView.getInstance().getScene().getLastChild().detachChild(towerTile);
                 dismiss();

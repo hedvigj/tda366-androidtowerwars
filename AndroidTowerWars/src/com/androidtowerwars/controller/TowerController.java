@@ -86,7 +86,7 @@ public class TowerController {//extends Entity {
         int i = (int) ((int) towerTile.getTower().getCost()*0.75);
         World.getPlayer(towerTile.getTeam()).increaseGold(i);
         removeTower(towerTile);
-        towerTile.reset();
+        towerTile.resetOccupied();
     }
     
     public static synchronized void removeTower(final TowerTile towerTile) {
