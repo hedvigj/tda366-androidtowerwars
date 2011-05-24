@@ -79,4 +79,8 @@ public class TowerTile implements IButtonSprite {
 	    Log.d("test","null h�r?");
 	    return tower;
 	}
+	
+	public void reset() {
+		occupied = false;
+	}
 }

@@ -86,16 +86,18 @@ public class TowerController {//extends Entity {
         int i = (int) ((int) towerTile.getTower().getCost()*0.75);
         World.getPlayer(towerTile.getTeam()).increaseGold(i);
         removeTower(towerTile);
+        towerTile.reset();
     }
     
     public static synchronized void removeTower(final TowerTile towerTile) {
-        WorldView.getInstance().runOnUpdateThread(new Runnable() {
+    	WorldView.getInstance().unregisterUpdateHandler(timerHandlerMap.get(towerTile.getTower()));
+    	timerHandlerMap.remove(towerTile.getTower());
+    	WorldView.getInstance().runOnUpdateThread(new Runnable() {
             public void run() {
-            	WorldView.getInstance().unregisterUpdateHandler(timerHandlerMap.get(towerTile.getTower()));
-                timerHandlerMap.remove(towerTile.getTower());
+            	WorldView.getInstance().getScene().getLastChild().detachChild(TowerView.towerSpriteMap.get(towerTile.getTower()));
             	World.getPlayer(towerTile.getTeam()).removeTower(towerTile.getTower());
-                World.getPlayer(towerTile.getTeam()).getTowerTiles().remove(towerTile);
-                WorldView.getInstance().getScene().getLastChild().detachChild(TowerView.towerSpriteMap.get(towerTile.getTower()));
+                //World.getPlayer(towerTile.getTeam()).getTowerTiles().remove(towerTile);
+                
             }
         });
     }
