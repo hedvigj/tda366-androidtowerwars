@@ -13,7 +13,6 @@ public class Player extends Observable implements IPlayer{
 	private int gold = 80;
 	private Team team;
 	private Barrack barrack = new Barrack();
-	private TowerTile towerTile = new TowerTile();
 	
 	
 	public boolean removeTower(ITower tower) {
@@ -79,8 +78,5 @@ public class Player extends Observable implements IPlayer{
 	public Barrack getBarrack(){
 		return barrack;
 	}
-	
-	public TowerTile getTowerTile(){
-		return towerTile;
-	}
+
 }
