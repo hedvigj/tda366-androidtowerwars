@@ -1,5 +1,7 @@
 package com.androidtowerwars.model;
 
+import java.util.List;
+
 import org.anddev.andengine.entity.primitive.Rectangle;
 
 public interface ITower {
@@ -23,5 +25,11 @@ public interface ITower {
 	public void increaseKills();
 	
 	public int getKills();
+
+	public List<IProjectile> getProjectiles();
+	
+	public void addProjectile(IProjectile projectile);
+	
+	public boolean hasProjectiles();
 	
 }

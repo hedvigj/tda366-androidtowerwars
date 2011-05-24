@@ -8,24 +8,24 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Player extends Observable implements IPlayer{
 	
 	private List<TowerTile> towerTileList = new ArrayList<TowerTile>();
-	private List<ITower> towerList= new ArrayList<ITower>();
+
 	
 	private int gold = 80;
 	private Team team;
 	private Barrack barrack = new Barrack();
 	
 	
-	public boolean removeTower(ITower tower) {
-		return towerList.remove(tower);
-	}
-	
-	public void addTower(Tower tower){
-		towerList.add(tower);
-	}
-	
-	public void putTowerList(List<ITower> tower){
-		towerList = new CopyOnWriteArrayList<ITower>(tower);
-	}
+//	public boolean removeTower(ITower tower) {
+//		return towerList.remove(tower);
+//	}
+//	
+//	public void addTower(Tower tower){
+//		towerList.add(tower);
+//	}
+//	
+//	public void putTowerList(List<ITower> tower){
+//		towerList = new CopyOnWriteArrayList<ITower>(tower);
+//	}
 	
 	public List<TowerTile> getTowerTiles() {
 		return towerTileList;

@@ -4,15 +4,9 @@ package com.androidtowerwars.model;
 
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.anddev.andengine.engine.handler.timer.ITimerCallback;
-import org.anddev.andengine.engine.handler.timer.TimerHandler;
 import org.anddev.andengine.entity.primitive.Rectangle;
-import org.anddev.andengine.entity.sprite.Sprite;
-
-import com.androidtowerwars.controller.TowerController;
-import com.androidtowerwars.model.logic.TowerLogic;
-import com.androidtowerwars.view.WorldView;
 
 public class Tower implements ITower {
 
@@ -25,8 +19,8 @@ public class Tower implements ITower {
 	public int kills = 0;
 	public static int cost = 20;
 	
-	public static ConcurrentHashMap<Team, List<IProjectile>> projectileListMap = new ConcurrentHashMap<Team, List<IProjectile>>();
-
+	private List<IProjectile> projectileList = new CopyOnWriteArrayList<IProjectile>();
+	
 	public Tower(float pX, float pY, float range, Team team) {
 		this.range = new Rectangle(pX-(range*0.5f)*0.5f, pY-400, range, 900f); //not centered by width!
 		this.team = team;
@@ -39,6 +33,22 @@ public class Tower implements ITower {
 		return this.attack_speed;
 	}
 
+	public List<IProjectile> getProjectiles() {
+		return projectileList;
+	}
+	
+	public void addProjectile(IProjectile projectile) {
+		projectileList.add(projectile);
+	}
+	
+	public boolean hasProjectiles() {
+		if (projectileList.size() == 0) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
 	
 	public Team getTeam() {
 		return team;
