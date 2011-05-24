@@ -18,10 +18,10 @@ public class TowerTileView {
 		for (int n = 0; n < 6; n++) {
 			// good towers
 			ClickButton tempSprite = new ClickButton(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
+					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.49f,
 					ButtonView.mButtonTextureRegion);
 			TowerTile tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.44f,
+					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.49f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.GOOD);
@@ -31,10 +31,10 @@ public class TowerTileView {
 			scene.getLastChild().attachChild(tempSprite);
 
 			tempSprite = new ClickButton(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
+					- (500 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.75f,
 					ButtonView.mButtonTextureRegion);
 			tempTowerTile = new TowerTile(WorldView.MAP_WIDTH
-					- (700 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.56f,
+					- (500 + (tileSpacing * n)), WorldView.MAP_HEIGHT * 0.75f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.GOOD);
@@ -44,11 +44,11 @@ public class TowerTileView {
 			scene.getLastChild().attachChild(tempSprite);
 
 			// evil towers
-			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.44f,
+			tempSprite = new ClickButton(350 + (tileSpacing * n),
+					WorldView.MAP_HEIGHT * 0.49f,
 					ButtonView.mButtonTextureRegion);
-			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.44f,
+			tempTowerTile = new TowerTile(350 + (tileSpacing * n),
+					WorldView.MAP_HEIGHT * 0.49f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.EVIL);
@@ -57,11 +57,11 @@ public class TowerTileView {
 			// scene.registerTouchArea(tempSprite);
 			scene.getLastChild().attachChild(tempSprite);
 
-			tempSprite = new ClickButton(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.56f,
+			tempSprite = new ClickButton(550 + (tileSpacing * n),
+					WorldView.MAP_HEIGHT * 0.75f,
 					ButtonView.mButtonTextureRegion);
-			tempTowerTile = new TowerTile(500 + (tileSpacing * n),
-					WorldView.MAP_HEIGHT * 0.56f,
+			tempTowerTile = new TowerTile(550 + (tileSpacing * n),
+					WorldView.MAP_HEIGHT * 0.75f,
 					ButtonView.mButtonTextureRegion.getWidth(),
 					ButtonView.mButtonTextureRegion.getHeight(),
 					Team.EVIL);

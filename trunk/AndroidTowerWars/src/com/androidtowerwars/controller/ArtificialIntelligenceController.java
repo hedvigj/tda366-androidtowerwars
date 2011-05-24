@@ -43,6 +43,7 @@ import com.androidtowerwars.view.WorldView;
 			
 			if (ArtificialIntelligence.evilSurpriseBig()) {
 				trainSoldier();
+				trainRanger();
 			}
 		}
 		public void update(Observable arg0, Object arg1) {
@@ -81,8 +82,11 @@ import com.androidtowerwars.view.WorldView;
 		}
 		
 		public static void trainSoldier() {
-			SoldierController.createSprite(300, WorldView.MAP_HEIGHT*0.52f, Team.EVIL);
+			SoldierController.createSprite(300, WorldView.MAP_HEIGHT*0.66f-32, Team.EVIL);
 			return;
+		}
+		public static void trainRanger(){
+			SoldierController.createAnimatedSprite(300, WorldView.MAP_HEIGHT*0.66f-32, Team.EVIL);
 		}
 		
 		public static float getUpdateInterval() {
