@@ -88,7 +88,7 @@ public class SoldierController extends Entity {
 		SoldierView.soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
-		World.playerMap.get(team).decreaseGold(soldier.getCost());
+		World.getPlayer(team).decreaseGold(soldier.getCost());
 	}
 	
 	public static void createAnimatedSprite(float pX, float pY,Team team){
@@ -101,7 +101,7 @@ public class SoldierController extends Entity {
         ranger.addObserver(rangerSprite);
         WorldView.getInstance().getScene().getLastChild().attachChild(cyclop);
         WorldView.getInstance().getScene().getLastChild().attachChild(rangerSprite);
-        World.playerMap.get(team).decreaseGold(ranger.getCost());
+        World.getPlayer(team).decreaseGold(ranger.getCost());
 
 	}
 	/**

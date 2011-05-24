@@ -8,11 +8,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class World {
 
-	public static Map<Team, Player> playerMap = new HashMap<Team, Player>();
+	//public static Map<Team, Player> playerMap = new HashMap<Team, Player>();
 	
 
-	private Player goodPlayer = new Player(Team.GOOD);
-	private Player evilPlayer = new Player(Team.EVIL);
+	private static Player goodPlayer = new Player(Team.GOOD);
+	private static Player evilPlayer = new Player(Team.EVIL);
 
 	private static World instance = null;
 
@@ -23,7 +23,7 @@ public class World {
 		return instance;
 	}
 
-	public Player getPlayer(Team team) {
+	public static Player getPlayer(Team team) {
 		if (team == Team.EVIL) {
 			return evilPlayer;
 		} else
