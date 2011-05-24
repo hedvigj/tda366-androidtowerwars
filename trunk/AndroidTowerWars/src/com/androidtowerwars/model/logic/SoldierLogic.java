@@ -5,6 +5,7 @@ import org.anddev.andengine.entity.sprite.Sprite;
 
 import android.util.Log;
 
+import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.Barrack;
 import com.androidtowerwars.model.ISoldier;
 import com.androidtowerwars.model.Team;
@@ -52,7 +53,7 @@ public class SoldierLogic {
     }
    
     
-    public static void attackSoldier(ISoldier attacker, ISoldier reciever) {
+    public static synchronized void attackSoldier(ISoldier attacker, ISoldier reciever) {
         //TODO: 
     	mAttacker = attacker;
     	mReciever = reciever;
@@ -65,18 +66,21 @@ public class SoldierLogic {
                 rVariable = true;
                 Log.d("TowerWars3", "removedefender"+"-"+reciever.getTeam());
                 //Log.d("TowerWars1", reciever.getHealth());
+                //SoldierController.removeSoldier(reciever, Barrack.getSoldierList());
                 alive = false;
             } else {
                 attacker.setHealth(attacker.getHealth() - reciever.getDamage());
                 //Log.d("TowerWars3", reciever.getHealth()+"");
                 //Log.d("TowerWars4", attacker.getHealth()+"");
+                if (attacker.getHealth() <= 0) {
+                    aVariable = true;
+                    Log.d("TowerWars4", "removeattacker"+"-"+attacker.getTeam());
+                    //SoldierController.removeSoldier(attacker, Barrack.soldierListMap.get(attacker.getTeam()));
+                    alive = false;
+                }
             }
             
-            if (attacker.getHealth() <= 0) {
-            	aVariable = true;
-                Log.d("TowerWars4", "removeattacker"+"-"+attacker.getTeam());
-                alive = false;
-            }
+
         }
         
         

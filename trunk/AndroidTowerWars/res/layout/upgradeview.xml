@@ -12,13 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/arrow_tower_button">
-		</Button>
-		<Button android:id="@+id/upgrade"
-        android:padding="5dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/arrow_tower_button">
-		</Button>		
+		</Button>	
 	</TableRow>
 	<TableRow>
 	<LinearLayout
@@ -39,24 +33,6 @@
 	        android:text="20">
         </TextView>
      </LinearLayout>
-		
-	<LinearLayout
-		android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-		android:gravity="center_vertical|center_horizontal"
-	>
-		<ImageView
-			android:src="@drawable/smallcoin"
-			android:layout_width="wrap_content"
-	        android:layout_height="fill_parent"
-		/>
-		<TextView android:id="@+id/keypad_4"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-			android:gravity="center_vertical|center_horizontal"
-	        android:textColor="#FFFFFF"
-	        android:text="30">
-        </TextView>
-     </LinearLayout>
+
 	</TableRow>
 </TableLayout>

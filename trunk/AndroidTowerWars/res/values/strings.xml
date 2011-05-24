@@ -17,7 +17,7 @@
     <string name="new_game_label">New Game</string>
     <string name="about_label">About</string>
     <string name="exit_label">Exit</string>
-    
+    <string name="sell_title">Sell tower</string>
 	<string name="about_title">Android Tower Wars </string>
     <string name="about_text">\ Tower defense-like game for Android. 
     Made by students at Chalmers in a project course 2011.

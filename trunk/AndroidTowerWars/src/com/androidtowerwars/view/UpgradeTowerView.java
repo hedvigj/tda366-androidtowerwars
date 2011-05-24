@@ -11,7 +11,7 @@ import android.view.View;
 
 public class UpgradeTowerView extends Dialog {
 
-    TowerTile towerTile;
+    private TowerTile towerTile;
     
     public UpgradeTowerView(Context context, TowerTile towerTile) {
         super(context);
@@ -20,7 +20,7 @@ public class UpgradeTowerView extends Dialog {
     }
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTitle(R.string.buildpop_title);
+        setTitle(R.string.sell_title);
         setContentView(R.layout.upgradeview);
         //findViews();
         setListeners();
@@ -37,12 +37,13 @@ public class UpgradeTowerView extends Dialog {
             }
         });
         
-        findViewById(R.id.upgrade).setOnClickListener(new View.OnClickListener() {
+      /*  findViewById(R.id.upgrade).setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 //send upgrade
+                TowerController.upgradeTower(towerTile);
                 dismiss();
             }
-        });
+        });*/
     }
 
 }
