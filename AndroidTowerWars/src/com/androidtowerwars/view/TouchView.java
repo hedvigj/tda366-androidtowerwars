@@ -103,8 +103,8 @@ public class TouchView {
 
 	public static void loadScene(Scene scene){
 		headUpDisplay = new HUD();
-        goodBarrack = new ClickButton(WorldView.MAP_WIDTH-300, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
-        badBarrack = new ClickButton(100, WorldView.MAP_HEIGHT*0.40f, mBadBarrackTextureRegion);
+        goodBarrack = new ClickButton(WorldView.MAP_WIDTH-280, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
+        badBarrack = new ClickButton(-20, WorldView.MAP_HEIGHT*0.40f, mBadBarrackTextureRegion);
         
         meleeSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-385,WorldView.CAMERA_HEIGHT-90 , mMeleeButtonTextureRegion);
         rangerSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-290,WorldView.CAMERA_HEIGHT-90 , mRangerButtonTextureRegion);
