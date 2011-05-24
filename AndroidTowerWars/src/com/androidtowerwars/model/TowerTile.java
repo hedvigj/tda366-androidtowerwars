@@ -51,6 +51,10 @@ public class TowerTile implements IButtonSprite {
 	public boolean isOccupied() {
 		return occupied;
 	}
+	
+	public boolean resetOccupied(){
+		return occupied = false;
+	}
 
 	public void action() {
 		if (!occupied) {
