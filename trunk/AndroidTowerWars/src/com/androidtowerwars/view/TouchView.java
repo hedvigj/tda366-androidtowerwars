@@ -12,6 +12,7 @@ import org.anddev.andengine.opengl.texture.region.TextureRegionFactory;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 
 import com.androidtowerwars.GameActivity;
 
@@ -24,6 +25,7 @@ public class TouchView {
 	public static ClickButton wizardSoldierButton;
 	public static ClickButton gigantSoldierButton;
 	public static ChangeableText goldText;
+	public static ChangeableText gameOverText;
 	
 	private static Texture mGoodBarrackTexture;
 	private static TextureRegion mGoodBarrackTextureRegion;
@@ -43,8 +45,10 @@ public class TouchView {
 	
 	private static HUD headUpDisplay;
 	
-	private static Font mFont;
-	private static Texture mFontTexture;
+	private static Font mGoldFont;
+	private static Font mGameOverFont;
+	private static Texture mGoldFontTexture;
+	private static Texture mGameOverFontTexture;
 	
 	public static void loadResources(GameActivity gameActivity) {
 		mGoodBarrackTexture = new Texture(512,256,
@@ -78,11 +82,16 @@ public class TouchView {
 		mGigantButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				mGigantButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
 		
-		mFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-        mFont = new Font(mFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.WHITE);
+		mGoldFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mGameOverFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+        mGoldFont = new Font(mGoldFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.WHITE);
+        
+        mGameOverFont = new Font(mGameOverFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 64, true, Color.DKGRAY);
        
-        WorldView.getInstance().getTextureManager().loadTexture(mFontTexture);
-        WorldView.getInstance().getFontManager().loadFont(mFont);
+        WorldView.getInstance().getTextureManager().loadTexture(mGoldFontTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mGameOverFontTexture);
+        WorldView.getInstance().getFontManager().loadFont(mGoldFont);
+        WorldView.getInstance().getFontManager().loadFont(mGameOverFont);
         WorldView.getInstance().getTextureManager().loadTexture(mGoodBarrackTexture);
         WorldView.getInstance().getTextureManager().loadTexture(mBadBarrackTexture);
         WorldView.getInstance().getTextureManager().loadTexture(mMeleeButtonTexture);
@@ -102,7 +111,9 @@ public class TouchView {
         wizardSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mWizardButtonTextureRegion);
         gigantSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mGigantButtonTextureRegion);
         coin = new Sprite(WorldView.CAMERA_WIDTH-175, 10, mCoinTextureRegion);
-        goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, mFont, "", "XXXXX".length());
+        goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, mGoldFont, "", "XXXXX".length());
+        
+        gameOverText = new ChangeableText(WorldView.CAMERA_WIDTH/2-2*64, WorldView.CAMERA_HEIGHT / 2 - 64, mGameOverFont, "", "XXXXXXXXX".length());
         
         headUpDisplay.registerTouchArea(meleeSoldierButton);
         headUpDisplay.registerTouchArea(rangerSoldierButton);
@@ -119,6 +130,18 @@ public class TouchView {
         headUpDisplay.getLastChild().attachChild(coin);
         headUpDisplay.getLastChild().attachChild(goldText);
         
+        
         WorldView.getInstance().getCamera().setHUD(headUpDisplay);
+	}
+	
+	public static void gameOver(boolean victory) {
+		if(victory) {
+			gameOverText.setText("Victory!");
+			System.out.println("Victory!");
+		}
+		else {
+			gameOverText.setText("Game Over!");
+		}
+		headUpDisplay.getLastChild().attachChild(gameOverText);
 	}
 }

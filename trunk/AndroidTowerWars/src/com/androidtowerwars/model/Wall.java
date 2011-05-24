@@ -3,7 +3,7 @@ package com.androidtowerwars.model;
 import org.anddev.andengine.entity.primitive.Rectangle;
 
 public class Wall implements IWall {
-	private int maxHealth = 200;
+	private int maxHealth = 100;
 	private int health = maxHealth;
 	private Team team;
 	private Rectangle range;
