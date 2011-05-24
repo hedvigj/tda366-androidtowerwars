@@ -24,7 +24,7 @@ public class BackgroundView {
 		mBackgroundTexture = new Texture(4096, 2048);
 		mBackgroundTextureRegion = TextureRegionFactory.createFromAsset(
 				mBackgroundTexture, gameActivity,
-				"gfx/Optimized-Background_Test.jpg", 0, 0);
+				"gfx/BackgroundBegining.jpg", 0, 0);
 		WorldView.getInstance().getTextureManager().loadTexture(mBackgroundTexture);
 	}
 
