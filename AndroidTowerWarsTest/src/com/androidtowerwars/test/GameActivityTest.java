@@ -3,6 +3,7 @@ package com.androidtowerwars.test;
 import org.junit.Test;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
 
 import com.androidtowerwars.GameActivity;
@@ -16,7 +17,6 @@ import junit.framework.Assert;
 public class GameActivityTest extends ActivityInstrumentationTestCase2<GameActivity> {
 
     private GameActivity mActivity;
-    private Tower tower;
     public GameActivityTest() {
         
         super("com.androidtowerwars", GameActivity.class);
@@ -26,14 +26,23 @@ public class GameActivityTest extends ActivityInstrumentationTestCase2<GameActiv
     protected void setUp() throws Exception {
         super.setUp();
         mActivity = this.getActivity();
+        Tower t = new Tower(800, 800, 100, Team.GOOD);
+        testCreateTestTower(t);
+        Soldier S = new Soldier(300, 200, 5, Team.GOOD);
+        testGetCost(S);
+        
 
     }
+    
+    protected void tearDown() throws Exception {
+        super.tearDown();
+      }
    /* void TestCase() {
        Assert.assertEquals(true, true);
     }
     */
-    /*
-    public void testgetGold() {
+    @SmallTest
+    public void testGetGold() {
        //Assert.assertTrue(true);
         //Log.d("Test", "wie");
        Assert.assertEquals(80, World.getPlayer(Team.GOOD).getGold());
@@ -42,10 +51,10 @@ public class GameActivityTest extends ActivityInstrumentationTestCase2<GameActiv
        //Soldier soldier = new Soldier(pX, pY, 5, team);
        
     }
-*/
-   public void testgetCost() {
+    @SmallTest
+    public void testGetCost(Soldier S) {
         //Soldier S = new Soldier(300, 200, 5, Team.GOOD);
-        Assert.assertEquals(20, new Tower(800, 800, 100, Team.GOOD).getCost());
+        Assert.assertEquals(5, S.getCost());
     }
     
     
@@ -54,9 +63,9 @@ public class GameActivityTest extends ActivityInstrumentationTestCase2<GameActiv
         S.getCost();
     }*/
     
-
-    public void testcreateTestTower() {
-        Tower t = new Tower(800, 800, 100, Team.GOOD);
-        this.tower = t;
+    @SmallTest
+    public void testCreateTestTower(Tower t) {
+        
+        Assert.assertNotNull(t);
     }
 }
