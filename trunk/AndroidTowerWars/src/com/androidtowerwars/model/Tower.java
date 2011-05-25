@@ -14,7 +14,7 @@ public class Tower implements ITower {
     public int damage         = 55;
     public float attack_speed = 0.7f; //seconds delay
     public int kills          = 0;
-    public static int cost    = 20;
+    public int cost    			= 20;
 
     private List<IProjectile> projectileList = new CopyOnWriteArrayList<IProjectile>();
 
@@ -56,7 +56,7 @@ public class Tower implements ITower {
         return (int) (cost*0.8f);
     }
 
-    public static int getCost() {
+    public int getCost() {
         return cost;
     }
 

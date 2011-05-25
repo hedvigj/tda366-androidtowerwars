@@ -24,6 +24,17 @@ public class PlayerController {
             }
         });
         WorldView.getInstance().registerUpdateHandler(timerHandler);
+        
+        final TimerHandler goldTimerHandler = new TimerHandler(15,
+                new ITimerCallback() {
+            public void onTimePassed(
+                    final TimerHandler pTimerHandler) {
+                pTimerHandler.reset();
+                World.getPlayer(Team.GOOD).increaseGold(10); //Players earn 10 gold every 15 seconds
+                World.getPlayer(Team.EVIL).increaseGold(10);
+            }
+        });
+        WorldView.getInstance().registerUpdateHandler(goldTimerHandler); 
     }
 
     public static void gameOver(boolean victory) {

@@ -79,7 +79,7 @@
 	        android:layout_height="wrap_content"
 			android:gravity="center_vertical|center_horizontal"
 	        android:textColor="#FFFFFF"
-	        android:text="40">
+	        android:text="50">
         </TextView>
      </LinearLayout>
 	</TableRow>

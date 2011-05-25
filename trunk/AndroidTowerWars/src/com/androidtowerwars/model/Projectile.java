@@ -7,7 +7,7 @@ import com.androidtowerwars.util.Vector2d;
 public class Projectile extends Observable implements IProjectile, IObservableSprite {
     private float x;
     private float y;
-    private float speed = 250f;
+    private float speed = 320f;
     private ISoldier target;
     private ITower parent;
     private Vector2d direction;
