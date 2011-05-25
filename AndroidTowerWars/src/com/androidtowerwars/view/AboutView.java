@@ -1,6 +1,7 @@
 package com.androidtowerwars.view;
 
 import com.androidtowerwars.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 
