@@ -63,7 +63,7 @@ public class Tower implements ITower {
 		return (int) (cost*0.8f);
 	}
 	
-	public int getCost() {
+	public static int getCost() {
 		return cost;
 	}
 

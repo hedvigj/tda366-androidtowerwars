@@ -82,21 +82,26 @@ public class SoldierController extends Entity {
 	}
 	
 	public static void createSprite(float pX, float pY, Team team) {
+		
 		Soldier soldier = new Soldier(pX, pY, 5, team); // TODO, Inte s�ker p� att 5 �r r�tt.
+		if(World.getInstance().getPlayer(team).getGold() - soldier.getCost() >= 0 ){
 		SoldierView soldierSprite = new SoldierView(pX, pY, soldier);
 		World.getInstance().getPlayer(team).getBarrack().addSoldiers(soldier);
 		SoldierView.soldierSpriteMap.put(soldier, soldierSprite);
 		soldier.addObserver(soldierSprite);
 		WorldView.getInstance().getScene().getLastChild().attachChild(soldierSprite);
 		World.getPlayer(team).decreaseGold(soldier.getCost());
+		}
 	}
 	
 	public static void createAnimatedSprite(float pX, float pY,Team team){
 		TiledTextureRegion textureRegion = RangerView.mCyclopTextureRegion;
+		
 		if (team == Team.EVIL) {
         	textureRegion = RangerView.mCyclopFacingRightTextureRegion;
         }
-		Ranger ranger = new Ranger(pX, pY, 7, team);
+		Ranger ranger = new Ranger(pX, pY, 20, team);
+		if(World.getInstance().getPlayer(team).getGold() - ranger.getCost() >= 0 ){
 		RangerView rangerSprite = new RangerView(pX, pY, textureRegion);
 		rangerSprite.animate(100);
 
@@ -106,6 +111,6 @@ public class SoldierController extends Entity {
 
         WorldView.getInstance().getScene().getLastChild().attachChild(rangerSprite);
         World.getPlayer(team).decreaseGold(ranger.getCost());
-
+		}
 	}
 }
