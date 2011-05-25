@@ -1,7 +1,0 @@
-#summary Here you can download an .apk ready for installation on your phone.
-
-= Download =
-
-Here you can download an .apk ready for installation on your phone. Copy it to your phones SD-card and install it using "App Installer" or similar.
-
-* Download link: http://dl.dropbox.com/u/1604785/AndroidTowerWars-r159-aligned.apk *
