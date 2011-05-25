@@ -22,59 +22,56 @@ import org.anddev.andengine.input.touch.detector.ScrollDetector.IScrollDetectorL
  */
 public class DragAndZoomController implements Scene.IOnSceneTouchListener, IScrollDetectorListener, IPinchZoomDetectorListener {
 
-	private ZoomCamera camera;
+    private ZoomCamera camera;
 
-	private SurfaceScrollDetector mScrollDetector;
-	private PinchZoomDetector mPinchZoomDetector;
-	private float mPinchZoomStartedCameraZoomFactor;
+    private SurfaceScrollDetector mScrollDetector;
+    private PinchZoomDetector mPinchZoomDetector;
+    private float mPinchZoomStartedCameraZoomFactor;
 
-	public DragAndZoomController(ZoomCamera camera) {
-		super();
-		this.camera = camera;
+    public DragAndZoomController(ZoomCamera camera) {
+        super();
+        this.camera = camera;
 
-		this.mScrollDetector = new SurfaceScrollDetector(this);
-		if(MultiTouch.isSupportedByAndroidVersion()) {
-			try {
-				this.mPinchZoomDetector = new PinchZoomDetector(this);
-			} catch (final MultiTouchException e) {
-			}
-		}
-	}
+        this.mScrollDetector = new SurfaceScrollDetector(this);
+        if (MultiTouch.isSupportedByAndroidVersion()) {
+            try {
+                this.mPinchZoomDetector = new PinchZoomDetector(this);
+            } catch (final MultiTouchException e) {
+            }
+        }
+    }
 
-	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
-		if (this.mPinchZoomDetector != null) {
-			this.mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
+    public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
+        if (this.mPinchZoomDetector != null) {
+            this.mPinchZoomDetector.onTouchEvent(pSceneTouchEvent);
+            if (this.mPinchZoomDetector.isZooming()) {
+                this.mScrollDetector.setEnabled(false);
+            } else {
+                if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
+                    this.mScrollDetector.setEnabled(true);
+                }
+                this.mScrollDetector.onTouchEvent(pSceneTouchEvent);
+            }
+        } else {
+            this.mScrollDetector.onTouchEvent(pSceneTouchEvent);
+        }
+        return true;
+    }
 
-			if (this.mPinchZoomDetector.isZooming()) {
-				this.mScrollDetector.setEnabled(false);
-			} else {
-				if (pSceneTouchEvent.getAction() == TouchEvent.ACTION_DOWN) {
-					this.mScrollDetector.setEnabled(true);
-				}
+    public void onPinchZoomStarted(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent) {
+        this.mPinchZoomStartedCameraZoomFactor = camera.getZoomFactor();
+    }
 
-				this.mScrollDetector.onTouchEvent(pSceneTouchEvent);
-			}
-		} else {
-			this.mScrollDetector.onTouchEvent(pSceneTouchEvent);
-		}
+    public void onPinchZoom(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
+        camera.setZoomFactor(this.mPinchZoomStartedCameraZoomFactor * pZoomFactor);
+    }
 
-		return true;
-	}
+    public void onPinchZoomFinished(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
+        camera.setZoomFactor(this.mPinchZoomStartedCameraZoomFactor * pZoomFactor);
+    }
 
-	public void onPinchZoomStarted(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent) {
-		this.mPinchZoomStartedCameraZoomFactor = camera.getZoomFactor();
-	}
-
-	public void onPinchZoom(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
-		camera.setZoomFactor(this.mPinchZoomStartedCameraZoomFactor * pZoomFactor);
-	}
-
-	public void onPinchZoomFinished(final PinchZoomDetector pPinchZoomDetector, final TouchEvent pTouchEvent, final float pZoomFactor) {
-		camera.setZoomFactor(this.mPinchZoomStartedCameraZoomFactor * pZoomFactor);
-	}
-
-	public void onScroll(ScrollDetector pScollDetector, TouchEvent pTouchEvent, float pDistanceX, float pDistanceY) {
-		final float zoomFactor = camera.getZoomFactor();
-		camera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
-	}
+    public void onScroll(ScrollDetector pScollDetector, TouchEvent pTouchEvent, float pDistanceX, float pDistanceY) {
+        final float zoomFactor = camera.getZoomFactor();
+        camera.offsetCenter(-pDistanceX / zoomFactor, -pDistanceY / zoomFactor);
+    }
 }
