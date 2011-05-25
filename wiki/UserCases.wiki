@@ -7,18 +7,29 @@ Add your content here.
 
 = Details =
 
-http://dl.dropbox.com/u/19803932/UserCases/ArrowTower.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Build%20Tower.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Kill%20the%20Wall.pdf
-http://dl.dropbox.com/u/19803932/UserCases/MagmaPitTower.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Pass%20Defenses.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Pause-menu.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Start%20Game%20Menu.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Start%20Game.pdf
-http://dl.dropbox.com/u/19803932/UserCases/TarTower.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Train%20Troops.pdf
-http://dl.dropbox.com/u/19803932/UserCases/Zoom%20in-out.pdf
+http://dl.dropbox.com/u/19803932/UserCases/Sell%20Tower.pdf
 
+http://dl.dropbox.com/u/19803932/UserCases/ArrowTower.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Build%20Tower.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Kill%20the%20Wall.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/MagmaPitTower.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Pass%20Defenses.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Pause-menu.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Start%20Game%20Menu.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Start%20Game.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/TarTower.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Train%20Troops.pdf
+
+http://dl.dropbox.com/u/19803932/UserCases/Zoom%20in-out.pdf
 
 http://dl.dropbox.com/u/19803932/Mute.pdf
 
