@@ -1,7 +1,5 @@
 package com.androidtowerwars.model;
 
 public interface IBarrack {
-	
-	public Team getTeam();
-	
+    public Team getTeam();	
 }
