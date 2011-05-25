@@ -25,6 +25,7 @@ import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.controller.WallController;
 import com.androidtowerwars.model.Team;
+import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.BackgroundView;
 import com.androidtowerwars.view.ButtonView;
@@ -157,6 +158,8 @@ public class GameActivity extends BaseGameActivity {
 					public void onTimePassed(final TimerHandler pTimerHandler) {
 						TouchView.goldText.setText(Integer.toString(World.getPlayer(Team.GOOD)
 								.getGold()));
+						TouchView.goodWallHealthText.setText(Integer.toString(GameActivity.instance.wallController.goodWall.getHealth()));
+						TouchView.badWallHealthText.setText(Integer.toString(GameActivity.instance.wallController.badWall.getHealth()));
 					}
 				}));
 		return scene;
