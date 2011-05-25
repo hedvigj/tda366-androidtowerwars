@@ -15,6 +15,7 @@ public class Player extends Observable implements IPlayer{
 	private Barrack barrack = new Barrack();
 	
 	
+	
 //	public boolean removeTower(ITower tower) {
 //		return towerList.remove(tower);
 //	}
@@ -78,5 +79,6 @@ public class Player extends Observable implements IPlayer{
 	public Barrack getBarrack(){
 		return barrack;
 	}
+	
 
 }

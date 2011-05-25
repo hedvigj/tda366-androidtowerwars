@@ -11,8 +11,8 @@ import com.androidtowerwars.model.logic.WallLogic;
 public class WallController extends Entity {
 	
 	private static WallController instance = null;
-	private Wall goodWall;
-	private Wall badWall;
+	public Wall goodWall;
+	public Wall badWall;
 	
 	public WallController(Wall goodWall, Wall badWall) {
 		this.goodWall = goodWall;

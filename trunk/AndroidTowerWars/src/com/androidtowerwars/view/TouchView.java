@@ -26,6 +26,8 @@ public class TouchView {
 	public static ClickButton gigantSoldierButton;
 	public static ChangeableText goldText;
 	public static ChangeableText gameOverText;
+	public static ChangeableText goodWallHealthText;
+	public static ChangeableText badWallHealthText;
 	
 	private static Texture mGoodBarrackTexture;
 	private static TextureRegion mGoodBarrackTextureRegion;
@@ -41,7 +43,14 @@ public class TouchView {
 	private static TextureRegion mGigantButtonTextureRegion;
 	private static Texture mCoinTexture;
 	private static TextureRegion mCoinTextureRegion;
+	private static Texture mGoodWallHealthTexture;
+	private static TextureRegion mGoodWallHealthTextureRegion;
+	private static Texture mBadWallHealthTexture;
+	private static TextureRegion mBadWallHealthTextureRegion;
 	private static Sprite coin;
+	private static Sprite goodWallHealth;
+	private static Sprite badWallHealth;
+	
 	
 	private static HUD headUpDisplay;
 	
@@ -66,6 +75,14 @@ public class TouchView {
 		mCoinTextureRegion = TextureRegionFactory.createFromAsset(
 				mCoinTexture, gameActivity, "gfx/Coin.png", 0,0);
 		
+		mGoodWallHealthTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mGoodWallHealthTextureRegion = TextureRegionFactory.createFromAsset(
+				mGoodWallHealthTexture, gameActivity, "gfx/GoodWallHealth.png", 0,0);
+		
+		mBadWallHealthTexture = new Texture(32,32, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mBadWallHealthTextureRegion = TextureRegionFactory.createFromAsset(
+				mBadWallHealthTexture, gameActivity, "gfx/BadWallHealth.png", 0,0);
+		
 		mMeleeButtonTexture = new Texture(128,128, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mMeleeButtonTextureRegion = TextureRegionFactory.createFromAsset(
 				mMeleeButtonTexture, gameActivity, "gfx/skellyButton.png", 0,0);
@@ -86,6 +103,8 @@ public class TouchView {
 		mGameOverFontTexture = new Texture(256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
         mGoldFont = new Font(mGoldFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 32, true, Color.WHITE);
         
+        
+        
         mGameOverFont = new Font(mGameOverFontTexture, Typeface.create(Typeface.DEFAULT, Typeface.BOLD), 64, true, Color.DKGRAY);
        
         WorldView.getInstance().getTextureManager().loadTexture(mGoldFontTexture);
@@ -99,6 +118,8 @@ public class TouchView {
         WorldView.getInstance().getTextureManager().loadTexture(mWizardButtonTexture);
         WorldView.getInstance().getTextureManager().loadTexture(mGigantButtonTexture);
         WorldView.getInstance().getTextureManager().loadTexture(mCoinTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mGoodWallHealthTexture);
+        WorldView.getInstance().getTextureManager().loadTexture(mBadWallHealthTexture);
 	}
 
 	public static void loadScene(Scene scene){
@@ -110,11 +131,13 @@ public class TouchView {
         rangerSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-290,WorldView.CAMERA_HEIGHT-90 , mRangerButtonTextureRegion);
         wizardSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mWizardButtonTextureRegion);
         gigantSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mGigantButtonTextureRegion);
-        coin = new Sprite(WorldView.CAMERA_WIDTH-175, 10, mCoinTextureRegion);
-        goldText = new ChangeableText(WorldView.CAMERA_WIDTH-225, 10, mGoldFont, "", "XXXXX".length());
-        
+        coin = new Sprite(WorldView.CAMERA_WIDTH-225, 10, mCoinTextureRegion);
+        goldText = new ChangeableText(WorldView.CAMERA_WIDTH-300, 10, mGoldFont, "", "XXXXX".length());
+        goodWallHealth = new Sprite(WorldView.CAMERA_WIDTH-75, 10, mGoodWallHealthTextureRegion);
+        badWallHealth = new Sprite(43, 10, mBadWallHealthTextureRegion);
         gameOverText = new ChangeableText(WorldView.CAMERA_WIDTH/2-2*64, WorldView.CAMERA_HEIGHT / 2 - 64, mGameOverFont, "", "XXXXXXXXX".length());
-        
+        badWallHealthText = new ChangeableText(85, 10, mGoldFont, "","XXXXX".length() );
+        goodWallHealthText = new ChangeableText(WorldView.CAMERA_WIDTH-140, 10, mGoldFont, "","XXXXX".length() );
         headUpDisplay.registerTouchArea(meleeSoldierButton);
         headUpDisplay.registerTouchArea(rangerSoldierButton);
         headUpDisplay.registerTouchArea(wizardSoldierButton);
@@ -129,6 +152,10 @@ public class TouchView {
         headUpDisplay.getLastChild().attachChild(gigantSoldierButton);
         headUpDisplay.getLastChild().attachChild(coin);
         headUpDisplay.getLastChild().attachChild(goldText);
+        headUpDisplay.getLastChild().attachChild(goodWallHealth);
+        headUpDisplay.getLastChild().attachChild(badWallHealth);
+        headUpDisplay.getLastChild().attachChild(goodWallHealthText);
+        headUpDisplay.getLastChild().attachChild(badWallHealthText);
         
         
         WorldView.getInstance().getCamera().setHUD(headUpDisplay);
