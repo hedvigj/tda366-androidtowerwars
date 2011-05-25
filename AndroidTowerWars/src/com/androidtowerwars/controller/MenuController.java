@@ -40,17 +40,28 @@ public class MenuController implements IOnMenuItemClickListener {
         }
     }
     public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
-        if (pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {    
-            if (WorldView.getInstance().getScene().hasChildScene()) {
+        if(pKeyCode == KeyEvent.KEYCODE_MENU && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
+        	if(WorldView.getInstance().getScene().hasChildScene()) {
+                        /* Remove the menu and reset it. */
+                        menuView.close();
+                } else {
+                        /* Attach the menu. */
+                        WorldView.getInstance().getScene().setChildScene(menuView.getMenuScene(), false, true, true);
+                }
+                return true;
+        }
+        else if(pKeyCode == KeyEvent.KEYCODE_BACK && pEvent.getAction() == KeyEvent.ACTION_DOWN) {
+        	if(WorldView.getInstance().getScene().hasChildScene()) {
                 /* Remove the menu and reset it. */
                 menuView.close();
-            } else {
-                /* Attach the menu. */
-                WorldView.getInstance().getScene().setChildScene(menuView.getMenuScene(), false, true, true);
-            }
-            return true;
-        } else {
-            return false;
+                return true;
+        	}
+        	else {
+        		return false;
+        	}
         }
-    }
+        else {
+                return false;
+        }
+}
 }
