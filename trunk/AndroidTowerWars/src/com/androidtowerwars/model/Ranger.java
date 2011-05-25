@@ -12,6 +12,7 @@ public class Ranger extends Soldier {
 		super.maxHealth = 200;
 		super.damage = 50;
 		super.value = 10;
+		super.cost = 7;
 		if (team == Team.GOOD) {
 			speed = -speed;
 		}
