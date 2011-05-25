@@ -46,7 +46,7 @@ public class TowerTile implements IButtonSprite {
     }
 
     public void action() {
-        if (!occupied   && World.getInstance().getPlayer(team).getGold() - Tower.getCost() >= 0) {
+        if (!occupied   && World.getInstance().getPlayer(team).getGold() - 20 >= 0) {
             this.tower = TowerController.createTestTower(x
                     - (TowerView.mTowerTextureRegion.getWidth() / 2)
                     + (ButtonView.mButtonTextureRegion.getWidth() / 2), y
@@ -58,7 +58,7 @@ public class TowerTile implements IButtonSprite {
     }
 
     public void magma_action() {
-        if (!occupied && World.getInstance().getPlayer(team).getGold() - MagmaPitTower.getCost() >= 0) {
+        if (!occupied && World.getInstance().getPlayer(team).getGold() - 50 >= 0) {
             this.tower = TowerController.createMagmaPitTower(x
                     - (TowerView.mMagmaPitTowerTextureRegion.getWidth() / 2)
                     + (ButtonView.mButtonTextureRegion.getWidth() / 2) + 30, y,
@@ -68,7 +68,7 @@ public class TowerTile implements IButtonSprite {
     }
 
     public void tar_action() {
-        if (!occupied && World.getInstance().getPlayer(team).getGold() - TarTower.getCost() >= 0) {
+        if (!occupied && World.getInstance().getPlayer(team).getGold() - 30 >= 0) {
             this.tower = TowerController.createTarTower(x
                     - (TowerView.mTarTowerTextureRegion.getWidth() / 2)
                     + (ButtonView.mButtonTextureRegion.getWidth() / 2)+20, y-80,

@@ -28,14 +28,19 @@ public class ProjectileController extends Entity {
                     ITower tower = towerTile.getTower();
                     if (tower.hasProjectiles()) {
                         for (IProjectile projectile : tower.getProjectiles()) {
-                            ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
-                            if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(SoldierView.soldierSpriteMap.get(projectile.getTarget()))) {
-                                ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
-                                removeProjectile(projectile, tower.getProjectiles());
-                            } else if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(RangerView.rangerSpriteMap.get(projectile.getTarget()))) {
-                                ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
-                                removeProjectile(projectile, tower.getProjectiles());
-                            }
+                        	if (projectile.getTarget().getHealth() > 0) {
+	                            ProjectileLogic.updateProjectilePosition(projectile, pSecondsElapsed);
+	                            if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(SoldierView.soldierSpriteMap.get(projectile.getTarget()))) {
+	                                ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
+	                                removeProjectile(projectile, tower.getProjectiles());
+	                            } else if (ProjectileView.projectileSpriteMap.get(projectile).collidesWith(RangerView.rangerSpriteMap.get(projectile.getTarget()))) {
+	                                ProjectileLogic.updateProjectileState(projectile, pSecondsElapsed);
+	                                removeProjectile(projectile, tower.getProjectiles());
+	                            }
+                        	}
+                        	else {
+                        		removeProjectile(projectile, tower.getProjectiles());
+                        	}
                         }
                     }
                 }

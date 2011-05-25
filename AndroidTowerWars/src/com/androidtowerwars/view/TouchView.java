@@ -123,10 +123,10 @@ public class TouchView {
         goodBarrack   = new ClickButton(WorldView.MAP_WIDTH-280, WorldView.MAP_HEIGHT*0.40f, mGoodBarrackTextureRegion);
         badBarrack    = new ClickButton(-20, WorldView.MAP_HEIGHT*0.40f, mBadBarrackTextureRegion);
 
-        meleeSoldierButton  = new ClickButton(WorldView.CAMERA_WIDTH-385,WorldView.CAMERA_HEIGHT-90 , mMeleeButtonTextureRegion);
-        rangerSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-290,WorldView.CAMERA_HEIGHT-90 , mRangerButtonTextureRegion);
-        wizardSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mWizardButtonTextureRegion);
-        gigantSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mGigantButtonTextureRegion);
+        meleeSoldierButton  = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mMeleeButtonTextureRegion);
+        rangerSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mRangerButtonTextureRegion);
+//        wizardSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-195,WorldView.CAMERA_HEIGHT-90 , mWizardButtonTextureRegion);
+//        gigantSoldierButton = new ClickButton(WorldView.CAMERA_WIDTH-100,WorldView.CAMERA_HEIGHT-90 , mGigantButtonTextureRegion);
         coin                = new Sprite(WorldView.CAMERA_WIDTH-225, 10, mCoinTextureRegion);
         goldText            = new ChangeableText(WorldView.CAMERA_WIDTH-300, 10, mGoldFont, "", "XXXXX".length());
         goodWallHealth      = new Sprite(WorldView.CAMERA_WIDTH-75, 10, mGoodWallHealthTextureRegion);
@@ -137,8 +137,8 @@ public class TouchView {
 
         headUpDisplay.registerTouchArea(meleeSoldierButton);
         headUpDisplay.registerTouchArea(rangerSoldierButton);
-        headUpDisplay.registerTouchArea(wizardSoldierButton);
-        headUpDisplay.registerTouchArea(gigantSoldierButton);
+//        headUpDisplay.registerTouchArea(wizardSoldierButton);
+//        headUpDisplay.registerTouchArea(gigantSoldierButton);
 
         scene.registerTouchArea(goodBarrack);
         scene.getLastChild().attachChild(goodBarrack);
@@ -146,8 +146,8 @@ public class TouchView {
 
         headUpDisplay.getLastChild().attachChild(meleeSoldierButton);
         headUpDisplay.getLastChild().attachChild(rangerSoldierButton);
-        headUpDisplay.getLastChild().attachChild(wizardSoldierButton);
-        headUpDisplay.getLastChild().attachChild(gigantSoldierButton);
+//        headUpDisplay.getLastChild().attachChild(wizardSoldierButton);
+//        headUpDisplay.getLastChild().attachChild(gigantSoldierButton);
         headUpDisplay.getLastChild().attachChild(coin);
         headUpDisplay.getLastChild().attachChild(goldText);
         headUpDisplay.getLastChild().attachChild(goodWallHealth);
