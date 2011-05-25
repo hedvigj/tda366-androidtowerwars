@@ -44,9 +44,34 @@ import com.androidtowerwars.view.WorldView;
 			if (ArtificialIntelligence.evilSurpriseBig()) {
 				trainSoldier();
 				trainRanger();
+				buildFancyTower();
 			}
 		}
-		public void update(Observable arg0, Object arg1) {
+		private static void buildFancyTower() {
+            List<TowerTile> tileList = World.getInstance().getPlayer(team).getTowerTiles();
+            Random r = new Random();
+            int k = 0 + (int)(Math.random() * ((1 - 0) + 1));
+            while (nBuiltTowers < tileList.size()) {
+                TowerTile tile = tileList.get(r.nextInt(tileList.size()));
+                
+                if (!tile.isOccupied()) {
+                    if (k == 0) {
+                        tile.tar_action();
+                        nBuiltTowers++;
+                        break;
+                    } else {
+                        tile.magma_action();
+                        nBuiltTowers++;
+                        break;                 
+                    }
+                }
+            }
+            return;
+            
+        }
+
+
+        public void update(Observable arg0, Object arg1) {
 			// TODO Auto-generated method stub
 			Player model = (Player) arg0;
 			
