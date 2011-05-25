@@ -6,21 +6,17 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.androidtowerwars.R;
-import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.model.TowerTile;
 
-
 public class BuildTowerView extends Dialog {
-
-    
     private final View keys[] = new View[3];
     private TowerTile towerTile;
-      
+
     public BuildTowerView(Context context, TowerTile towerTile) {
         super(context);
         this.towerTile = towerTile;
     }
-    
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +25,13 @@ public class BuildTowerView extends Dialog {
         findViews();
         setListeners();
     }
-    
+
     private void findViews() {
         keys[0] = findViewById(R.id.keypad_1);
         keys[1] = findViewById(R.id.keypad_2);
         keys[2] = findViewById(R.id.keypad_3);
     }
-    
+
     private void setListeners() {
         for (int i = 0; i < keys.length; i++) {
             final int t = i + 1;
@@ -46,27 +42,19 @@ public class BuildTowerView extends Dialog {
             });
         }
     }
-    
+
     private void sendBuild (int tower, TowerTile towerTile) {
-        
         switch (tower) {
         case 1:
-            //build tower 1
-            //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
-        	towerTile.action();
+            towerTile.action();
             break;
         case 2:
-            //build tower 1
-            //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
-        	towerTile.tar_action();
+            towerTile.tar_action();
             break;
         case 3:
-            //build tower 1
-            //TowerController.createTestTower(pX, pY, pTextureRegion, range, team);
-        	towerTile.magma_action();
+            towerTile.magma_action();
             break;
         }
-        
         dismiss();
     }
 }
