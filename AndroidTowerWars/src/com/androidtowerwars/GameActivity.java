@@ -25,7 +25,6 @@ import com.androidtowerwars.controller.TowerController;
 import com.androidtowerwars.controller.TowerTileController;
 import com.androidtowerwars.controller.WallController;
 import com.androidtowerwars.model.Team;
-import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.view.BackgroundView;
 import com.androidtowerwars.view.ButtonView;
@@ -42,164 +41,125 @@ import com.androidtowerwars.view.WallView;
 import com.androidtowerwars.view.WorldView;
 
 public class GameActivity extends BaseGameActivity {
+    public static GameActivity instance = null;
 
-	// ===========================================================
-	// Constants
-	// ===========================================================
+    public SoldierController soldierController;
+    public ProjectileController projectileController;
+    public TowerController towerController;
+    public WallController wallController;
+    public TowerTileController towerTileController;
+    public PlayerController playerController;
 
-	// ===========================================================
-	// Fields
-	// ===========================================================
+    private TouchController touchController = new TouchController(this);
+    private TowerTileView towerTileView     = new TowerTileView();
+    private WallView wallView               = new WallView();
+    private MenuView menuView               = new MenuView();
+    private MenuController menuController   = new MenuController(this, menuView);
 
-	public static GameActivity instance = null;
+    public Engine onLoadEngine() {
+        instance = this;
+        Engine engine = new WorldView();
+        // Attempt to set up multitouch support
+        if (MultiTouch.isSupported(this) && (MultiTouch.isSupported(this))) {
+            try {
+                engine.setTouchController(new MultiTouchController());
+            } catch (MultiTouchException e) {
+                Log.e("TowerWars", "Error with multitouch initialization", e);
+            }
+        }
+        return engine;
+    }
 
-	public SoldierController soldierController;
-	public ProjectileController projectileController;
-	public TowerController towerController;
-	public WallController wallController;
-	public TowerTileController towerTileController;
-	public PlayerController playerController;
-	
-	private static long timestamp;
+    public void onLoadResources() {
+        MenuView.loadResources(this);
+        TouchView.loadResources(this);
+        TowerView.loadResources(this);
+        ButtonView.loadResources(this);
+        SoldierView.loadResources(this);
+        RangerView.loadResources(this);
+        CoinView.loadResources(this);
+        ProjectileView.loadResources(this);
+        WallView.loadResources(this);
+        BackgroundView.loadResources(this);
+        FontView.loadResources();
+    }
 
-	private TouchController touchController = new TouchController(this);
-	private TowerTileView towerTileView = new TowerTileView();
-	private WallView wallView = new WallView();
+    public Scene onLoadScene() {
+        final Scene scene = new Scene(1);
+        getEngine().registerUpdateHandler(new FPSLogger());
+        
+        BackgroundView.loadScene(scene);
+        wallView.loadScene(scene);
+        
+        playerController  = new PlayerController();
+        soldierController = new SoldierController();
+        scene.getLastChild().attachChild(soldierController);
+        projectileController = new ProjectileController();
+        scene.getLastChild().attachChild(projectileController);
+        wallController = new WallController(WallView.goodWall, WallView.badWall);
+        scene.getLastChild().attachChild(wallController);
+        towerController = TowerController.getInstance();
+        towerTileController = new TowerTileController();
+        
+        
+        TouchView.loadScene(scene);
+        
+        menuView.createMenuScene();
+        menuController.loadScene();
 
-	private MenuView menuView = new MenuView();
-	private MenuController menuController = new MenuController(this, menuView);
+        /* Limit scene size */
+        WorldView.getInstance().getCamera()
+                .setBounds(0, WorldView.MAP_WIDTH, 0, WorldView.MAP_HEIGHT);
+        WorldView.getInstance().getCamera().setBoundsEnabled(true);
+        /* Center camera */
+        WorldView
+                .getInstance()
+                .getCamera()
+                .setCenter(WorldView.MAP_WIDTH * 0.88f,
+                WorldView.MAP_HEIGHT * 0.5f);
 
+        Scene.IOnSceneTouchListener touchListener = new DragAndZoomController (
+                WorldView.getInstance().getCamera());
 
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
+        scene.setOnSceneTouchListener(touchListener);
+        scene.setOnAreaTouchListener(touchController);
+        
+        WorldView.getInstance().getCamera().getHUD().setOnAreaTouchListener(touchController);
 
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
+        towerTileView.loadScene(scene);
+        
+        scene.registerUpdateHandler(new TimerHandler(1 / 20.0f, true,
+                new ITimerCallback() {
+                    public void onTimePassed(final TimerHandler pTimerHandler) {
+                        TouchView.goldText.setText(
+                                Integer.toString(World.getPlayer(Team.GOOD).getGold()));
+                        TouchView.goodWallHealthText.setText(Integer.toString(
+                                GameActivity.instance.wallController.goodWall.getHealth()));
+                        TouchView.badWallHealthText.setText(Integer.toString(
+                                GameActivity.instance.wallController.badWall.getHealth()));
+                    }
+                }));
+        return scene;
+    }
 
-	public Engine onLoadEngine() {
-		instance = this;
-		Engine engine = new WorldView();
-		// Attempt to set up multitouch support
-		if (MultiTouch.isSupported(this) && (MultiTouch.isSupported(this))) {
-			try {
-				engine.setTouchController(new MultiTouchController());
-			} catch (MultiTouchException e) {
-				Log.e("TowerWars", "Error with multitouch initialization", e);
-			}
-		}
-		return engine;
-	}
+    public void onLoadComplete() {
+        ArtificialIntelligenceController.buildTower();
+        ArtificialIntelligenceController.buildTower();
+        ArtificialIntelligenceController.trainSoldier();
+        
+        Toast.makeText(
+                getApplicationContext(),
+                "In the land of Agarwaen the war has been raging for 300 years.",
+                Toast.LENGTH_LONG).show();
+        
+    }
 
-	public void onLoadResources() {
-		
-		MenuView.loadResources(this);
-		TouchView.loadResources(this);
-		TowerView.loadResources(this);
-		ButtonView.loadResources(this);
-		SoldierView.loadResources(this);
-		RangerView.loadResources(this);
-		CoinView.loadResources(this);
-		ProjectileView.loadResources(this);
-		WallView.loadResources(this);
-		BackgroundView.loadResources(this);
-		FontView.loadResources();
-	}
-
-	public Scene onLoadScene() {
-		
-		final Scene scene = new Scene(1);
-		getEngine().registerUpdateHandler(new FPSLogger());
-		
-		BackgroundView.loadScene(scene);
-		wallView.loadScene(scene);
-		
-		playerController = new PlayerController();
-		soldierController = new SoldierController();
-		scene.getLastChild().attachChild(soldierController);
-		projectileController = new ProjectileController();
-		scene.getLastChild().attachChild(projectileController);
-		wallController = new WallController(WallView.goodWall, WallView.badWall);
-		scene.getLastChild().attachChild(wallController);
-		towerController = TowerController.getInstance();
-		towerTileController = new TowerTileController();
-		
-		
-		TouchView.loadScene(scene);
-		
-		menuView.createMenuScene();
-		menuController.loadScene();
-
-		/* Limit scene size */
-		WorldView.getInstance().getCamera()
-				.setBounds(0, WorldView.MAP_WIDTH, 0, WorldView.MAP_HEIGHT);
-		WorldView.getInstance().getCamera().setBoundsEnabled(true);
-		/* Center camera */
-		WorldView
-				.getInstance()
-				.getCamera()
-				.setCenter(WorldView.MAP_WIDTH * 0.88f,
-						WorldView.MAP_HEIGHT * 0.5f);
-
-		Scene.IOnSceneTouchListener touchListener = new DragAndZoomController(
-				WorldView.getInstance().getCamera());
-
-		scene.setOnSceneTouchListener(touchListener);
-		scene.setOnAreaTouchListener(touchController);
-		
-		WorldView.getInstance().getCamera().getHUD().setOnAreaTouchListener(touchController);
-
-		towerTileView.loadScene(scene);
-		
-		scene.registerUpdateHandler(new TimerHandler(1 / 20.0f, true,
-				new ITimerCallback() {
-
-					public void onTimePassed(final TimerHandler pTimerHandler) {
-						TouchView.goldText.setText(Integer.toString(World.getPlayer(Team.GOOD)
-								.getGold()));
-						TouchView.goodWallHealthText.setText(Integer.toString(GameActivity.instance.wallController.goodWall.getHealth()));
-						TouchView.badWallHealthText.setText(Integer.toString(GameActivity.instance.wallController.badWall.getHealth()));
-					}
-				}));
-		return scene;
-	}
-
-	public void onLoadComplete() {
-		ArtificialIntelligenceController.buildTower();
-		ArtificialIntelligenceController.buildTower();
-		ArtificialIntelligenceController.trainSoldier();
-		
-		Toast.makeText(
-				getApplicationContext(),
-				"In the land of Agarwaen the war has been raging for 300 years.",
-				Toast.LENGTH_LONG).show();
-		
-	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-	@Override
-	public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
-		if (menuController.onKeyDown(pKeyCode, pEvent)) {
-			return true;
-		} else {
-			return super.onKeyDown(pKeyCode, pEvent);
-		}
-	}
-
-	public static void setTimestamp(int i) {
-		Log.d("TowerWars", "time" + i);
-		timestamp = 0;
-	}
-
-	// ===========================================================
-	// Methods
-	// ===========================================================
-
-	// ===========================================================
-	// Inner and Anonymous Classes
-	// ===========================================================
-
+    @Override
+    public boolean onKeyDown(final int pKeyCode, final KeyEvent pEvent) {
+        if (menuController.onKeyDown(pKeyCode, pEvent)) {
+            return true;
+        } else {
+            return super.onKeyDown(pKeyCode, pEvent);
+        }
+    }
 }
