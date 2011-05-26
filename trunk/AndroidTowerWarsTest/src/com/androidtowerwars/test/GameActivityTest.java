@@ -63,6 +63,6 @@ public class GameActivityTest extends InstrumentationTestCase {
     
     public void testCreatePlayer() {
         Player p = new Player(Team.GOOD);
-        assertNotNull(k);
+        assertNotNull(p);
     }
 }
