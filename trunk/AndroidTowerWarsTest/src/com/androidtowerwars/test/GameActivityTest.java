@@ -1,14 +1,16 @@
 package com.androidtowerwars.test;
 
+import org.junit.Assert;
+
 import android.test.InstrumentationTestCase;
 
-
-import com.androidtowerwars.GameActivity;
 import com.androidtowerwars.model.Player;
 import com.androidtowerwars.model.Soldier;
 import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.Tower;
+import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
+import com.androidtowerwars.model.logic.WallLogic;
 
 
 public class GameActivityTest extends InstrumentationTestCase {
@@ -65,4 +67,19 @@ public class GameActivityTest extends InstrumentationTestCase {
         Player p = new Player(Team.GOOD);
         assertNotNull(p);
     }
+    
+    public void testDecreaseHPCastle() {
+    	Wall wall = new Wall(Team.GOOD);
+    	wall.setHealth(wall.getHealth()-10);
+    	int i = wall.getHealth();
+    	assertEquals(90, i);
+    }
+    
+    public void testDamageCastle() {
+    	Wall wall1 = new Wall(Team.GOOD);
+    	WallLogic.damageCastle(wall1);
+    	int i = wall1.getHealth();
+    	assertEquals(90, i);
+    }
+       
 }
