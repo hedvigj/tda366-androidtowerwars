@@ -1,6 +1,10 @@
 #summary SDD and material such as Model Mindmap etc.
 =Documents concerning the SDD. Including images.= 
 
+SDD Version 4:
+
+http://dl.dropbox.com/u/19803932/SDD4.pdf
+
 SDD Version 3:
 
 http://dl.dropbox.com/u/19803932/SDD3.pdf
