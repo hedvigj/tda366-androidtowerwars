@@ -7,6 +7,7 @@ import com.androidtowerwars.controller.SoldierController;
 import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
+import com.androidtowerwars.view.RangerView;
 import com.androidtowerwars.view.SoldierView;
 
 public class WallLogic {
@@ -15,6 +16,11 @@ public class WallLogic {
         Rectangle range = wall.getRange();
         for (int n=0;n<World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().size();n++) {
             if (range.collidesWith(SoldierView.soldierSpriteMap.get(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n)))){
+                SoldierController.removeSoldier(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n),
+                        World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n).getTeam()));
+                damageCastle(wall);
+            }
+            else if (range.collidesWith(RangerView.rangerSpriteMap.get(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n)))){
                 SoldierController.removeSoldier(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n),
                         World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers(World.getInstance().getPlayer(team.opposite()).getBarrack().getSoldiers().get(n).getTeam()));
                 damageCastle(wall);
