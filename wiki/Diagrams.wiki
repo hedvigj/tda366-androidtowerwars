@@ -23,5 +23,8 @@ http://dl.dropbox.com/u/19803932/Ny%20mapp/BuildTower%20sequence%20diagram.pdf
 http://dl.dropbox.com/u/19803932/Ny%20mapp/StartGame%20sequence%20diagram.pdf 
 
 
+*Diagram over logic classes*
+
+http://dl.dropbox.com/u/21480735/Towerlogics.pdf
 
 = Details =
