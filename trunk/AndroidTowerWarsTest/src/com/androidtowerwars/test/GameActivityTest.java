@@ -1,6 +1,5 @@
 package com.androidtowerwars.test;
 
-import org.junit.Assert;
 
 import android.test.InstrumentationTestCase;
 
@@ -11,47 +10,23 @@ import com.androidtowerwars.model.Tower;
 import com.androidtowerwars.model.Wall;
 import com.androidtowerwars.model.World;
 import com.androidtowerwars.model.logic.WallLogic;
-
+/*
+ * Because of the Rectange class for range in both Tower and Soldier
+ * we can't test anything of value, since that can't be reached from here
+ * for some reason. Pretty much meaning that the lack of valuable test is from 
+ * time missing to fix the problem.
+ */
 
 public class GameActivityTest extends InstrumentationTestCase {
-
-//    private GameActivity mActivity;
-    private Tower k;
-//    public GameActivityTest() {
-//        super("com.androidtowerwars", GameActivity.class);
-        //testCreateTestTower(t);
-//    }
     protected void setUp() throws Exception {
         super.setUp();
-        //mActivity = this.getActivity();
-        
-        //Tower t = new Tower(800, 800, 100, Team.GOOD);
-        /*testCreateTestTower(t);
-        Soldier S = new Soldier(300, 200, 5, Team.GOOD);*/
-        //testGetCost(S);
     }
 
-   /* void TestCase() {
-       Assert.assertEquals(true, true);
-    }
-    */
-    //@SmallTest
+
     public void testGetGold() {
-       //Assert.assertTrue(true);
-        //Log.d("Test", "wie");
        assertEquals(80, World.getInstance().getPlayer(Team.GOOD).getGold());
-        //assertEquals(10, 10); 
-       
-       //Soldier soldier = new Soldier(pX, pY, 5, team);
-       
-    } /*
-    @SmallTest
-    public void testGetCost(Soldier S) {
-        //Soldier S = new Soldier(300, 200, 5, Team.GOOD);
-        Assert.assertEquals(5, S.getCost());
-    }
+    } 
     
-    */
     public void testtrainSoldier() {
         Soldier S = new Soldier(300, 200, 5, Team.GOOD);
         S.getCost();
