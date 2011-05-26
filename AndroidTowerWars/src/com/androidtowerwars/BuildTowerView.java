@@ -1,4 +1,4 @@
-package com.androidtowerwars.view;
+package com.androidtowerwars;
 
 import android.app.Dialog;
 import android.content.Context;
