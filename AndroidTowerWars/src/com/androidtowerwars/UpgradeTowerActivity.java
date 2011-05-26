@@ -9,10 +9,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
-public class UpgradeTowerView extends Dialog {
+public class UpgradeTowerActivity extends Dialog {
     private TowerTile towerTile;
 
-    public UpgradeTowerView(Context context, TowerTile towerTile) {
+    public UpgradeTowerActivity(Context context, TowerTile towerTile) {
         super(context);
         this.towerTile = towerTile;
     }

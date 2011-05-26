@@ -8,11 +8,11 @@ import android.view.View;
 import com.androidtowerwars.R;
 import com.androidtowerwars.model.TowerTile;
 
-public class BuildTowerView extends Dialog {
+public class BuildTowerActivity extends Dialog {
     private final View keys[] = new View[3];
     private TowerTile towerTile;
 
-    public BuildTowerView(Context context, TowerTile towerTile) {
+    public BuildTowerActivity(Context context, TowerTile towerTile) {
         super(context);
         this.towerTile = towerTile;
     }
