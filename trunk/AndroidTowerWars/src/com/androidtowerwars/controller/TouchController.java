@@ -7,14 +7,14 @@ import org.anddev.andengine.input.touch.TouchEvent;
 import android.app.Dialog;
 import android.view.MotionEvent;
 
+import com.androidtowerwars.BuildTowerView;
 import com.androidtowerwars.GameActivity;
+import com.androidtowerwars.UpgradeTowerView;
 import com.androidtowerwars.model.Team;
 import com.androidtowerwars.model.TowerTile;
-import com.androidtowerwars.view.BuildTowerView;
 import com.androidtowerwars.view.ClickButton;
 import com.androidtowerwars.view.TouchView;
 import com.androidtowerwars.view.TowerTileView;
-import com.androidtowerwars.view.UpgradeTowerView;
 import com.androidtowerwars.view.WorldView;
 
 public class TouchController implements IOnAreaTouchListener {

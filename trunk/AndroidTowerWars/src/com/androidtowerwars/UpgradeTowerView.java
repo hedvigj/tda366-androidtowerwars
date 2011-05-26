@@ -1,4 +1,4 @@
-package com.androidtowerwars.view;
+package com.androidtowerwars;
 
 import com.androidtowerwars.R;
 import com.androidtowerwars.controller.TowerController;
